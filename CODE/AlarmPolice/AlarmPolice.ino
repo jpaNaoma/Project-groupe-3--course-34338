@@ -56,5 +56,5 @@ police();
 void loop() {
   // put your main code here, to run repeatedly:
     
-    lcd.print(millis()/1000);
+    
 }
