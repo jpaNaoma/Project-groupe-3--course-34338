@@ -39,7 +39,7 @@ void loop() {
   for (byte i = 0; i < 4; i++) {
     nuidPICC[i] = rfid.uid.uidByte[i];
   }
-  Serial.println(F("The NUID tag is:"));
+  Serial.print(F("The NUID tag is:"));
   printHex(rfid.uid.uidByte, rfid.uid.size);
   Serial.println();
 
