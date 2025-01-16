@@ -2,7 +2,6 @@
 
 #define trigPin 2
 #define echoPin 3
-#define ledPin 13 // Onboard LED pin
 
 Servo myservo;
 
@@ -13,7 +12,7 @@ const int minDistance = 10; // Minimum distance to trigger LED (in cm)
 void setup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
-  pinMode(ledPin, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT); 
   myservo.attach(4);
   Serial.begin(115200);
 }
@@ -53,8 +52,8 @@ void measureDistance() {
 
   // Light up LED if object is nearby
   if (distance > 0 && distance <= minDistance) {
-    digitalWrite(ledPin, HIGH);
+    digitalWrite(LED_BUILTIN, HIGH);
   } else {
-    digitalWrite(ledPin, LOW);
+    digitalWrite(LED_BUILTIN, LOW);
   }
 }
