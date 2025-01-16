@@ -21,8 +21,8 @@
 MFRC522 rfid(SS_pin, RST_pin);
 MFRC522::MIFARE_Key key;
 
-char nuidPICC[4];
-char AccessPICC[4] = {0x83,0xE8,0x1F, 0x16};
+unsigned char nuidPICC[4];
+unsigned char AccessPICC[4] = {0x83,0xE8,0x1F, 0x16};
 char ControlChar = (1<<0); // 1st bit is locked, starts being locked
 void setup() {
   Serial.begin(115200);  // Initialize serial communications with the PC
