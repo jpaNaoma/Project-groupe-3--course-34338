@@ -1,5 +1,16 @@
 // source : https://circuitdigest.com/microcontroller-projects/interfacing-rfid-reader-module-with-arduino
 // github files are from https://github.com/miguelbalboa/rfid/tree/master
+/**
+ * @section Pin connections
+ * SDA | RX | SS is connected to SS_pin 
+ * SCK is pin 52 (Mega2560)
+ * MOSI is pin 51 (Mega2560)
+ * MISO is pin 50 (Mega2560)
+ * RST | Reset is connected to RST_pin
+ * LED is connected to LED_pin and is active high
+ *  The LED should have a resistor to limit current (Using 220R, variation changes light level)
+ *     
+ */
 #include "SPI.h"
 #include "MFRC522.h"  // must add files from github
 
@@ -76,5 +87,3 @@ void printHex(byte *buffer, byte bufferSize) {
     Serial.print(buffer[i], HEX);
   }
 }
-
-// test
