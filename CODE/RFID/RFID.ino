@@ -1,4 +1,3 @@
-// source : https://circuitdigest.com/microcontroller-projects/interfacing-rfid-reader-module-with-arduino
 // github files are from https://github.com/miguelbalboa/rfid/tree/master
 /**
  * @section Pin connections
