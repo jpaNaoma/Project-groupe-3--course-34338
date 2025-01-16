@@ -1,4 +1,3 @@
-// github files are from https://github.com/miguelbalboa/rfid/tree/master
 /**
  * @section Pin connections
  * SDA | RX | SS is connected to SS_pin 
@@ -8,23 +7,33 @@
  * RST | Reset is connected to RST_pin
  * LED is connected to LED_pin and is active high
  *  The LED should have a resistor to limit current (Using 220R, variation changes light level)
- *     
+ * @see Library & use examples are from https://github.com/miguelbalboa/rfid/tree/master, Inspiration was used, but slightly modified.    
+ * 
+ * Servo motor uses 5V (Red), GND (brown) and digital pin Servo_pin
+ * 
  */
 #include "SPI.h"
 #include "MFRC522.h"  // must add files from github
+#include "Servo.h"
 
 #define SS_pin 53  // slave select
 #define RST_pin 5  // reset pin
+#define Servo_Pin 3 // Servo motor pin
 
 #define LED_pin 2 // pin for turning on and off status led
 
 MFRC522 rfid(SS_pin, RST_pin);
 MFRC522::MIFARE_Key key;
 
+Servo Lock;
+
 unsigned char nuidPICC[4];
 unsigned char AccessPICC[4] = {0x83,0xE8,0x1F, 0x16};
 char ControlChar = (1<<0); // 1st bit is locked, starts being locked
 void setup() {
+  Lock.attach(Servo_Pin);
+  Lock.write(0);
+    
   Serial.begin(115200);  // Initialize serial communications with the PC
   pinMode(LED_pin, OUTPUT);
   digitalWrite(LED_pin, ControlChar && (1<<0) );
@@ -74,6 +83,13 @@ void loop() {
     }
   }
   digitalWrite(LED_pin, ControlChar && (1<<0) );
+
+  if (ControlChar & 1<<0){
+    // if locked
+    Lock.write(130);
+    }else{
+      Lock.write(50);
+      }
 }
 
 
