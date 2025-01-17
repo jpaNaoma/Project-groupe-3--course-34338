@@ -1,20 +1,47 @@
-// source : https://circuitdigest.com/microcontroller-projects/interfacing-rfid-reader-module-with-arduino
-// github files are from https://github.com/miguelbalboa/rfid/tree/master
+/**
+ * @section Pin connections
+ * SDA | RX | SS is connected to SS_pin 
+ * SCK is pin 52 (Mega2560)
+ * MOSI is pin 51 (Mega2560)
+ * MISO is pin 50 (Mega2560)
+ * RST | Reset is connected to RST_pin
+ * LED is connected to LED_pin and is active high
+ *  The LED should have a resistor to limit current (Using 220R, variation changes light level)
+ * @see RFID Library & use examples are from https://github.com/miguelbalboa/rfid/tree/master, Inspiration was used.    
+ * @see Radio Frequency Transmission are from https://lastminuteengineers.com/433mhz-rf-wireless-arduino-tutorial/
+ * Servo motor uses 5V (Red), GND (brown) and digital pin Servo_pin
+ * @see Servo Library is added from due to conflicting timers https://github.com/nabontra/ServoTimer2/tree/master
+ */
+#include <RH_ASK.h> // RadioHead library, downloaded from arduino library manager
+
 #include "SPI.h"
 #include "MFRC522.h"  // must add files from github
+#include "ServoTimer2.h" // Files downloaded
+
 
 #define SS_pin 53  // slave select
 #define RST_pin 5  // reset pin
+#define Servo_Pin 3 // Servo motor pin
 
 #define LED_pin 2 // pin for turning on and off status led
 
 MFRC522 rfid(SS_pin, RST_pin);
 MFRC522::MIFARE_Key key;
 
-char nuidPICC[4];
-char AccessPICC[4] = {0x83,0xE8,0x1F, 0x16};
+ServoTimer2 Lock;
+
+// Create Amplitude Shift Keying Object
+RH_ASK rf_driver;
+
+unsigned char nuidPICC[4];
+unsigned char AccessPICC[4] = {0x83,0xE8,0x1F, 0x16};
 char ControlChar = (1<<0); // 1st bit is locked, starts being locked
 void setup() {
+  rf_driver.init(); // Initialize receiver
+
+  Lock.attach(Servo_Pin);
+  Lock.write(1500);
+    
   Serial.begin(115200);  // Initialize serial communications with the PC
   pinMode(LED_pin, OUTPUT);
   digitalWrite(LED_pin, ControlChar && (1<<0) );
@@ -27,6 +54,34 @@ void setup() {
   Serial.println(F("Scan PICC to see UID, SAK, type, and data blocks..."));
 }
 void loop() {
+  uint8_t buf[12 + 1];
+  uint8_t buflen = sizeof(buf);
+  // Check if received packet is correct size
+    if (rf_driver.recv(buf, &buflen)){
+      buf[buflen] = '\0'; // will not overflow since we added the +1 
+      // Message received with valid checksum
+
+      if (strcmp((char *)buf , "HB") == 0){
+      }else if(strcmp((char *)buf , "Lock") == 0){
+        ControlChar |= (1<<0); // Lock the door
+        Serial.println("Locking the door");
+      }else if(strcmp((char *)buf , "Unlock") == 0){
+        ControlChar &= ~(1<<0); // Unlock the door
+        Serial.println("Unlocking the door");
+      }else{
+        Serial.print("Message Received: ");
+        Serial.println((char*)buf);
+      }
+
+      digitalWrite(LED_pin, ControlChar && (1<<0) );
+      if (ControlChar & 1<<0){
+      // if locked
+      Lock.write(1500);
+      }else{
+        Lock.write(0);
+      }
+    }
+
   // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
   if ( ! rfid.PICC_IsNewCardPresent())
     return;
@@ -39,7 +94,7 @@ void loop() {
   for (byte i = 0; i < 4; i++) {
     nuidPICC[i] = rfid.uid.uidByte[i];
   }
-  Serial.println(F("The NUID tag is:"));
+  Serial.print(F("The NUID tag is:"));
   printHex(rfid.uid.uidByte, rfid.uid.size);
   Serial.println();
 
@@ -64,6 +119,13 @@ void loop() {
     }
   }
   digitalWrite(LED_pin, ControlChar && (1<<0) );
+
+  if (ControlChar & 1<<0){
+    // if locked
+    Lock.write(1500);
+    }else{
+      Lock.write(0);
+      }
 }
 
 
