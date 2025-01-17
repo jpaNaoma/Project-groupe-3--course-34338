@@ -1,48 +1,44 @@
-/*
-  Based on the SendDemo example from the RC Switch library
-  https://github.com/sui77/rc-switch/
-*/
+// Include RadioHead Amplitude Shift Keying Library
+#include <RH_ASK.h>
+// Include dependant SPI Library
+#include <SPI.h>
 
-#include <RCSwitch.h>
-RCSwitch mySwitch = RCSwitch();
+#include <WString.h>
+// Create Amplitude Shift Keying Object
+RH_ASK rf_driver;
+
+unsigned long lastTransmitTime = 0;
+const unsigned long heartbeatInterval = 500; // Send a "heartbeat" every second
 
 void setup() {
-  Serial.begin(9600);
-  
-  // Transmitter is connected to Arduino Pin #10  
-  mySwitch.enableTransmit(10);
-
-  // Optional set pulse length.
-  mySwitch.setPulseLength(416);
-  
-  // Optional set protocol (default is 1, will work for most outlets)
-  mySwitch.setProtocol(1);
-  
-  // Optional set number of transmission repetitions.
-  mySwitch.setRepeatTransmit(15);
+  // Initialize ASK Object
+  rf_driver.init();
+  Serial.begin(115200);
 }
 
 void loop() {
-  // Binary code - button 3
-  Serial.println("\nsending code");
-  Serial.println("000101010101000101010101");
+  String input;
+  if (Serial.available() > 0) {
+    // Read the input string
+    input = Serial.readString();
+    Serial.print("Sending: ");
+    Serial.println(input);
 
-  mySwitch.send("000101010101000101010101");
-  delay(1000);  
+    // Convert String to const char*
+    const char *msg = input.c_str();
 
-  Serial.println("\nsending code");
-  Serial.println("000101010101000101010100");
-  mySwitch.send("000101010101000101010100");
-  delay(1000);
-  
-  // Binary code - button 4
-  Serial.println("\nsending code");
-  Serial.println("000101010101010001010101");
-  mySwitch.send("000101010101010001010101");
-  delay(1000);  
-  
-  Serial.println("\nsending code");
-  Serial.println("000101010101010001010100");
-  mySwitch.send("000101010101010001010100");
-  delay(1000);
+    // Transmit the message
+    rf_driver.send((uint8_t *)msg, strlen(msg));
+    rf_driver.waitPacketSent();
+   // delay(100);
+  } else {
+    // Send a periodic "heartbeat" to maintain synchronization
+        unsigned long currentTime = millis();
+        if (currentTime - lastTransmitTime > heartbeatInterval) {
+            const char *heartbeat = "HB"; // Heartbeat message
+            rf_driver.send((uint8_t *)heartbeat, strlen(heartbeat));
+            rf_driver.waitPacketSent();
+            lastTransmitTime = currentTime;
+  }
+}
 }
