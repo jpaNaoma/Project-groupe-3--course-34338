@@ -21,7 +21,7 @@ const uint8_t RGBgreen=D6;
 const uint8_t RGBblue=D7;
 const uint8_t buzzer=D3;
 
-LiquidCrystal_I2C lcd(0x27, 16, 2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
+LiquidCrystal_I2C lcd(0x27, 16, 2);  // setting the LCD 
 
 
 //Wi-Fi informations
@@ -39,11 +39,11 @@ WiFiClient client;
 /* function police: alarm system, combination of red and blue light and speaker alarm*/
 void police(){
   lcd.clear();
-  lcd.print("Alarm!");
+
   for (int i=0; i<20; i++)   //The alarm goes off for 20 seconds
     {
-      lcd.setCursor(0,1);
-      lcd.print(i);
+      lcd.setCursor(0,0);
+      lcd.print("Alarm!");
 
       digitalWrite(RGBred,HIGH);
       digitalWrite(RGBblue,LOW);
@@ -52,9 +52,10 @@ void police(){
       delay(500);
       tone(buzzer, 622);
       digitalWrite(RGBred,LOW);
-      
       digitalWrite(RGBblue,HIGH);
+      lcd.clear();
       delay(500);
+      
     }
   lcd.clear();
   digitalWrite(RGBred,LOW);
@@ -100,7 +101,7 @@ void setup() {
 
 
 void loop(){
-  
+
   // Read values from ThingSpeak (field1: door status, field2: ultrasonic sensor, field3: light sensor)
   bool doorStatus = ThingSpeak.readIntField(channelID, 1, readAPIKey) == 1;   
   bool threatDetected = ThingSpeak.readIntField(channelID, 2, readAPIKey) == 1; 
@@ -112,10 +113,8 @@ void loop(){
     delay(20000);  
     return;
   }
-  
-    
-    
-  // Display the values
+
+  // Display the values on the serial monitor
   Serial.print("Door status: ");
   Serial.println(doorStatus ? "Closed" : "Open");
   Serial.print("Threat detected: ");
@@ -129,27 +128,32 @@ void loop(){
       - the door is closed, the threat is not detected, the light is on; */
   
   if(doorStatus && threatDetected && lightDetected ){
-    Serial.println("Alarm activation!");  
+    Serial.println("Activate alarm!");  
     police();
   }
   else if (doorStatus && threatDetected && !lightDetected){
-    Serial.println("Alarm activation!");
+    Serial.println("Activate alarm!");
     police();
   }
   else if (doorStatus && !threatDetected && lightDetected ){
-    Serial.println("Alarm activation!");
+    Serial.println("Activate alarm!");
     police();
   }
   else{
     Serial.println("Alarm deactivated.");
     lcd.clear();
-    lcd.setCursor(16,0);
-    lcd.print("Alarm deactivated");
-    for (int i = 0; i < 17; i++) {  
-      lcd.scrollDisplayLeft();      
-      delay(300);                   
+    for(int t=0; t<10;t++){
+      lcd.setCursor(16,0);
+      lcd.print("Alarm deactivated");
+      for (int i = 0; i < 17; i++) {  
+        lcd.scrollDisplayLeft();      
+        delay(300);               
+      }
+      lcd.clear();
     }
+  
   }
+
 
 
   delay(20000);
