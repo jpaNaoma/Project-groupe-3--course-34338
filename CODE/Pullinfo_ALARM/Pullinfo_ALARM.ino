@@ -57,7 +57,6 @@ void police(){
       delay(500);
       
     }
-  lcd.clear();
   digitalWrite(RGBred,LOW);
   digitalWrite(RGBblue,LOW);
   noTone(buzzer);
@@ -82,13 +81,47 @@ void setup() {
   WiFi.begin(ssid, password);
   
 
-  //Checking the connection to the WiFi
+  //Checking the connection to the WiFi and breaking the operation if it takes too long
   Serial.print("Connecting to Wi-Fi");
+  int startTime=millis();
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
     Serial.print(".");
+
+    if(millis()-startTime>30000) // 30-second timeout
+    {
+      Serial.println("\nUnable to connect to Wi-Fi");
+      break;
+    }
   }
-  Serial.println("\nConnected to Wi-Fi!");
+  
+  if(WiFi.status() == WL_CONNECTED){
+    Serial.println("\nConnected to Wi-Fi!");
+  }
+  
+  //Retrying to connect to the Wi-Fi if the connection failed previously
+  if(WiFi.status() != WL_CONNECTED)
+  {
+    Serial.println("Retrying to connect to the Wi-Fi");
+    WiFi.begin(ssid, password);    
+    int retryTime=millis();
+
+    while(WiFi.status() != WL_CONNECTED && millis()-retryTime<60000) //Time given to reconnect is 60s
+    {
+      delay(1000);
+      Serial.print(".");
+    }
+    if(WiFi.status() == WL_CONNECTED){
+      Serial.println("\nReconnected to Wi-Fi!");
+    }
+    else
+    {
+      Serial.println("\nFailed to connect to Wi-Fi!");
+      digitalWrite(RGBred, HIGH);
+    }
+  }
+
+  
 
   // Initialize connection between ESP8266 and ThingSpeak
   ThingSpeak.begin(client);
@@ -102,17 +135,28 @@ void setup() {
 
 void loop(){
 
+  digitalWrite(RGBred,LOW);
+  digitalWrite(RGBblue,LOW);
+  digitalWrite(RGBgreen,LOW);
+  
+  
   // Read values from ThingSpeak (field1: door status, field2: ultrasonic sensor, field3: light sensor)
-  bool doorStatus = ThingSpeak.readIntField(channelID, 1, readAPIKey) == 1;   
-  bool threatDetected = ThingSpeak.readIntField(channelID, 2, readAPIKey) == 1; 
-  bool lightDetected = ThingSpeak.readIntField(channelID, 3, readAPIKey) == 1;  
+  int intdoorStatus = ThingSpeak.readIntField(channelID, 1, readAPIKey);
+  int intthreatDetected = ThingSpeak.readIntField(channelID, 2, readAPIKey);
+  int intlightDetected = ThingSpeak.readIntField(channelID, 3, readAPIKey);
   
   // Check if the read operation was successful
-  if (doorStatus == -1 || threatDetected == -1 || lightDetected == -1) {
+  if (intdoorStatus == -1 || intthreatDetected == -1 || intlightDetected == -1) {
     Serial.println("Error reading from ThingSpeak.");
     delay(20000);  
     return;
   }
+  // Converts the values from ThingPseak into booleans
+  bool doorStatus = (intdoorStatus == 1);   
+  bool threatDetected = (intthreatDetected == 1); 
+  bool lightDetected = (intlightDetected == 1);  
+  
+
 
   // Display the values on the serial monitor
   Serial.print("Door status: ");
@@ -127,35 +171,23 @@ void loop(){
       - the door is closed, the threat is detected, the light is off;
       - the door is closed, the threat is not detected, the light is on; */
   
-  if(doorStatus && threatDetected && lightDetected ){
+  if(doorStatus && (threatDetected || lightDetected)){
     Serial.println("Activate alarm!");  
     police();
   }
-  else if (doorStatus && threatDetected && !lightDetected){
-    Serial.println("Activate alarm!");
-    police();
-  }
-  else if (doorStatus && !threatDetected && lightDetected ){
-    Serial.println("Activate alarm!");
-    police();
-  }
   else{
+    digitalWrite(RGBgreen, HIGH);
     Serial.println("Alarm deactivated.");
+    
     lcd.clear();
-    for(int t=0; t<10;t++){
-      lcd.setCursor(16,0);
-      lcd.print("Alarm deactivated");
-      for (int i = 0; i < 17; i++) {  
-        lcd.scrollDisplayLeft();      
-        delay(300);               
-      }
-      lcd.clear();
+    lcd.setCursor(16,0);
+    lcd.print("Alarm deactivated");
+    for (int i = 0; i < 17; i++) {  
+      lcd.scrollDisplayLeft();      
+      delay(300);               
     }
-  
+      
+    
   }
 
-
-
-  delay(20000);
-  
 }
