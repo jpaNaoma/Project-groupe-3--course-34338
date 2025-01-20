@@ -32,7 +32,7 @@ const char* password = "jarlvep26";
 const unsigned long channelID = 2808163; //INSERT CHANNEL ID
 const char* readAPIKey = "XS1Z5OLYIGIWYLPP"; // INSERT API KEY
 
-WiFiClient client;
+WiFiClient client; // Create a WiFiClient object to enable communication over TCP/IP.
 
 
 
