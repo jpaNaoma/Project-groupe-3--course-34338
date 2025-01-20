@@ -76,13 +76,13 @@ void setup() {
  
   //Set the WiFi to station so that the esp can just receive information from the Thingspeak
   WiFi.mode(WIFI_STA);
+  delay(100);
 
   //Start the connection with the WiFi
   WiFi.begin(ssid, password);
-  
+  delay(100);
 
   //Checking the connection to the WiFi and breaking the operation if it takes too long
-  Serial.print("Connecting to Wi-Fi");
   int startTime=millis();
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
