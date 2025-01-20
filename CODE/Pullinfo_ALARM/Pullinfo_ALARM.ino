@@ -25,12 +25,12 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);  // setting the LCD
 
 
 //Wi-Fi informations
-const char* ssid = "OUR_SSID";
-const char* password = "OUR_PASSWORD";
+const char* ssid = "Jarls Galaxy";
+const char* password = "jarlvep26";
 
 // ThingSpeak channel info
-const unsigned long channelID = ....; //INSERT CHANNEL ID
-const char* readAPIKey = "OUR_READ_API_KEY"; // INSERT API KEY
+const unsigned long channelID = 2808163; //INSERT CHANNEL ID
+const char* readAPIKey = "XS1Z5OLYIGIWYLPP"; // INSERT API KEY
 
 WiFiClient client;
 
