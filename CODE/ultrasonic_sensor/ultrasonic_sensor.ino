@@ -15,15 +15,20 @@
 
 /**
  * @brief Pin definitions for the ultrasonic sensor.
+ * @param trigPin Trigger pin for the ultrasonic sensor.
+ * @param echoPin Echo pin for the ultrasonic sensor.
+ * @param duration Duration of echo signal in microseconds.
+ * @param distance Calculated distance in cm.
+ * @param minDistance Minimum distance (in cm) to trigger LED.
  */
 #define trigPin 2 ///< Trigger pin for the ultrasonic sensor.
 #define echoPin 3 ///< Echo pin for the ultrasonic sensor.
 
-Servo myservo; ///< Servo motor object.
+Servo myservo; 
 
-long duration; ///< Duration of echo signal in microseconds.
-float distance; ///< Calculated distance in cm.
-const int minDistance = 10; ///< Minimum distance (in cm) to trigger LED.
+long duration; 
+float distance; 
+const int minDistance = 10; 
 
 /**
  * @brief Setup function initializes pins and serial communication.
