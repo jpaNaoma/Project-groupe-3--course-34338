@@ -80,7 +80,6 @@ void setup() {
 
   //Start the connection with the WiFi
   WiFi.begin(ssid, password);
-  delay(100);
 
   //Checking the connection to the WiFi and breaking the operation if it takes too long
   int startTime=millis();
