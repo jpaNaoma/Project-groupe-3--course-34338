@@ -10,6 +10,14 @@ RH_ASK rf_driver;
 unsigned long lastTransmitTime = 0;
 const unsigned long heartbeatInterval = 500; // Send a "heartbeat" every second
 
+/** @brief Sends a string using Radio Frequency using RadioHead library
+*   @param Takes a char pointer / string as input
+*/
+void RadioSend(const char *msg){
+  rf_driver.send((uint8_t *)msg, strlen(msg));
+  rf_driver.waitPacketSent();
+}
+
 void setup() {
   // Initialize ASK Object
   rf_driver.init();
@@ -28,17 +36,15 @@ void loop() {
     const char *msg = input.c_str();
 
     // Transmit the message
-    rf_driver.send((uint8_t *)msg, strlen(msg));
-    rf_driver.waitPacketSent();
-   // delay(100);
+    RadioSend(msg);
   } else {
     // Send a periodic "heartbeat" to maintain synchronization
         unsigned long currentTime = millis();
         if (currentTime - lastTransmitTime > heartbeatInterval) {
-            const char *heartbeat = "HB"; // Heartbeat message
-            rf_driver.send((uint8_t *)heartbeat, strlen(heartbeat));
-            rf_driver.waitPacketSent();
+            RadioSend("HB");
             lastTransmitTime = currentTime;
   }
 }
 }
+
+
