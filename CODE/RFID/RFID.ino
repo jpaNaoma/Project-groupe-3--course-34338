@@ -7,14 +7,17 @@
  * RST | Reset is connected to RST_pin
  * LED is connected to LED_pin and is active high
  *  The LED should have a resistor to limit current (Using 220R, variation changes light level)
- * @see Library & use examples are from https://github.com/miguelbalboa/rfid/tree/master, Inspiration was used, but slightly modified.    
- * 
+ * @see RFID Library & use examples are from https://github.com/miguelbalboa/rfid/tree/master, Inspiration was used.    
+ * @see Radio Frequency Transmission are from https://lastminuteengineers.com/433mhz-rf-wireless-arduino-tutorial/
  * Servo motor uses 5V (Red), GND (brown) and digital pin Servo_pin
- * 
+ * @see Servo Library is added from due to conflicting timers https://github.com/nabontra/ServoTimer2/tree/master
  */
+#include <RH_ASK.h> // RadioHead library, downloaded from arduino library manager
+
 #include "SPI.h"
 #include "MFRC522.h"  // must add files from github
-#include "Servo.h"
+#include "ServoTimer2.h" // Files downloaded
+
 
 #define SS_pin 53  // slave select
 #define RST_pin 5  // reset pin
@@ -25,14 +28,19 @@
 MFRC522 rfid(SS_pin, RST_pin);
 MFRC522::MIFARE_Key key;
 
-Servo Lock;
+ServoTimer2 Lock;
+
+// Create Amplitude Shift Keying Object
+RH_ASK rf_driver;
 
 unsigned char nuidPICC[4];
 unsigned char AccessPICC[4] = {0x83,0xE8,0x1F, 0x16};
 char ControlChar = (1<<0); // 1st bit is locked, starts being locked
 void setup() {
+  rf_driver.init(); // Initialize receiver
+
   Lock.attach(Servo_Pin);
-  Lock.write(0);
+  Lock.write(1500);
     
   Serial.begin(115200);  // Initialize serial communications with the PC
   pinMode(LED_pin, OUTPUT);
@@ -46,6 +54,34 @@ void setup() {
   Serial.println(F("Scan PICC to see UID, SAK, type, and data blocks..."));
 }
 void loop() {
+  uint8_t buf[12 + 1];
+  uint8_t buflen = sizeof(buf);
+  // Check if received packet is correct size
+    if (rf_driver.recv(buf, &buflen)){
+      buf[buflen] = '\0'; // will not overflow since we added the +1 
+      // Message received with valid checksum
+
+      if (strcmp((char *)buf , "HB") == 0){
+      }else if(strcmp((char *)buf , "Lock") == 0){
+        ControlChar |= (1<<0); // Lock the door
+        Serial.println("Locking the door");
+      }else if(strcmp((char *)buf , "Unlock") == 0){
+        ControlChar &= ~(1<<0); // Unlock the door
+        Serial.println("Unlocking the door");
+      }else{
+        Serial.print("Message Received: ");
+        Serial.println((char*)buf);
+      }
+
+      digitalWrite(LED_pin, ControlChar && (1<<0) );
+      if (ControlChar & 1<<0){
+      // if locked
+      Lock.write(1500);
+      }else{
+        Lock.write(0);
+      }
+    }
+
   // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
   if ( ! rfid.PICC_IsNewCardPresent())
     return;
@@ -86,9 +122,9 @@ void loop() {
 
   if (ControlChar & 1<<0){
     // if locked
-    Lock.write(130);
+    Lock.write(1500);
     }else{
-      Lock.write(50);
+      Lock.write(0);
       }
 }
 
