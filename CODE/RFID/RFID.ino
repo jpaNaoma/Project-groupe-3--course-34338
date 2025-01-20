@@ -8,16 +8,12 @@
  * LED is connected to LED_pin and is active high
  *  The LED should have a resistor to limit current (Using 220R, variation changes light level)
  * @see RFID Library & use examples are from https://github.com/miguelbalboa/rfid/tree/master, Inspiration was used.    
- * @see Radio Frequency Transmission are from https://lastminuteengineers.com/433mhz-rf-wireless-arduino-tutorial/
- * Servo motor uses 5V (Red), GND (brown) and digital pin Servo_pin
- * @see Servo Library is added from due to conflicting timers https://github.com/nabontra/ServoTimer2/tree/master
+ * @see Radio Frequency Transmission are from https://lastminuteengineers.com/433mhz-rf-wireless-arduino-tutorial/ 
  */
 #include <RH_ASK.h> // RadioHead library, downloaded from arduino library manager
 
 #include "SPI.h"
 #include "MFRC522.h"  // must add files from github
-#include "ServoTimer2.h" // Files downloaded
-
 
 #define SS_pin 53  // slave select
 #define RST_pin 5  // reset pin
@@ -28,59 +24,56 @@
 MFRC522 rfid(SS_pin, RST_pin);
 MFRC522::MIFARE_Key key;
 
-ServoTimer2 Lock;
-
 // Create Amplitude Shift Keying Object
 RH_ASK rf_driver;
 
 unsigned char nuidPICC[4];
 unsigned char AccessPICC[4] = {0x83,0xE8,0x1F, 0x16};
 char ControlChar = (1<<0); // 1st bit is locked, starts being locked
+
+unsigned long lastTransmitTime = 0;
+const unsigned long TransmitInterval = 250; // Send status every 250 ms
+
+void RadioSend(const char *msg){
+  rf_driver.send((uint8_t *)msg, strlen(msg));
+  rf_driver.waitPacketSent();
+}
+/**
+* @brief Setups Serial (Not needed for final), Pins, SPI and RFID
+*
+*
+*/
 void setup() {
   rf_driver.init(); // Initialize receiver
-
-  Lock.attach(Servo_Pin);
-  Lock.write(1500);
     
   Serial.begin(115200);  // Initialize serial communications with the PC
   pinMode(LED_pin, OUTPUT);
   digitalWrite(LED_pin, ControlChar && (1<<0) );
 
-  while (!Serial); // Do nothing if no serial port is opened (added for Arduinos based on ATMEGA32U4)
   SPI.begin();                     // Init SPI bus
   rfid.PCD_Init();                 // Init MFRC522
   delay(4);                        // Optional delay. Some board do need more time after init to be ready, see Readme
   rfid.PCD_DumpVersionToSerial();  // Show details of PCD - MFRC522 Card Reader details
   Serial.println(F("Scan PICC to see UID, SAK, type, and data blocks..."));
 }
+
+/**
+* @brief Main loop for RFID part. Checks the RFID and sends over radio if it 
+* should be locked or not.
+* LED shows the status if it's locked or unlocked
+*/
 void loop() {
-  uint8_t buf[12 + 1];
-  uint8_t buflen = sizeof(buf);
-  // Check if received packet is correct size
-    if (rf_driver.recv(buf, &buflen)){
-      buf[buflen] = '\0'; // will not overflow since we added the +1 
-      // Message received with valid checksum
-
-      if (strcmp((char *)buf , "HB") == 0){
-      }else if(strcmp((char *)buf , "Lock") == 0){
-        ControlChar |= (1<<0); // Lock the door
-        Serial.println("Locking the door");
-      }else if(strcmp((char *)buf , "Unlock") == 0){
-        ControlChar &= ~(1<<0); // Unlock the door
-        Serial.println("Unlocking the door");
-      }else{
-        Serial.print("Message Received: ");
-        Serial.println((char*)buf);
-      }
-
-      digitalWrite(LED_pin, ControlChar && (1<<0) );
-      if (ControlChar & 1<<0){
-      // if locked
-      Lock.write(1500);
-      }else{
-        Lock.write(0);
-      }
+  unsigned long currentTime = millis(); // Current time
+  if(currentTime - lastTransmitTime > TransmitInterval){ // Send status every TransmitInterval
+    if (ControlChar & 1<<0){ // Sends the status over radio
+      RadioSend("Locked");
+      Serial.println("Sending status: LOCKED");
+    }else{
+      RadioSend("Unlocked");
+      Serial.println("Sending status: UNLOCKED");
     }
+    lastTransmitTime = currentTime; 
+  }
 
   // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
   if ( ! rfid.PICC_IsNewCardPresent())
@@ -119,18 +112,11 @@ void loop() {
     }
   }
   digitalWrite(LED_pin, ControlChar && (1<<0) );
-
-  if (ControlChar & 1<<0){
-    // if locked
-    Lock.write(1500);
-    }else{
-      Lock.write(0);
-      }
 }
 
-
 /**
- * Helper routine to dump a byte array as hex values to Serial. 
+ * @brief Helper routine to dump a byte array as hex values to Serial. Will not be needed in final project
+ *  
  */
 void printHex(byte *buffer, byte bufferSize) {
   for (byte i = 0; i < bufferSize; i++) {
@@ -138,3 +124,4 @@ void printHex(byte *buffer, byte bufferSize) {
     Serial.print(buffer[i], HEX);
   }
 }
+
