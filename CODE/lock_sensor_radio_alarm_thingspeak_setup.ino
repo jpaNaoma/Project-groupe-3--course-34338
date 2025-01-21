@@ -51,6 +51,7 @@ void setup() {
 
 unsigned long previousMillis = 0;
 const unsigned long postDelay = 20000; // 20 seconds
+int loopCounter = 0; // Global counter to track loop iterations
 
 void loop() {
 
@@ -66,25 +67,29 @@ void loop() {
       if (strcmp((char*)buf , "LockedNFar") == 0){
         
         door=0;
-
+alarm = 0;
          Serial.println("Locking the door");
         lock.write(160);
       }
-      else if(strcmp((char*)buf , "LockedNClose") == 0){
-         Serial.println("Locking the door223");
-              door=0;
-              
-              alarm = 0;
-        for (int i=0; i<10; i++)   //The alarm goes off for 10 seconds
-              alarm = 1;
-         Serial.println("Alarm goes off");
-      
-        lock.write(160);
-      }
+      else if(strcmp((char*)buf , "LockedNClose") == 0) {
+    Serial.println("Locking the door223");
+    door = 0;
+
+    alarm = 0; // Ensure the alarm starts off
+    loopCounter = 0; // Reset the loop counter
+
+    lock.write(160); // Lock the door immediately
+
+    
+}
+
+
+
       else if(strcmp((char* )buf , "UnlockNFar") == 0){
          Serial.println("Unlocking the door");
         
         door=1;
+        alarm = 0;
         
         lock.write(0);
       }
@@ -92,6 +97,7 @@ void loop() {
          Serial.println("Unlocking the door");
         
         door=1;
+        alarm = 0;
 
         lock.write(0);
       }
@@ -101,6 +107,15 @@ void loop() {
         Serial.print((char*)buf);
       }
 
+    }
+
+
+     if (loopCounter < 10) {
+    loopCounter++;
+      } else if (loopCounter == 10 && alarm == 0 && door == 0) {
+    alarm = 1; // Trigger the alarm
+    Serial.println("Alarm goes off");
+    loopCounter = 0;
     }
 
  // Message handling logic here
