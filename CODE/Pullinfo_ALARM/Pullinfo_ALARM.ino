@@ -40,7 +40,7 @@ WiFiClient client; // Create a WiFiClient object to enable communication over TC
 void police(){
   lcd.clear();
 
-  for (int i=0; i<20; i++)   //The alarm goes off for 20 seconds
+  for (int i=0; i<5; i++)   //The alarm goes off for 5 seconds
     {
       lcd.setCursor(0,0);
       lcd.print("Alarm!");
@@ -71,6 +71,8 @@ void setup() {
   pinMode(RGBgreen, OUTPUT);
   pinMode(RGBblue, OUTPUT);
   pinMode(buzzer, OUTPUT);
+  digitalWrite(RGBred,LOW);
+  digitalWrite(RGBblue,LOW);
   digitalWrite(RGBgreen,LOW);
  
  
@@ -121,7 +123,6 @@ void setup() {
   }
 
   
-
   // Initialize connection between ESP8266 and ThingSpeak
   ThingSpeak.begin(client);
 
@@ -134,28 +135,24 @@ void setup() {
 
 void loop(){
 
-  digitalWrite(RGBred,LOW);
-  digitalWrite(RGBblue,LOW);
-  digitalWrite(RGBgreen,LOW);
-  
   
   // Read values from ThingSpeak (field1: door status, field2: ultrasonic sensor, field3: light sensor)
-  int intdoorStatus = ThingSpeak.readIntField(channelID, 1, readAPIKey);
+  int intdoorStatus = ThingSpeak.readIntField(channelID, 1, readAPIKey); //alarm when sensor detect a person for 20 seconds
   int intthreatDetected = ThingSpeak.readIntField(channelID, 2, readAPIKey);
   int intlightDetected = ThingSpeak.readIntField(channelID, 3, readAPIKey);
   
   // Check if the read operation was successful
-  if (intdoorStatus == -1 || intthreatDetected == -1 || intlightDetected == -1) {
+  if (intdoorStatus == -1 || intthreatDetected == -1) { //|| intlightDetected == -1) {
     Serial.println("Error reading from ThingSpeak.");
     delay(20000);  
     return;
   }
+
   // Converts the values from ThingPseak into booleans
-  bool doorStatus = (intdoorStatus == 1);   
+  bool doorStatus = (intdoorStatus == 0);   
   bool threatDetected = (intthreatDetected == 1); 
   bool lightDetected = (intlightDetected == 1);  
   
-
 
   // Display the values on the serial monitor
   Serial.print("Door status: ");
@@ -186,7 +183,6 @@ void loop(){
       delay(300);               
     }
       
-    
   }
 
 }
