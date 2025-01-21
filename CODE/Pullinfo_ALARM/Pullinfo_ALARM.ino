@@ -30,7 +30,7 @@ const char* password = "detvedjegikke";
 
 // ThingSpeak channel info
 const unsigned long channelID = 2814485; //INSERT CHANNEL ID
-const char* readAPIKey = "6COFCODQXCAV6F9O"; // INSERT API KEY
+const char* readAPIKey = "DF9UCEIB1R550QNT"; // INSERT API KEY
 
 WiFiClient client; // Create a WiFiClient object to enable communication over TCP/IP.
 
