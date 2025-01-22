@@ -1,0 +1,72 @@
+\doxysection{CODE/\+RFID/\+Servo\+Timer2-\/master/\+Servo\+Timer2-\/master/\+Servo\+Timer2.cpp File Reference}
+\hypertarget{_servo_timer2_8cpp}{}\label{_servo_timer2_8cpp}\index{CODE/RFID/ServoTimer2-\/master/ServoTimer2-\/master/ServoTimer2.cpp@{CODE/RFID/ServoTimer2-\/master/ServoTimer2-\/master/ServoTimer2.cpp}}
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include "{}Servo\+Timer2.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_servo_timer2_8cpp_a8acd44db6ecddf429f7418f8131ba25c}{FRAME\+\_\+\+SYNC\+\_\+\+INDEX}}~0
+\item 
+\#define \mbox{\hyperlink{_servo_timer2_8cpp_a87454c6b6d547760556344e03c7c33ab}{FRAME\+\_\+\+SYNC\+\_\+\+PERIOD}}~20000
+\item 
+\#define \mbox{\hyperlink{_servo_timer2_8cpp_a7146e47502efc69c45ab7fa7e9bd1baa}{FRAME\+\_\+\+SYNC\+\_\+\+DELAY}}~((\mbox{\hyperlink{_servo_timer2_8cpp_a87454c6b6d547760556344e03c7c33ab}{FRAME\+\_\+\+SYNC\+\_\+\+PERIOD}} -\/ ( \mbox{\hyperlink{_servo_timer2_8h_acccb387d396c1c5e087f200810580b4e}{NBR\+\_\+\+CHANNELS}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_servo_timer2_8h_a7eada57cb49e7b1766a813e4635d79bd}{DEFAULT\+\_\+\+PULSE\+\_\+\+WIDTH}}))/ 128)
+\item 
+\#define \mbox{\hyperlink{_servo_timer2_8cpp_a4b3ac6f7732ed61423a012a9607db8ad}{DELAY\+\_\+\+ADJUST}}~8
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_servo_timer2_8cpp_a7cfcbe42bd266750aeb6e5d71e5ea479}{ISR}} (TIMER2\+\_\+\+OVF\+\_\+vect)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{_servo_timer2_8cpp_ae7fa221e0d4e5055884c79930050361a}{Channel\+Count}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_servo_timer2_8cpp_a4b3ac6f7732ed61423a012a9607db8ad}\index{ServoTimer2.cpp@{ServoTimer2.cpp}!DELAY\_ADJUST@{DELAY\_ADJUST}}
+\index{DELAY\_ADJUST@{DELAY\_ADJUST}!ServoTimer2.cpp@{ServoTimer2.cpp}}
+\doxysubsubsection{\texorpdfstring{DELAY\_ADJUST}{DELAY\_ADJUST}}
+{\footnotesize\ttfamily \label{_servo_timer2_8cpp_a4b3ac6f7732ed61423a012a9607db8ad} 
+\#define DELAY\+\_\+\+ADJUST~8}
+
+\Hypertarget{_servo_timer2_8cpp_a7146e47502efc69c45ab7fa7e9bd1baa}\index{ServoTimer2.cpp@{ServoTimer2.cpp}!FRAME\_SYNC\_DELAY@{FRAME\_SYNC\_DELAY}}
+\index{FRAME\_SYNC\_DELAY@{FRAME\_SYNC\_DELAY}!ServoTimer2.cpp@{ServoTimer2.cpp}}
+\doxysubsubsection{\texorpdfstring{FRAME\_SYNC\_DELAY}{FRAME\_SYNC\_DELAY}}
+{\footnotesize\ttfamily \label{_servo_timer2_8cpp_a7146e47502efc69c45ab7fa7e9bd1baa} 
+\#define FRAME\+\_\+\+SYNC\+\_\+\+DELAY~((\mbox{\hyperlink{_servo_timer2_8cpp_a87454c6b6d547760556344e03c7c33ab}{FRAME\+\_\+\+SYNC\+\_\+\+PERIOD}} -\/ ( \mbox{\hyperlink{_servo_timer2_8h_acccb387d396c1c5e087f200810580b4e}{NBR\+\_\+\+CHANNELS}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_servo_timer2_8h_a7eada57cb49e7b1766a813e4635d79bd}{DEFAULT\+\_\+\+PULSE\+\_\+\+WIDTH}}))/ 128)}
+
+\Hypertarget{_servo_timer2_8cpp_a8acd44db6ecddf429f7418f8131ba25c}\index{ServoTimer2.cpp@{ServoTimer2.cpp}!FRAME\_SYNC\_INDEX@{FRAME\_SYNC\_INDEX}}
+\index{FRAME\_SYNC\_INDEX@{FRAME\_SYNC\_INDEX}!ServoTimer2.cpp@{ServoTimer2.cpp}}
+\doxysubsubsection{\texorpdfstring{FRAME\_SYNC\_INDEX}{FRAME\_SYNC\_INDEX}}
+{\footnotesize\ttfamily \label{_servo_timer2_8cpp_a8acd44db6ecddf429f7418f8131ba25c} 
+\#define FRAME\+\_\+\+SYNC\+\_\+\+INDEX~0}
+
+\Hypertarget{_servo_timer2_8cpp_a87454c6b6d547760556344e03c7c33ab}\index{ServoTimer2.cpp@{ServoTimer2.cpp}!FRAME\_SYNC\_PERIOD@{FRAME\_SYNC\_PERIOD}}
+\index{FRAME\_SYNC\_PERIOD@{FRAME\_SYNC\_PERIOD}!ServoTimer2.cpp@{ServoTimer2.cpp}}
+\doxysubsubsection{\texorpdfstring{FRAME\_SYNC\_PERIOD}{FRAME\_SYNC\_PERIOD}}
+{\footnotesize\ttfamily \label{_servo_timer2_8cpp_a87454c6b6d547760556344e03c7c33ab} 
+\#define FRAME\+\_\+\+SYNC\+\_\+\+PERIOD~20000}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_servo_timer2_8cpp_a7cfcbe42bd266750aeb6e5d71e5ea479}\index{ServoTimer2.cpp@{ServoTimer2.cpp}!ISR@{ISR}}
+\index{ISR@{ISR}!ServoTimer2.cpp@{ServoTimer2.cpp}}
+\doxysubsubsection{\texorpdfstring{ISR()}{ISR()}}
+{\footnotesize\ttfamily \label{_servo_timer2_8cpp_a7cfcbe42bd266750aeb6e5d71e5ea479} 
+ISR (\begin{DoxyParamCaption}\item[{TIMER2\+\_\+\+OVF\+\_\+vect}]{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_servo_timer2_8cpp_ae7fa221e0d4e5055884c79930050361a}\index{ServoTimer2.cpp@{ServoTimer2.cpp}!ChannelCount@{ChannelCount}}
+\index{ChannelCount@{ChannelCount}!ServoTimer2.cpp@{ServoTimer2.cpp}}
+\doxysubsubsection{\texorpdfstring{ChannelCount}{ChannelCount}}
+{\footnotesize\ttfamily \label{_servo_timer2_8cpp_ae7fa221e0d4e5055884c79930050361a} 
+uint8\+\_\+t Channel\+Count = 0}
+

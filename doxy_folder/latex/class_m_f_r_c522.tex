@@ -1,0 +1,1691 @@
+\doxysection{MFRC522 Class Reference}
+\hypertarget{class_m_f_r_c522}{}\label{class_m_f_r_c522}\index{MFRC522@{MFRC522}}
+
+
+{\ttfamily \#include $<$MFRC522.\+h$>$}
+
+Inheritance diagram for MFRC522\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_m_f_r_c522}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MIFARE\+\_\+\+Key}}
+\item 
+struct \mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}} \+: byte \{ \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a0ec37643fa721f476b0cd4359e3c7ef1}{Command\+Reg}} = 0x01 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad956725472615518dfb99f2d7dccc50e}{Com\+IEn\+Reg}} = 0x02 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afb4527cc3e364cce3fe3e62cdcde7da0}{Div\+IEn\+Reg}} = 0x03 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a76b2a615444982e04566784bdb5c9841}{Com\+Irq\+Reg}} = 0x04 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a95e26d5ece97ae43c34d08797205a356}{Div\+Irq\+Reg}} = 0x05 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a240aa03a1d9542235b89cdef377a5796}{Error\+Reg}} = 0x06 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9f8b10dda6868e74226ab7ccca8d5be0}{Status1\+Reg}} = 0x07 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a8fb1a8c28b7a860793831566373f172f}{Status2\+Reg}} = 0x08 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afdbfd2f397b96d1043c808ec26e80328}{FIFOData\+Reg}} = 0x09 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a35e5daf30358a0a271dadf50ba6bb4e7}{FIFOLevel\+Reg}} = 0x0A \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aee5f7c4d0d34d93e5ac67a47e886b224}{Water\+Level\+Reg}} = 0x0B \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9d0df9e03ad6706004b003e20127a76a}{Control\+Reg}} = 0x0C \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aaf8beb5a739cd8bf94b8b5c8d2d109ce}{Bit\+Framing\+Reg}} = 0x0D \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afafb7ec88f79c9b1f195195497d0ca07}{Coll\+Reg}} = 0x0E \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a2cd647ad1ac1327d2a632115cd9c4477}{Mode\+Reg}} = 0x11 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad4fe18ad01abc83d4559369226fe7992}{Tx\+Mode\+Reg}} = 0x12 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a7e0d6ae1fdd25be6d80d1b76b2274764}{Rx\+Mode\+Reg}} = 0x13 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a73dc12b03f05177a400263e5e2bcf0cc}{Tx\+Control\+Reg}} = 0x14 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac9de33ca066ca9481bd01d5642a0c879}{Tx\+ASKReg}} = 0x15 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a6cf11e077148648aaec0492317be5177}{Tx\+Sel\+Reg}} = 0x16 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a669c0c9418d5437566b4b42da326c05f}{Rx\+Sel\+Reg}} = 0x17 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a50d7af7ddc6c606c2b3b9c07df2f22ab}{Rx\+Threshold\+Reg}} = 0x18 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a37b01e93fff19ca62364e8f4f797a5c4}{Demod\+Reg}} = 0x19 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a08eb51f4d08a41ceb4b34189bb712dc7}{Mf\+Tx\+Reg}} = 0x1C \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a92fbf63612de021d242465d4685f1754}{Mf\+Rx\+Reg}} = 0x1D \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a23529258de3c3f5655afa2849f547f68}{Serial\+Speed\+Reg}} = 0x1F \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a430d34a355d45528d674ad839a187494}{CRCResult\+RegH}} = 0x21 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a4be013336d7bab727dc0e7e150dcd03c}{CRCResult\+RegL}} = 0x22 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad69a6a3d883ebfc993fc6fbdbc035508}{Mod\+Width\+Reg}} = 0x24 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a0c99eea491c71e9d2a02bf8a86988adf}{RFCfg\+Reg}} = 0x26 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a2f81aa5f433fa51bb4b41cd8955de794}{Gs\+NReg}} = 0x27 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a02925dc7a230fcf039c597bf8cfa113f}{CWGs\+PReg}} = 0x28 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669acf6ed89766ba2a4e6483b3209b1aa74e}{Mod\+Gs\+PReg}} = 0x29 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a1ed52e7f88c8bf3fda91bf31bb62afe4}{TMode\+Reg}} = 0x2A \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a88c2ad7cdfb7178ea775c157f4ce5213}{TPrescaler\+Reg}} = 0x2B \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac9a037a517ada62924c47d5e4b62a14c}{TReload\+RegH}} = 0x2C \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afa3348d82b026de8fecdd18d58e92e2a}{TReload\+RegL}} = 0x2D \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ab32cff60c4488866726d4a3930ad8995}{TCounter\+Value\+RegH}} = 0x2E \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad70c519d4928690a1d8e7835532ce146}{TCounter\+Value\+RegL}} = 0x2F \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a3fd81beec1ed6566ff1897aac235890f}{Test\+Sel1\+Reg}} = 0x31 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac1053bcb64682eba4a767caaea677807}{Test\+Sel2\+Reg}} = 0x32 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a62a7871c0d3452a8f642bbea0ca7cb34}{Test\+Pin\+En\+Reg}} = 0x33 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aa5bb4445abb525ddf46c6efcb21e8811}{Test\+Pin\+Value\+Reg}} = 0x34 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a37bc0188996dc1ee5332d40961bffb4b}{Test\+Bus\+Reg}} = 0x35 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9583618ad17a8a20b7a735c7677c8e56}{Auto\+Test\+Reg}} = 0x36 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a4281c25cf6743163ed2e2f903cf17ba9}{Version\+Reg}} = 0x37 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669af1d5966b064c10a672e0064d3ccc55c3}{Analog\+Test\+Reg}} = 0x38 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a25334abb5ff680a530e95e6fb0e48a5b}{Test\+DAC1\+Reg}} = 0x39 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a505b75aac860302b2959da7fe607e5eb}{Test\+DAC2\+Reg}} = 0x3A \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a1042587aeb71f82f884975ca54c8854a}{Test\+ADCReg}} = 0x3B \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+ \}
+\item 
+enum \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8}{PCD\+\_\+\+Command}} \+: byte \{ \newline
+\mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8afe5ffdce88fe7544cbc49f8947df9ad9}{PCD\+\_\+\+Idle}} = 0x00
+, \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2f3a9f820c74cb11fabdc00e20c7e2fe}{PCD\+\_\+\+Mem}} = 0x01
+, \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a3b9535f3e1eb589c05ca9f22f380647a}{PCD\+\_\+\+Generate\+Random\+ID}} = 0x02
+, \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a61d1786d5518a1ad71aac8413941f0ac}{PCD\+\_\+\+Calc\+CRC}} = 0x03
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8af91e3fb8471c0953d69b83b1baf55ae1}{PCD\+\_\+\+Transmit}} = 0x04
+, \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2d0df8c6384dd59ad6276510b4fe992d}{PCD\+\_\+\+No\+Cmd\+Change}} = 0x07
+, \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2ec760e26c27fff63bebee7e9cf844e7}{PCD\+\_\+\+Receive}} = 0x08
+, \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8af0b7178e7638038db6f8e7016892fafd}{PCD\+\_\+\+Transceive}} = 0x0C
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a903753278eed75d5d1af2390649ec0c2}{PCD\+\_\+\+MFAuthent}} = 0x0E
+, \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a8f54a569867f812163c6a9bc3461d03a}{PCD\+\_\+\+Soft\+Reset}} = 0x0F
+ \}
+\item 
+enum \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1}{PCD\+\_\+\+Rx\+Gain}} \+: byte \{ \newline
+\mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a4d5e7f6b74ce3912ffdf3305ea263497}{Rx\+Gain\+\_\+18dB}} = 0x00 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+, \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1aab1ac5ba97a5e07ff487f1996352a8e6}{Rx\+Gain\+\_\+23dB}} = 0x01 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+, \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1ac918bee80fae5c763094684ae08bff82}{Rx\+Gain\+\_\+18d\+B\+\_\+2}} = 0x02 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+, \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1ac3b5b39560b326ac91971a41ad167c15}{Rx\+Gain\+\_\+23d\+B\+\_\+2}} = 0x03 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a721f1c7082ea232324d8660844996158}{Rx\+Gain\+\_\+33dB}} = 0x04 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+, \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1af2f57fe1d71de1d17204933084649368}{Rx\+Gain\+\_\+38dB}} = 0x05 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+, \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1abc9602260b5733a23e0be7e0c03b1ec9}{Rx\+Gain\+\_\+43dB}} = 0x06 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+, \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a13227ab5e3143489b0888671d284301b}{Rx\+Gain\+\_\+48dB}} = 0x07 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a97ffca230ea898a78b5734ae0dd44506}{Rx\+Gain\+\_\+min}} = 0x00 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+, \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a2b5b3bd5efdc06adc7c5e190919f5568}{Rx\+Gain\+\_\+avg}} = 0x04 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+, \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a3c59e553655b4e44c10d7deef54576a0}{Rx\+Gain\+\_\+max}} = 0x07 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+ \}
+\item 
+enum \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341}{PICC\+\_\+\+Command}} \+: byte \{ \newline
+\mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341aee3203a0a40028d3059861464198b688}{PICC\+\_\+\+CMD\+\_\+\+REQA}} = 0x26
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a9b8fbd1c87d0a6bbe2ef78d192001b3a}{PICC\+\_\+\+CMD\+\_\+\+WUPA}} = 0x52
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ac532079d67a5325cc5b3505cccf6ac8b}{PICC\+\_\+\+CMD\+\_\+\+CT}} = 0x88
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341aa9329ee8f72f61f5d73bb893b64c08d0}{PICC\+\_\+\+CMD\+\_\+\+SEL\+\_\+\+CL1}} = 0x93
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ab0399cde7122f0bb6dedb584254455c2}{PICC\+\_\+\+CMD\+\_\+\+SEL\+\_\+\+CL2}} = 0x95
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a291c265bc0a7b3f303b361582b95cc85}{PICC\+\_\+\+CMD\+\_\+\+SEL\+\_\+\+CL3}} = 0x97
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ad1e0cf89f52ca1b503297e59c600ca57}{PICC\+\_\+\+CMD\+\_\+\+HLTA}} = 0x50
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a4201da4f3f107dac7f4a9de95c413288}{PICC\+\_\+\+CMD\+\_\+\+RATS}} = 0x\+E0
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a7ab2b1b2d0f0d668dfb3ac53ec7f08d6}{PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+AUTH\+\_\+\+KEY\+\_\+A}} = 0x60
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a7b37f0b5fd5406b4cebe306608e5be3f}{PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+AUTH\+\_\+\+KEY\+\_\+B}} = 0x61
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a2ea95497e35adbc7acbc32c0cb8a574a}{PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+READ}} = 0x30
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a02ccb020ccc6d49d563f0ed1489d8025}{PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+WRITE}} = 0x\+A0
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a69b2bb1cd2dc0437d6d1fb11eb2796e7}{PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+DECREMENT}} = 0x\+C0
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a454e12c2c815a861a0450d40273f98ef}{PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+INCREMENT}} = 0x\+C1
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ab8ed49cb6ed6228acb0c911d60758486}{PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+RESTORE}} = 0x\+C2
+, \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a5d2309094d9fa17125dc90394e5aeaa0}{PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+TRANSFER}} = 0x\+B0
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ae8aeabd1ddb73db2f04259c76eaccd8e}{PICC\+\_\+\+CMD\+\_\+\+UL\+\_\+\+WRITE}} = 0x\+A2
+ \}
+\item 
+enum \mbox{\hyperlink{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eede}{MIFARE\+\_\+\+Misc}} \{ \mbox{\hyperlink{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eedea3b5fce9bf15481d218872d4584743a1c}{MF\+\_\+\+ACK}} = 0xA
+, \mbox{\hyperlink{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eedea410c51021b253b680b7ec518ccc818ce}{MF\+\_\+\+KEY\+\_\+\+SIZE}} = 6
+ \}
+\item 
+enum \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\+\_\+\+Type}} \+: byte \{ \newline
+\mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2aceba425b4eb6fd85de456a04e1ce1565}{PICC\+\_\+\+TYPE\+\_\+\+UNKNOWN}}
+, \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a5c8147b0f3970c9db0a177cb44592bc7}{PICC\+\_\+\+TYPE\+\_\+\+ISO\+\_\+14443\+\_\+4}}
+, \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a6d211bf0d6e1bed8f7cdb375e9137360}{PICC\+\_\+\+TYPE\+\_\+\+ISO\+\_\+18092}}
+, \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a58d34a16ef064d4679cae921ecc4b505}{PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+\+MINI}}
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a948d034c12fd457923b65f929b1538fb}{PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+1K}}
+, \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a7d2d0cfef1abe1c457fb72ebcf81fad4}{PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+4K}}
+, \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a905f84b972470f7d80ed017817ae300c}{PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+\+UL}}
+, \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a16d53e0355d6214dbe7faf7e37c99002}{PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+\+PLUS}}
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2ac6d7ac25fc66f5a56bd60d618ba072d4}{PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+\+DESFIRE}}
+, \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a3efaeaa8963b24323f274bab4c1eaf8f}{PICC\+\_\+\+TYPE\+\_\+\+TNP3\+XXX}}
+, \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a06fbbb7628bd0c595c58b96547cb8960}{PICC\+\_\+\+TYPE\+\_\+\+NOT\+\_\+\+COMPLETE}} = 0xff
+ \}
+\item 
+enum \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \+: byte \{ \newline
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a3e34ac777020ad63ef7e346dfb813fe7}{STATUS\+\_\+\+OK}}
+, \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9aa3b0624b83ba5934292d671c73638a54}{STATUS\+\_\+\+ERROR}}
+, \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a2ad63357ec8c38f712ea6fd811056993}{STATUS\+\_\+\+COLLISION}}
+, \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a1db4d2ed757f0a638e5018fb994071ae}{STATUS\+\_\+\+TIMEOUT}}
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a45ce24f67052f4813df3b0f4efaafea8}{STATUS\+\_\+\+NO\+\_\+\+ROOM}}
+, \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a851307266f677fd58db61540ffe76855}{STATUS\+\_\+\+INTERNAL\+\_\+\+ERROR}}
+, \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a88d450f43a9d22ead5db926808599fb5}{STATUS\+\_\+\+INVALID}}
+, \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9ac25a91c2efa2dc7638758321374f7566}{STATUS\+\_\+\+CRC\+\_\+\+WRONG}}
+, \newline
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9ad14f5e1a33047c90b50fa829cb669109}{STATUS\+\_\+\+MIFARE\+\_\+\+NACK}} = 0xff
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a999d0301e800f479e1ecfa2fd06e28c8}{MFRC522}} ()
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a59c2f9a7664d029afe4e0185c7f3623b}{MFRC522}} (byte reset\+Power\+Down\+Pin)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a8b859e244e80970594bf333a0148ade1}{MFRC522}} (byte chip\+Select\+Pin, byte reset\+Power\+Down\+Pin)
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_aa5e5825adb4c784d8a5a60242c135fb7}{PCD\+\_\+\+Write\+Register}} (\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}} reg, byte value)
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a846b4b9d0468b62d853b125d4b269054}{PCD\+\_\+\+Write\+Register}} (\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}} reg, byte count, byte \texorpdfstring{$\ast$}{*}values)
+\item 
+byte \mbox{\hyperlink{class_m_f_r_c522_a4289838c6f24f2d62eb8dc0e7a6647d1}{PCD\+\_\+\+Read\+Register}} (\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}} reg)
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_ae84aeb5b0cab567ac0445ae76c16a86b}{PCD\+\_\+\+Read\+Register}} (\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}} reg, byte count, byte \texorpdfstring{$\ast$}{*}values, byte rx\+Align=0)
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_acebb9a90249419f2a53281c4a13727d1}{PCD\+\_\+\+Set\+Register\+Bit\+Mask}} (\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}} reg, byte mask)
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a76193f4f8916f688fe2b7976d0fd1dc2}{PCD\+\_\+\+Clear\+Register\+Bit\+Mask}} (\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}} reg, byte mask)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a7c65647b1d72b6ee7557797322030643}{PCD\+\_\+\+Calculate\+CRC}} (byte \texorpdfstring{$\ast$}{*}data, byte length, byte \texorpdfstring{$\ast$}{*}result)
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_ad681e424fc68a57941bea5702cee05eb}{PCD\+\_\+\+Init}} ()
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a50a743c6c0c3ced652cb7fdca61949ab}{PCD\+\_\+\+Init}} (byte reset\+Power\+Down\+Pin)
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a3a14c851e9a2f62956db01d5666c284b}{PCD\+\_\+\+Init}} (byte chip\+Select\+Pin, byte reset\+Power\+Down\+Pin)
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a9886678ea0a65021bf602cfb110caa15}{PCD\+\_\+\+Reset}} ()
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a044be037a5f172e9cea7d8ce1dcf32e0}{PCD\+\_\+\+Antenna\+On}} ()
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a2098ebe85700109b20c5026643f1dad7}{PCD\+\_\+\+Antenna\+Off}} ()
+\item 
+byte \mbox{\hyperlink{class_m_f_r_c522_aa02ae994a9ebf146475f46fc538cef28}{PCD\+\_\+\+Get\+Antenna\+Gain}} ()
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a5ce84dd855f2ae297dd00fafaf62ef78}{PCD\+\_\+\+Set\+Antenna\+Gain}} (byte mask)
+\item 
+bool \mbox{\hyperlink{class_m_f_r_c522_a25f052c9c340da34128c365662370b01}{PCD\+\_\+\+Perform\+Self\+Test}} ()
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a98befa52f6df765779dce6bf616ff009}{PCD\+\_\+\+Soft\+Power\+Down}} ()
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_ad6559531854fba81f7440babe617c90e}{PCD\+\_\+\+Soft\+Power\+Up}} ()
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_aaa96aa7ec4f95e0835cb758ad0450d74}{PCD\+\_\+\+Transceive\+Data}} (byte \texorpdfstring{$\ast$}{*}send\+Data, byte send\+Len, byte \texorpdfstring{$\ast$}{*}back\+Data, byte \texorpdfstring{$\ast$}{*}back\+Len, byte \texorpdfstring{$\ast$}{*}valid\+Bits=nullptr, byte rx\+Align=0, bool check\+CRC=false)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_acb2b1e74bc49fda2704450a684faa845}{PCD\+\_\+\+Communicate\+With\+PICC}} (byte command, byte wait\+IRq, byte \texorpdfstring{$\ast$}{*}send\+Data, byte send\+Len, byte \texorpdfstring{$\ast$}{*}back\+Data=nullptr, byte \texorpdfstring{$\ast$}{*}back\+Len=nullptr, byte \texorpdfstring{$\ast$}{*}valid\+Bits=nullptr, byte rx\+Align=0, bool check\+CRC=false)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a4e0ac6edf5e8f6ade351b009278fbbc7}{PICC\+\_\+\+RequestA}} (byte \texorpdfstring{$\ast$}{*}buffer\+ATQA, byte \texorpdfstring{$\ast$}{*}buffer\+Size)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_ad00a1efcfa6dc203ca885d43f4d02125}{PICC\+\_\+\+WakeupA}} (byte \texorpdfstring{$\ast$}{*}buffer\+ATQA, byte \texorpdfstring{$\ast$}{*}buffer\+Size)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a639d27ac072bc0dfa478d0957591afcc}{PICC\+\_\+\+REQA\+\_\+or\+\_\+\+WUPA}} (byte command, byte \texorpdfstring{$\ast$}{*}buffer\+ATQA, byte \texorpdfstring{$\ast$}{*}buffer\+Size)
+\item 
+virtual \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a7a78c629cb4e1d90cc2d7526b17d6c22}{PICC\+\_\+\+Select}} (\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}}, byte valid\+Bits=0)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a8874921b4ed26c5b73d89c90f76d4933}{PICC\+\_\+\+HaltA}} ()
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a6c2313c4aa98806cc2bf0e9cca993ec0}{PCD\+\_\+\+Authenticate}} (byte command, byte block\+Addr, \mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MIFARE\+\_\+\+Key}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_mifare_classic_value_block_8ino_a74db86b29b9d826a8007113e1fd3d2d4}{key}}, \mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}})
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a24d3ab7b2170fdfa3f0121a7256f12d9}{PCD\+\_\+\+Stop\+Crypto1}} ()
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a6ed93e88913ea104420f3bb4a88cce52}{MIFARE\+\_\+\+Read}} (byte block\+Addr, byte \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a0dc32c681766921ea9cb757927be6dd3}{buffer}}, byte \texorpdfstring{$\ast$}{*}buffer\+Size)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a0dc5fb05769779ec3ed708bd153706b3}{MIFARE\+\_\+\+Write}} (byte block\+Addr, byte \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a0dc32c681766921ea9cb757927be6dd3}{buffer}}, byte buffer\+Size)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a7053e61540b68e6aa5c6cbea308836c4}{MIFARE\+\_\+\+Ultralight\+\_\+\+Write}} (byte page, byte \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a0dc32c681766921ea9cb757927be6dd3}{buffer}}, byte buffer\+Size)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_aeab21496c761cdecb29c69f9f3fa6150}{MIFARE\+\_\+\+Decrement}} (byte block\+Addr, int32\+\_\+t delta)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_af9566664f23d4d67efd270e42c3dc723}{MIFARE\+\_\+\+Increment}} (byte block\+Addr, int32\+\_\+t delta)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a946ba7e7e244f40adcb9f900d8fd3a48}{MIFARE\+\_\+\+Restore}} (byte block\+Addr)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a16ee66df69fda8a3065bc9218b45de0b}{MIFARE\+\_\+\+Transfer}} (byte block\+Addr)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_ab4009cbdd5150b1b3a62084aa2033807}{MIFARE\+\_\+\+Get\+Value}} (byte block\+Addr, int32\+\_\+t \texorpdfstring{$\ast$}{*}value)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_af19fc75e9415322fbe89245ed70a784b}{MIFARE\+\_\+\+Set\+Value}} (byte block\+Addr, int32\+\_\+t value)
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_acb47eb7a05ae58825b4085efeb7a09bb}{PCD\+\_\+\+NTAG216\+\_\+\+AUTH}} (byte \texorpdfstring{$\ast$}{*}pass\+Word, byte p\+ACK\mbox{[}$\,$\mbox{]})
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_aa88d28676b3ffb5985af8db35d39077b}{PCD\+\_\+\+MIFARE\+\_\+\+Transceive}} (byte \texorpdfstring{$\ast$}{*}send\+Data, byte send\+Len, bool accept\+Timeout=false)
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a41c31c6932a59646eeff470c60a4d20d}{PCD\+\_\+\+Dump\+Version\+To\+Serial}} ()
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a6f324d43c6fbbd0e260b171747186037}{PICC\+\_\+\+Dump\+To\+Serial}} (\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}})
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a3b9a2c6da6505e0ff7b58c37d7aeff37}{PICC\+\_\+\+Dump\+Details\+To\+Serial}} (\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}})
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_aafba2e74124efa2d736c1672ea104190}{PICC\+\_\+\+Dump\+Mifare\+Classic\+To\+Serial}} (\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}}, \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\+\_\+\+Type}} picc\+Type, \mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MIFARE\+\_\+\+Key}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_mifare_classic_value_block_8ino_a74db86b29b9d826a8007113e1fd3d2d4}{key}})
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_a20c559f09927a7c5f91295f6158e4342}{PICC\+\_\+\+Dump\+Mifare\+Classic\+Sector\+To\+Serial}} (\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}}, \mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MIFARE\+\_\+\+Key}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_mifare_classic_value_block_8ino_a74db86b29b9d826a8007113e1fd3d2d4}{key}}, byte sector)
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_ac148d28877dd577606a28e9e7e4b6809}{PICC\+\_\+\+Dump\+Mifare\+Ultralight\+To\+Serial}} ()
+\item 
+void \mbox{\hyperlink{class_m_f_r_c522_ab8c712963189654e9bc368be8783e2ab}{MIFARE\+\_\+\+Set\+Access\+Bits}} (byte \texorpdfstring{$\ast$}{*}access\+Bit\+Buffer, byte g0, byte g1, byte g2, byte g3)
+\item 
+bool \mbox{\hyperlink{class_m_f_r_c522_a925607adc9382720c222578bd236a9c8}{MIFARE\+\_\+\+Open\+Uid\+Backdoor}} (bool log\+Errors)
+\item 
+bool \mbox{\hyperlink{class_m_f_r_c522_a2bdc18af4952ce99099607c84139b51c}{MIFARE\+\_\+\+Set\+Uid}} (byte \texorpdfstring{$\ast$}{*}new\+Uid, byte uid\+Size, bool log\+Errors)
+\item 
+bool \mbox{\hyperlink{class_m_f_r_c522_afcbb15d925cb3bea9f58595111fbca48}{MIFARE\+\_\+\+Unbrick\+Uid\+Sector}} (bool log\+Errors)
+\item 
+virtual bool \mbox{\hyperlink{class_m_f_r_c522_a3adca9d3b455c680ebcde3b74c4e567b}{PICC\+\_\+\+Is\+New\+Card\+Present}} ()
+\item 
+virtual bool \mbox{\hyperlink{class_m_f_r_c522_aab1218c71cec9cc17ee3ac8a683df106}{PICC\+\_\+\+Read\+Card\+Serial}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const \+\_\+\+\_\+\+Flash\+String\+Helper \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_m_f_r_c522_a32f88620ab97f7fef3693280c58cb4bb}{Get\+Status\+Code\+Name}} (\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} code)
+\item 
+static \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\+\_\+\+Type}} \mbox{\hyperlink{class_m_f_r_c522_ac80a18228260bdde07dff5d4ac23bb53}{PICC\+\_\+\+Get\+Type}} (byte sak)
+\item 
+static const \+\_\+\+\_\+\+Flash\+String\+Helper \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_m_f_r_c522_aae4a482352d4d4b7d7a9714b0b0b7c38}{PICC\+\_\+\+Get\+Type\+Name}} (\mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\+\_\+\+Type}} type)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr byte \mbox{\hyperlink{class_m_f_r_c522_a37ca1cca79286c98755584f2256bbe1b}{FIFO\+\_\+\+SIZE}} = 64
+\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{class_m_f_r_c522_a41313d0e4a8a674271e64362d24e1d6b}{UNUSED\+\_\+\+PIN}} = UINT8\+\_\+\+MAX
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code}} \mbox{\hyperlink{class_m_f_r_c522_a86cb4ad38f61b823dfe97103b1b1f9d6}{MIFARE\+\_\+\+Two\+Step\+Helper}} (byte command, byte block\+Addr, int32\+\_\+t data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte \mbox{\hyperlink{class_m_f_r_c522_affaa7030ec6e5984cce845a8ed6df1b2}{\+\_\+chip\+Select\+Pin}}
+\item 
+byte \mbox{\hyperlink{class_m_f_r_c522_a3885cb4bb582de0045cff2829d59006f}{\+\_\+reset\+Power\+Down\+Pin}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eede}\index{MFRC522@{MFRC522}!MIFARE\_Misc@{MIFARE\_Misc}}
+\index{MIFARE\_Misc@{MIFARE\_Misc}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_Misc}{MIFARE\_Misc}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eede} 
+enum \mbox{\hyperlink{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eede}{MFRC522\+::\+MIFARE\+\_\+\+Misc}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MF\_ACK@{MF\_ACK}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!MF\_ACK@{MF\_ACK}}}\Hypertarget{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eedea3b5fce9bf15481d218872d4584743a1c}\label{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eedea3b5fce9bf15481d218872d4584743a1c} 
+MF\+\_\+\+ACK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MF\_KEY\_SIZE@{MF\_KEY\_SIZE}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!MF\_KEY\_SIZE@{MF\_KEY\_SIZE}}}\Hypertarget{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eedea410c51021b253b680b7ec518ccc818ce}\label{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eedea410c51021b253b680b7ec518ccc818ce} 
+MF\+\_\+\+KEY\+\_\+\+SIZE&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8}\index{MFRC522@{MFRC522}!PCD\_Command@{PCD\_Command}}
+\index{PCD\_Command@{PCD\_Command}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_Command}{PCD\_Command}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8} 
+enum \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8}{MFRC522\+::\+PCD\+\_\+\+Command}} \+: byte}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCD\_Idle@{PCD\_Idle}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PCD\_Idle@{PCD\_Idle}}}\Hypertarget{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8afe5ffdce88fe7544cbc49f8947df9ad9}\label{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8afe5ffdce88fe7544cbc49f8947df9ad9} 
+PCD\+\_\+\+Idle&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCD\_Mem@{PCD\_Mem}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PCD\_Mem@{PCD\_Mem}}}\Hypertarget{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2f3a9f820c74cb11fabdc00e20c7e2fe}\label{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2f3a9f820c74cb11fabdc00e20c7e2fe} 
+PCD\+\_\+\+Mem&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCD\_GenerateRandomID@{PCD\_GenerateRandomID}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PCD\_GenerateRandomID@{PCD\_GenerateRandomID}}}\Hypertarget{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a3b9535f3e1eb589c05ca9f22f380647a}\label{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a3b9535f3e1eb589c05ca9f22f380647a} 
+PCD\+\_\+\+Generate\+Random\+ID&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCD\_CalcCRC@{PCD\_CalcCRC}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PCD\_CalcCRC@{PCD\_CalcCRC}}}\Hypertarget{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a61d1786d5518a1ad71aac8413941f0ac}\label{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a61d1786d5518a1ad71aac8413941f0ac} 
+PCD\+\_\+\+Calc\+CRC&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCD\_Transmit@{PCD\_Transmit}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PCD\_Transmit@{PCD\_Transmit}}}\Hypertarget{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8af91e3fb8471c0953d69b83b1baf55ae1}\label{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8af91e3fb8471c0953d69b83b1baf55ae1} 
+PCD\+\_\+\+Transmit&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCD\_NoCmdChange@{PCD\_NoCmdChange}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PCD\_NoCmdChange@{PCD\_NoCmdChange}}}\Hypertarget{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2d0df8c6384dd59ad6276510b4fe992d}\label{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2d0df8c6384dd59ad6276510b4fe992d} 
+PCD\+\_\+\+No\+Cmd\+Change&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCD\_Receive@{PCD\_Receive}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PCD\_Receive@{PCD\_Receive}}}\Hypertarget{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2ec760e26c27fff63bebee7e9cf844e7}\label{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2ec760e26c27fff63bebee7e9cf844e7} 
+PCD\+\_\+\+Receive&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCD\_Transceive@{PCD\_Transceive}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PCD\_Transceive@{PCD\_Transceive}}}\Hypertarget{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8af0b7178e7638038db6f8e7016892fafd}\label{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8af0b7178e7638038db6f8e7016892fafd} 
+PCD\+\_\+\+Transceive&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCD\_MFAuthent@{PCD\_MFAuthent}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PCD\_MFAuthent@{PCD\_MFAuthent}}}\Hypertarget{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a903753278eed75d5d1af2390649ec0c2}\label{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a903753278eed75d5d1af2390649ec0c2} 
+PCD\+\_\+\+MFAuthent&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PCD\_SoftReset@{PCD\_SoftReset}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PCD\_SoftReset@{PCD\_SoftReset}}}\Hypertarget{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a8f54a569867f812163c6a9bc3461d03a}\label{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a8f54a569867f812163c6a9bc3461d03a} 
+PCD\+\_\+\+Soft\+Reset&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}\index{MFRC522@{MFRC522}!PCD\_Register@{PCD\_Register}}
+\index{PCD\_Register@{PCD\_Register}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_Register}{PCD\_Register}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669} 
+enum \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{MFRC522\+::\+PCD\+\_\+\+Register}} \+: byte}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CommandReg@{CommandReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!CommandReg@{CommandReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a0ec37643fa721f476b0cd4359e3c7ef1}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a0ec37643fa721f476b0cd4359e3c7ef1} 
+Command\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ComIEnReg@{ComIEnReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!ComIEnReg@{ComIEnReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad956725472615518dfb99f2d7dccc50e}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad956725472615518dfb99f2d7dccc50e} 
+Com\+IEn\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DivIEnReg@{DivIEnReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!DivIEnReg@{DivIEnReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afb4527cc3e364cce3fe3e62cdcde7da0}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afb4527cc3e364cce3fe3e62cdcde7da0} 
+Div\+IEn\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ComIrqReg@{ComIrqReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!ComIrqReg@{ComIrqReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a76b2a615444982e04566784bdb5c9841}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a76b2a615444982e04566784bdb5c9841} 
+Com\+Irq\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DivIrqReg@{DivIrqReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!DivIrqReg@{DivIrqReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a95e26d5ece97ae43c34d08797205a356}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a95e26d5ece97ae43c34d08797205a356} 
+Div\+Irq\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ErrorReg@{ErrorReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!ErrorReg@{ErrorReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a240aa03a1d9542235b89cdef377a5796}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a240aa03a1d9542235b89cdef377a5796} 
+Error\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Status1Reg@{Status1Reg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!Status1Reg@{Status1Reg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9f8b10dda6868e74226ab7ccca8d5be0}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9f8b10dda6868e74226ab7ccca8d5be0} 
+Status1\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Status2Reg@{Status2Reg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!Status2Reg@{Status2Reg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a8fb1a8c28b7a860793831566373f172f}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a8fb1a8c28b7a860793831566373f172f} 
+Status2\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FIFODataReg@{FIFODataReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!FIFODataReg@{FIFODataReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afdbfd2f397b96d1043c808ec26e80328}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afdbfd2f397b96d1043c808ec26e80328} 
+FIFOData\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FIFOLevelReg@{FIFOLevelReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!FIFOLevelReg@{FIFOLevelReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a35e5daf30358a0a271dadf50ba6bb4e7}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a35e5daf30358a0a271dadf50ba6bb4e7} 
+FIFOLevel\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WaterLevelReg@{WaterLevelReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!WaterLevelReg@{WaterLevelReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aee5f7c4d0d34d93e5ac67a47e886b224}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aee5f7c4d0d34d93e5ac67a47e886b224} 
+Water\+Level\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ControlReg@{ControlReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!ControlReg@{ControlReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9d0df9e03ad6706004b003e20127a76a}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9d0df9e03ad6706004b003e20127a76a} 
+Control\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BitFramingReg@{BitFramingReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!BitFramingReg@{BitFramingReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aaf8beb5a739cd8bf94b8b5c8d2d109ce}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aaf8beb5a739cd8bf94b8b5c8d2d109ce} 
+Bit\+Framing\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CollReg@{CollReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!CollReg@{CollReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afafb7ec88f79c9b1f195195497d0ca07}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afafb7ec88f79c9b1f195195497d0ca07} 
+Coll\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ModeReg@{ModeReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!ModeReg@{ModeReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a2cd647ad1ac1327d2a632115cd9c4477}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a2cd647ad1ac1327d2a632115cd9c4477} 
+Mode\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TxModeReg@{TxModeReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TxModeReg@{TxModeReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad4fe18ad01abc83d4559369226fe7992}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad4fe18ad01abc83d4559369226fe7992} 
+Tx\+Mode\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxModeReg@{RxModeReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxModeReg@{RxModeReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a7e0d6ae1fdd25be6d80d1b76b2274764}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a7e0d6ae1fdd25be6d80d1b76b2274764} 
+Rx\+Mode\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TxControlReg@{TxControlReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TxControlReg@{TxControlReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a73dc12b03f05177a400263e5e2bcf0cc}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a73dc12b03f05177a400263e5e2bcf0cc} 
+Tx\+Control\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TxASKReg@{TxASKReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TxASKReg@{TxASKReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac9de33ca066ca9481bd01d5642a0c879}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac9de33ca066ca9481bd01d5642a0c879} 
+Tx\+ASKReg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TxSelReg@{TxSelReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TxSelReg@{TxSelReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a6cf11e077148648aaec0492317be5177}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a6cf11e077148648aaec0492317be5177} 
+Tx\+Sel\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxSelReg@{RxSelReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxSelReg@{RxSelReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a669c0c9418d5437566b4b42da326c05f}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a669c0c9418d5437566b4b42da326c05f} 
+Rx\+Sel\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxThresholdReg@{RxThresholdReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxThresholdReg@{RxThresholdReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a50d7af7ddc6c606c2b3b9c07df2f22ab}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a50d7af7ddc6c606c2b3b9c07df2f22ab} 
+Rx\+Threshold\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DemodReg@{DemodReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!DemodReg@{DemodReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a37b01e93fff19ca62364e8f4f797a5c4}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a37b01e93fff19ca62364e8f4f797a5c4} 
+Demod\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MfTxReg@{MfTxReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!MfTxReg@{MfTxReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a08eb51f4d08a41ceb4b34189bb712dc7}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a08eb51f4d08a41ceb4b34189bb712dc7} 
+Mf\+Tx\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MfRxReg@{MfRxReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!MfRxReg@{MfRxReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a92fbf63612de021d242465d4685f1754}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a92fbf63612de021d242465d4685f1754} 
+Mf\+Rx\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SerialSpeedReg@{SerialSpeedReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!SerialSpeedReg@{SerialSpeedReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a23529258de3c3f5655afa2849f547f68}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a23529258de3c3f5655afa2849f547f68} 
+Serial\+Speed\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CRCResultRegH@{CRCResultRegH}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!CRCResultRegH@{CRCResultRegH}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a430d34a355d45528d674ad839a187494}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a430d34a355d45528d674ad839a187494} 
+CRCResult\+RegH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CRCResultRegL@{CRCResultRegL}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!CRCResultRegL@{CRCResultRegL}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a4be013336d7bab727dc0e7e150dcd03c}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a4be013336d7bab727dc0e7e150dcd03c} 
+CRCResult\+RegL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ModWidthReg@{ModWidthReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!ModWidthReg@{ModWidthReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad69a6a3d883ebfc993fc6fbdbc035508}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad69a6a3d883ebfc993fc6fbdbc035508} 
+Mod\+Width\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RFCfgReg@{RFCfgReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RFCfgReg@{RFCfgReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a0c99eea491c71e9d2a02bf8a86988adf}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a0c99eea491c71e9d2a02bf8a86988adf} 
+RFCfg\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GsNReg@{GsNReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!GsNReg@{GsNReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a2f81aa5f433fa51bb4b41cd8955de794}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a2f81aa5f433fa51bb4b41cd8955de794} 
+Gs\+NReg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CWGsPReg@{CWGsPReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!CWGsPReg@{CWGsPReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a02925dc7a230fcf039c597bf8cfa113f}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a02925dc7a230fcf039c597bf8cfa113f} 
+CWGs\+PReg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ModGsPReg@{ModGsPReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!ModGsPReg@{ModGsPReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669acf6ed89766ba2a4e6483b3209b1aa74e}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669acf6ed89766ba2a4e6483b3209b1aa74e} 
+Mod\+Gs\+PReg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TModeReg@{TModeReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TModeReg@{TModeReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a1ed52e7f88c8bf3fda91bf31bb62afe4}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a1ed52e7f88c8bf3fda91bf31bb62afe4} 
+TMode\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TPrescalerReg@{TPrescalerReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TPrescalerReg@{TPrescalerReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a88c2ad7cdfb7178ea775c157f4ce5213}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a88c2ad7cdfb7178ea775c157f4ce5213} 
+TPrescaler\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TReloadRegH@{TReloadRegH}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TReloadRegH@{TReloadRegH}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac9a037a517ada62924c47d5e4b62a14c}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac9a037a517ada62924c47d5e4b62a14c} 
+TReload\+RegH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TReloadRegL@{TReloadRegL}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TReloadRegL@{TReloadRegL}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afa3348d82b026de8fecdd18d58e92e2a}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afa3348d82b026de8fecdd18d58e92e2a} 
+TReload\+RegL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TCounterValueRegH@{TCounterValueRegH}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TCounterValueRegH@{TCounterValueRegH}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ab32cff60c4488866726d4a3930ad8995}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ab32cff60c4488866726d4a3930ad8995} 
+TCounter\+Value\+RegH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TCounterValueRegL@{TCounterValueRegL}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TCounterValueRegL@{TCounterValueRegL}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad70c519d4928690a1d8e7835532ce146}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad70c519d4928690a1d8e7835532ce146} 
+TCounter\+Value\+RegL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TestSel1Reg@{TestSel1Reg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TestSel1Reg@{TestSel1Reg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a3fd81beec1ed6566ff1897aac235890f}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a3fd81beec1ed6566ff1897aac235890f} 
+Test\+Sel1\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TestSel2Reg@{TestSel2Reg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TestSel2Reg@{TestSel2Reg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac1053bcb64682eba4a767caaea677807}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac1053bcb64682eba4a767caaea677807} 
+Test\+Sel2\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TestPinEnReg@{TestPinEnReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TestPinEnReg@{TestPinEnReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a62a7871c0d3452a8f642bbea0ca7cb34}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a62a7871c0d3452a8f642bbea0ca7cb34} 
+Test\+Pin\+En\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TestPinValueReg@{TestPinValueReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TestPinValueReg@{TestPinValueReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aa5bb4445abb525ddf46c6efcb21e8811}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aa5bb4445abb525ddf46c6efcb21e8811} 
+Test\+Pin\+Value\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TestBusReg@{TestBusReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TestBusReg@{TestBusReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a37bc0188996dc1ee5332d40961bffb4b}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a37bc0188996dc1ee5332d40961bffb4b} 
+Test\+Bus\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AutoTestReg@{AutoTestReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!AutoTestReg@{AutoTestReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9583618ad17a8a20b7a735c7677c8e56}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9583618ad17a8a20b7a735c7677c8e56} 
+Auto\+Test\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VersionReg@{VersionReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!VersionReg@{VersionReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a4281c25cf6743163ed2e2f903cf17ba9}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a4281c25cf6743163ed2e2f903cf17ba9} 
+Version\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AnalogTestReg@{AnalogTestReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!AnalogTestReg@{AnalogTestReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669af1d5966b064c10a672e0064d3ccc55c3}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669af1d5966b064c10a672e0064d3ccc55c3} 
+Analog\+Test\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TestDAC1Reg@{TestDAC1Reg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TestDAC1Reg@{TestDAC1Reg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a25334abb5ff680a530e95e6fb0e48a5b}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a25334abb5ff680a530e95e6fb0e48a5b} 
+Test\+DAC1\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TestDAC2Reg@{TestDAC2Reg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TestDAC2Reg@{TestDAC2Reg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a505b75aac860302b2959da7fe607e5eb}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a505b75aac860302b2959da7fe607e5eb} 
+Test\+DAC2\+Reg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TestADCReg@{TestADCReg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!TestADCReg@{TestADCReg}}}\Hypertarget{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a1042587aeb71f82f884975ca54c8854a}\label{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a1042587aeb71f82f884975ca54c8854a} 
+Test\+ADCReg&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1}\index{MFRC522@{MFRC522}!PCD\_RxGain@{PCD\_RxGain}}
+\index{PCD\_RxGain@{PCD\_RxGain}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_RxGain}{PCD\_RxGain}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1} 
+enum \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1}{MFRC522\+::\+PCD\+\_\+\+Rx\+Gain}} \+: byte}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxGain\_18dB@{RxGain\_18dB}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxGain\_18dB@{RxGain\_18dB}}}\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a4d5e7f6b74ce3912ffdf3305ea263497}\label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a4d5e7f6b74ce3912ffdf3305ea263497} 
+Rx\+Gain\+\_\+18dB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxGain\_23dB@{RxGain\_23dB}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxGain\_23dB@{RxGain\_23dB}}}\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1aab1ac5ba97a5e07ff487f1996352a8e6}\label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1aab1ac5ba97a5e07ff487f1996352a8e6} 
+Rx\+Gain\+\_\+23dB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxGain\_18dB\_2@{RxGain\_18dB\_2}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxGain\_18dB\_2@{RxGain\_18dB\_2}}}\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1ac918bee80fae5c763094684ae08bff82}\label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1ac918bee80fae5c763094684ae08bff82} 
+Rx\+Gain\+\_\+18d\+B\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxGain\_23dB\_2@{RxGain\_23dB\_2}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxGain\_23dB\_2@{RxGain\_23dB\_2}}}\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1ac3b5b39560b326ac91971a41ad167c15}\label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1ac3b5b39560b326ac91971a41ad167c15} 
+Rx\+Gain\+\_\+23d\+B\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxGain\_33dB@{RxGain\_33dB}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxGain\_33dB@{RxGain\_33dB}}}\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a721f1c7082ea232324d8660844996158}\label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a721f1c7082ea232324d8660844996158} 
+Rx\+Gain\+\_\+33dB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxGain\_38dB@{RxGain\_38dB}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxGain\_38dB@{RxGain\_38dB}}}\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1af2f57fe1d71de1d17204933084649368}\label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1af2f57fe1d71de1d17204933084649368} 
+Rx\+Gain\+\_\+38dB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxGain\_43dB@{RxGain\_43dB}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxGain\_43dB@{RxGain\_43dB}}}\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1abc9602260b5733a23e0be7e0c03b1ec9}\label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1abc9602260b5733a23e0be7e0c03b1ec9} 
+Rx\+Gain\+\_\+43dB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxGain\_48dB@{RxGain\_48dB}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxGain\_48dB@{RxGain\_48dB}}}\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a13227ab5e3143489b0888671d284301b}\label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a13227ab5e3143489b0888671d284301b} 
+Rx\+Gain\+\_\+48dB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxGain\_min@{RxGain\_min}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxGain\_min@{RxGain\_min}}}\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a97ffca230ea898a78b5734ae0dd44506}\label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a97ffca230ea898a78b5734ae0dd44506} 
+Rx\+Gain\+\_\+min&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxGain\_avg@{RxGain\_avg}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxGain\_avg@{RxGain\_avg}}}\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a2b5b3bd5efdc06adc7c5e190919f5568}\label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a2b5b3bd5efdc06adc7c5e190919f5568} 
+Rx\+Gain\+\_\+avg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RxGain\_max@{RxGain\_max}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!RxGain\_max@{RxGain\_max}}}\Hypertarget{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a3c59e553655b4e44c10d7deef54576a0}\label{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a3c59e553655b4e44c10d7deef54576a0} 
+Rx\+Gain\+\_\+max&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341}\index{MFRC522@{MFRC522}!PICC\_Command@{PICC\_Command}}
+\index{PICC\_Command@{PICC\_Command}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_Command}{PICC\_Command}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341} 
+enum \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341}{MFRC522\+::\+PICC\+\_\+\+Command}} \+: byte}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_REQA@{PICC\_CMD\_REQA}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_REQA@{PICC\_CMD\_REQA}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341aee3203a0a40028d3059861464198b688}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341aee3203a0a40028d3059861464198b688} 
+PICC\+\_\+\+CMD\+\_\+\+REQA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_WUPA@{PICC\_CMD\_WUPA}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_WUPA@{PICC\_CMD\_WUPA}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a9b8fbd1c87d0a6bbe2ef78d192001b3a}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a9b8fbd1c87d0a6bbe2ef78d192001b3a} 
+PICC\+\_\+\+CMD\+\_\+\+WUPA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_CT@{PICC\_CMD\_CT}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_CT@{PICC\_CMD\_CT}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ac532079d67a5325cc5b3505cccf6ac8b}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ac532079d67a5325cc5b3505cccf6ac8b} 
+PICC\+\_\+\+CMD\+\_\+\+CT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_SEL\_CL1@{PICC\_CMD\_SEL\_CL1}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_SEL\_CL1@{PICC\_CMD\_SEL\_CL1}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341aa9329ee8f72f61f5d73bb893b64c08d0}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341aa9329ee8f72f61f5d73bb893b64c08d0} 
+PICC\+\_\+\+CMD\+\_\+\+SEL\+\_\+\+CL1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_SEL\_CL2@{PICC\_CMD\_SEL\_CL2}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_SEL\_CL2@{PICC\_CMD\_SEL\_CL2}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ab0399cde7122f0bb6dedb584254455c2}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ab0399cde7122f0bb6dedb584254455c2} 
+PICC\+\_\+\+CMD\+\_\+\+SEL\+\_\+\+CL2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_SEL\_CL3@{PICC\_CMD\_SEL\_CL3}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_SEL\_CL3@{PICC\_CMD\_SEL\_CL3}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a291c265bc0a7b3f303b361582b95cc85}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a291c265bc0a7b3f303b361582b95cc85} 
+PICC\+\_\+\+CMD\+\_\+\+SEL\+\_\+\+CL3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_HLTA@{PICC\_CMD\_HLTA}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_HLTA@{PICC\_CMD\_HLTA}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ad1e0cf89f52ca1b503297e59c600ca57}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ad1e0cf89f52ca1b503297e59c600ca57} 
+PICC\+\_\+\+CMD\+\_\+\+HLTA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_RATS@{PICC\_CMD\_RATS}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_RATS@{PICC\_CMD\_RATS}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a4201da4f3f107dac7f4a9de95c413288}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a4201da4f3f107dac7f4a9de95c413288} 
+PICC\+\_\+\+CMD\+\_\+\+RATS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_MF\_AUTH\_KEY\_A@{PICC\_CMD\_MF\_AUTH\_KEY\_A}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_MF\_AUTH\_KEY\_A@{PICC\_CMD\_MF\_AUTH\_KEY\_A}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a7ab2b1b2d0f0d668dfb3ac53ec7f08d6}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a7ab2b1b2d0f0d668dfb3ac53ec7f08d6} 
+PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+AUTH\+\_\+\+KEY\+\_\+A&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_MF\_AUTH\_KEY\_B@{PICC\_CMD\_MF\_AUTH\_KEY\_B}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_MF\_AUTH\_KEY\_B@{PICC\_CMD\_MF\_AUTH\_KEY\_B}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a7b37f0b5fd5406b4cebe306608e5be3f}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a7b37f0b5fd5406b4cebe306608e5be3f} 
+PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+AUTH\+\_\+\+KEY\+\_\+B&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_MF\_READ@{PICC\_CMD\_MF\_READ}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_MF\_READ@{PICC\_CMD\_MF\_READ}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a2ea95497e35adbc7acbc32c0cb8a574a}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a2ea95497e35adbc7acbc32c0cb8a574a} 
+PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+READ&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_MF\_WRITE@{PICC\_CMD\_MF\_WRITE}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_MF\_WRITE@{PICC\_CMD\_MF\_WRITE}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a02ccb020ccc6d49d563f0ed1489d8025}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a02ccb020ccc6d49d563f0ed1489d8025} 
+PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+WRITE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_MF\_DECREMENT@{PICC\_CMD\_MF\_DECREMENT}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_MF\_DECREMENT@{PICC\_CMD\_MF\_DECREMENT}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a69b2bb1cd2dc0437d6d1fb11eb2796e7}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a69b2bb1cd2dc0437d6d1fb11eb2796e7} 
+PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+DECREMENT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_MF\_INCREMENT@{PICC\_CMD\_MF\_INCREMENT}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_MF\_INCREMENT@{PICC\_CMD\_MF\_INCREMENT}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a454e12c2c815a861a0450d40273f98ef}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a454e12c2c815a861a0450d40273f98ef} 
+PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+INCREMENT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_MF\_RESTORE@{PICC\_CMD\_MF\_RESTORE}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_MF\_RESTORE@{PICC\_CMD\_MF\_RESTORE}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ab8ed49cb6ed6228acb0c911d60758486}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ab8ed49cb6ed6228acb0c911d60758486} 
+PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+RESTORE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_MF\_TRANSFER@{PICC\_CMD\_MF\_TRANSFER}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_MF\_TRANSFER@{PICC\_CMD\_MF\_TRANSFER}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a5d2309094d9fa17125dc90394e5aeaa0}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a5d2309094d9fa17125dc90394e5aeaa0} 
+PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+TRANSFER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_CMD\_UL\_WRITE@{PICC\_CMD\_UL\_WRITE}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_CMD\_UL\_WRITE@{PICC\_CMD\_UL\_WRITE}}}\Hypertarget{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ae8aeabd1ddb73db2f04259c76eaccd8e}\label{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ae8aeabd1ddb73db2f04259c76eaccd8e} 
+PICC\+\_\+\+CMD\+\_\+\+UL\+\_\+\+WRITE&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}\index{MFRC522@{MFRC522}!PICC\_Type@{PICC\_Type}}
+\index{PICC\_Type@{PICC\_Type}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_Type}{PICC\_Type}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2} 
+enum \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{MFRC522\+::\+PICC\+\_\+\+Type}} \+: byte}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_TYPE\_UNKNOWN@{PICC\_TYPE\_UNKNOWN}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_TYPE\_UNKNOWN@{PICC\_TYPE\_UNKNOWN}}}\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2aceba425b4eb6fd85de456a04e1ce1565}\label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2aceba425b4eb6fd85de456a04e1ce1565} 
+PICC\+\_\+\+TYPE\+\_\+\+UNKNOWN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_TYPE\_ISO\_14443\_4@{PICC\_TYPE\_ISO\_14443\_4}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_TYPE\_ISO\_14443\_4@{PICC\_TYPE\_ISO\_14443\_4}}}\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a5c8147b0f3970c9db0a177cb44592bc7}\label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a5c8147b0f3970c9db0a177cb44592bc7} 
+PICC\+\_\+\+TYPE\+\_\+\+ISO\+\_\+14443\+\_\+4&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_TYPE\_ISO\_18092@{PICC\_TYPE\_ISO\_18092}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_TYPE\_ISO\_18092@{PICC\_TYPE\_ISO\_18092}}}\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a6d211bf0d6e1bed8f7cdb375e9137360}\label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a6d211bf0d6e1bed8f7cdb375e9137360} 
+PICC\+\_\+\+TYPE\+\_\+\+ISO\+\_\+18092&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_TYPE\_MIFARE\_MINI@{PICC\_TYPE\_MIFARE\_MINI}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_TYPE\_MIFARE\_MINI@{PICC\_TYPE\_MIFARE\_MINI}}}\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a58d34a16ef064d4679cae921ecc4b505}\label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a58d34a16ef064d4679cae921ecc4b505} 
+PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+\+MINI&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_TYPE\_MIFARE\_1K@{PICC\_TYPE\_MIFARE\_1K}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_TYPE\_MIFARE\_1K@{PICC\_TYPE\_MIFARE\_1K}}}\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a948d034c12fd457923b65f929b1538fb}\label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a948d034c12fd457923b65f929b1538fb} 
+PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+1K&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_TYPE\_MIFARE\_4K@{PICC\_TYPE\_MIFARE\_4K}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_TYPE\_MIFARE\_4K@{PICC\_TYPE\_MIFARE\_4K}}}\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a7d2d0cfef1abe1c457fb72ebcf81fad4}\label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a7d2d0cfef1abe1c457fb72ebcf81fad4} 
+PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+4K&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_TYPE\_MIFARE\_UL@{PICC\_TYPE\_MIFARE\_UL}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_TYPE\_MIFARE\_UL@{PICC\_TYPE\_MIFARE\_UL}}}\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a905f84b972470f7d80ed017817ae300c}\label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a905f84b972470f7d80ed017817ae300c} 
+PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+\+UL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_TYPE\_MIFARE\_PLUS@{PICC\_TYPE\_MIFARE\_PLUS}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_TYPE\_MIFARE\_PLUS@{PICC\_TYPE\_MIFARE\_PLUS}}}\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a16d53e0355d6214dbe7faf7e37c99002}\label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a16d53e0355d6214dbe7faf7e37c99002} 
+PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+\+PLUS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_TYPE\_MIFARE\_DESFIRE@{PICC\_TYPE\_MIFARE\_DESFIRE}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_TYPE\_MIFARE\_DESFIRE@{PICC\_TYPE\_MIFARE\_DESFIRE}}}\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2ac6d7ac25fc66f5a56bd60d618ba072d4}\label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2ac6d7ac25fc66f5a56bd60d618ba072d4} 
+PICC\+\_\+\+TYPE\+\_\+\+MIFARE\+\_\+\+DESFIRE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_TYPE\_TNP3XXX@{PICC\_TYPE\_TNP3XXX}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_TYPE\_TNP3XXX@{PICC\_TYPE\_TNP3XXX}}}\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a3efaeaa8963b24323f274bab4c1eaf8f}\label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a3efaeaa8963b24323f274bab4c1eaf8f} 
+PICC\+\_\+\+TYPE\+\_\+\+TNP3\+XXX&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PICC\_TYPE\_NOT\_COMPLETE@{PICC\_TYPE\_NOT\_COMPLETE}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!PICC\_TYPE\_NOT\_COMPLETE@{PICC\_TYPE\_NOT\_COMPLETE}}}\Hypertarget{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a06fbbb7628bd0c595c58b96547cb8960}\label{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a06fbbb7628bd0c595c58b96547cb8960} 
+PICC\+\_\+\+TYPE\+\_\+\+NOT\+\_\+\+COMPLETE&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}\index{MFRC522@{MFRC522}!StatusCode@{StatusCode}}
+\index{StatusCode@{StatusCode}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{StatusCode}{StatusCode}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9} 
+enum \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} \+: byte}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATUS\_OK@{STATUS\_OK}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!STATUS\_OK@{STATUS\_OK}}}\Hypertarget{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a3e34ac777020ad63ef7e346dfb813fe7}\label{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a3e34ac777020ad63ef7e346dfb813fe7} 
+STATUS\+\_\+\+OK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATUS\_ERROR@{STATUS\_ERROR}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!STATUS\_ERROR@{STATUS\_ERROR}}}\Hypertarget{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9aa3b0624b83ba5934292d671c73638a54}\label{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9aa3b0624b83ba5934292d671c73638a54} 
+STATUS\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATUS\_COLLISION@{STATUS\_COLLISION}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!STATUS\_COLLISION@{STATUS\_COLLISION}}}\Hypertarget{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a2ad63357ec8c38f712ea6fd811056993}\label{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a2ad63357ec8c38f712ea6fd811056993} 
+STATUS\+\_\+\+COLLISION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATUS\_TIMEOUT@{STATUS\_TIMEOUT}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!STATUS\_TIMEOUT@{STATUS\_TIMEOUT}}}\Hypertarget{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a1db4d2ed757f0a638e5018fb994071ae}\label{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a1db4d2ed757f0a638e5018fb994071ae} 
+STATUS\+\_\+\+TIMEOUT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATUS\_NO\_ROOM@{STATUS\_NO\_ROOM}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!STATUS\_NO\_ROOM@{STATUS\_NO\_ROOM}}}\Hypertarget{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a45ce24f67052f4813df3b0f4efaafea8}\label{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a45ce24f67052f4813df3b0f4efaafea8} 
+STATUS\+\_\+\+NO\+\_\+\+ROOM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATUS\_INTERNAL\_ERROR@{STATUS\_INTERNAL\_ERROR}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!STATUS\_INTERNAL\_ERROR@{STATUS\_INTERNAL\_ERROR}}}\Hypertarget{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a851307266f677fd58db61540ffe76855}\label{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a851307266f677fd58db61540ffe76855} 
+STATUS\+\_\+\+INTERNAL\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATUS\_INVALID@{STATUS\_INVALID}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!STATUS\_INVALID@{STATUS\_INVALID}}}\Hypertarget{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a88d450f43a9d22ead5db926808599fb5}\label{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a88d450f43a9d22ead5db926808599fb5} 
+STATUS\+\_\+\+INVALID&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATUS\_CRC\_WRONG@{STATUS\_CRC\_WRONG}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!STATUS\_CRC\_WRONG@{STATUS\_CRC\_WRONG}}}\Hypertarget{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9ac25a91c2efa2dc7638758321374f7566}\label{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9ac25a91c2efa2dc7638758321374f7566} 
+STATUS\+\_\+\+CRC\+\_\+\+WRONG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATUS\_MIFARE\_NACK@{STATUS\_MIFARE\_NACK}!MFRC522@{MFRC522}}\index{MFRC522@{MFRC522}!STATUS\_MIFARE\_NACK@{STATUS\_MIFARE\_NACK}}}\Hypertarget{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9ad14f5e1a33047c90b50fa829cb669109}\label{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9ad14f5e1a33047c90b50fa829cb669109} 
+STATUS\+\_\+\+MIFARE\+\_\+\+NACK&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_m_f_r_c522_a999d0301e800f479e1ecfa2fd06e28c8}\index{MFRC522@{MFRC522}!MFRC522@{MFRC522}}
+\index{MFRC522@{MFRC522}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MFRC522()}{MFRC522()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a999d0301e800f479e1ecfa2fd06e28c8} 
+MFRC522\+::\+MFRC522 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Constructor. \Hypertarget{class_m_f_r_c522_a59c2f9a7664d029afe4e0185c7f3623b}\index{MFRC522@{MFRC522}!MFRC522@{MFRC522}}
+\index{MFRC522@{MFRC522}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MFRC522()}{MFRC522()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a59c2f9a7664d029afe4e0185c7f3623b} 
+MFRC522\+::\+MFRC522 (\begin{DoxyParamCaption}\item[{byte}]{reset\+Power\+Down\+Pin}{}\end{DoxyParamCaption})}
+
+Constructor. Prepares the output pins. 
+\begin{DoxyParams}{Parameters}
+{\em reset\+Power\+Down\+Pin} & Arduino pin connected to \doxylink{class_m_f_r_c522}{MFRC522}\textquotesingle{}s reset and power down input (Pin 6, NRSTPD, active low). If there is no connection from the CPU to NRSTPD, set this to UINT8\+\_\+\+MAX. In this case, only soft reset will be used in \doxylink{class_m_f_r_c522_ad681e424fc68a57941bea5702cee05eb}{PCD\+\_\+\+Init()}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a8b859e244e80970594bf333a0148ade1}\index{MFRC522@{MFRC522}!MFRC522@{MFRC522}}
+\index{MFRC522@{MFRC522}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MFRC522()}{MFRC522()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a8b859e244e80970594bf333a0148ade1} 
+MFRC522\+::\+MFRC522 (\begin{DoxyParamCaption}\item[{byte}]{chip\+Select\+Pin}{, }\item[{byte}]{reset\+Power\+Down\+Pin}{}\end{DoxyParamCaption})}
+
+Constructor. Prepares the output pins. 
+\begin{DoxyParams}{Parameters}
+{\em chip\+Select\+Pin} & Arduino pin connected to \doxylink{class_m_f_r_c522}{MFRC522}\textquotesingle{}s SPI slave select input (Pin 24, NSS, active low)  \\
+\hline
+{\em reset\+Power\+Down\+Pin} & Arduino pin connected to \doxylink{class_m_f_r_c522}{MFRC522}\textquotesingle{}s reset and power down input (Pin 6, NRSTPD, active low). If there is no connection from the CPU to NRSTPD, set this to UINT8\+\_\+\+MAX. In this case, only soft reset will be used in \doxylink{class_m_f_r_c522_ad681e424fc68a57941bea5702cee05eb}{PCD\+\_\+\+Init()}. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_m_f_r_c522_a32f88620ab97f7fef3693280c58cb4bb}\index{MFRC522@{MFRC522}!GetStatusCodeName@{GetStatusCodeName}}
+\index{GetStatusCodeName@{GetStatusCodeName}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{GetStatusCodeName()}{GetStatusCodeName()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a32f88620ab97f7fef3693280c58cb4bb} 
+const \+\_\+\+\_\+\+Flash\+String\+Helper \texorpdfstring{$\ast$}{*} MFRC522\+::\+Get\+Status\+Code\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}}}]{code}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns a \+\_\+\+\_\+\+Flash\+String\+Helper pointer to a status code name.
+
+\begin{DoxyReturn}{Returns}
+const \+\_\+\+\_\+\+Flash\+String\+Helper \texorpdfstring{$\ast$}{*} 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em code} & One of the \doxylink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{Status\+Code} enums. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_aeab21496c761cdecb29c69f9f3fa6150}\index{MFRC522@{MFRC522}!MIFARE\_Decrement@{MIFARE\_Decrement}}
+\index{MIFARE\_Decrement@{MIFARE\_Decrement}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_Decrement()}{MIFARE\_Decrement()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_aeab21496c761cdecb29c69f9f3fa6150} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+MIFARE\+\_\+\+Decrement (\begin{DoxyParamCaption}\item[{byte}]{block\+Addr}{, }\item[{int32\+\_\+t}]{delta}{}\end{DoxyParamCaption})}
+
+MIFARE Decrement subtracts the delta from the value of the addressed block, and stores the result in a volatile memory. For MIFARE Classic only. The sector containing the block must be authenticated before calling this function. Only for blocks in "{}value block"{} mode, ie with access bits \mbox{[}C1 C2 C3\mbox{]} = \mbox{[}110\mbox{]} or \mbox{[}001\mbox{]}. Use \doxylink{class_m_f_r_c522_a16ee66df69fda8a3065bc9218b45de0b}{MIFARE\+\_\+\+Transfer()} to store the result in a block.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em block\+Addr} & The block (0-\/0xff) number.  \\
+\hline
+{\em delta} & This number is subtracted from the value of block block\+Addr. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_ab4009cbdd5150b1b3a62084aa2033807}\index{MFRC522@{MFRC522}!MIFARE\_GetValue@{MIFARE\_GetValue}}
+\index{MIFARE\_GetValue@{MIFARE\_GetValue}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_GetValue()}{MIFARE\_GetValue()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_ab4009cbdd5150b1b3a62084aa2033807} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+MIFARE\+\_\+\+Get\+Value (\begin{DoxyParamCaption}\item[{byte}]{block\+Addr}{, }\item[{int32\+\_\+t \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})}
+
+Helper routine to read the current value from a Value Block.
+
+Only for MIFARE Classic and only for blocks in "{}value block"{} mode, that is\+: with access bits \mbox{[}C1 C2 C3\mbox{]} = \mbox{[}110\mbox{]} or \mbox{[}001\mbox{]}. The sector containing the block must be authenticated before calling this function.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em block\+Addr} & The block (0x00-\/0xff) number. \\
+\hline
+\mbox{\texttt{ out}}  & {\em value} & Current value of the Value Block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_m_f_r_c522_af9566664f23d4d67efd270e42c3dc723}\index{MFRC522@{MFRC522}!MIFARE\_Increment@{MIFARE\_Increment}}
+\index{MIFARE\_Increment@{MIFARE\_Increment}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_Increment()}{MIFARE\_Increment()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_af9566664f23d4d67efd270e42c3dc723} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+MIFARE\+\_\+\+Increment (\begin{DoxyParamCaption}\item[{byte}]{block\+Addr}{, }\item[{int32\+\_\+t}]{delta}{}\end{DoxyParamCaption})}
+
+MIFARE Increment adds the delta to the value of the addressed block, and stores the result in a volatile memory. For MIFARE Classic only. The sector containing the block must be authenticated before calling this function. Only for blocks in "{}value block"{} mode, ie with access bits \mbox{[}C1 C2 C3\mbox{]} = \mbox{[}110\mbox{]} or \mbox{[}001\mbox{]}. Use \doxylink{class_m_f_r_c522_a16ee66df69fda8a3065bc9218b45de0b}{MIFARE\+\_\+\+Transfer()} to store the result in a block.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em block\+Addr} & The block (0-\/0xff) number.  \\
+\hline
+{\em delta} & This number is added to the value of block block\+Addr. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a925607adc9382720c222578bd236a9c8}\index{MFRC522@{MFRC522}!MIFARE\_OpenUidBackdoor@{MIFARE\_OpenUidBackdoor}}
+\index{MIFARE\_OpenUidBackdoor@{MIFARE\_OpenUidBackdoor}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_OpenUidBackdoor()}{MIFARE\_OpenUidBackdoor()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a925607adc9382720c222578bd236a9c8} 
+bool MFRC522\+::\+MIFARE\+\_\+\+Open\+Uid\+Backdoor (\begin{DoxyParamCaption}\item[{bool}]{log\+Errors}{}\end{DoxyParamCaption})}
+
+Performs the "{}magic sequence"{} needed to get Chinese UID changeable Mifare cards to allow writing to sector 0, where the card UID is stored.
+
+Note that you do not need to have selected the card through REQA or WUPA, this sequence works immediately when the card is in the reader vicinity. This means you can use this method even on "{}bricked"{} cards that your reader does not recognise anymore (see \doxylink{class_m_f_r_c522_afcbb15d925cb3bea9f58595111fbca48}{MFRC522\+::\+MIFARE\+\_\+\+Unbrick\+Uid\+Sector}).
+
+Of course with non-\/bricked devices, you\textquotesingle{}re free to select them before calling this function. \Hypertarget{class_m_f_r_c522_a6ed93e88913ea104420f3bb4a88cce52}\index{MFRC522@{MFRC522}!MIFARE\_Read@{MIFARE\_Read}}
+\index{MIFARE\_Read@{MIFARE\_Read}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_Read()}{MIFARE\_Read()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a6ed93e88913ea104420f3bb4a88cce52} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+MIFARE\+\_\+\+Read (\begin{DoxyParamCaption}\item[{byte}]{block\+Addr}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+Reads 16 bytes (+ 2 bytes CRC\+\_\+A) from the active PICC.
+
+For MIFARE Classic the sector containing the block must be authenticated before calling this function.
+
+For MIFARE Ultralight only addresses 00h to 0Fh are decoded. The MF0\+ICU1 returns a NAK for higher addresses. The MF0\+ICU1 responds to the READ command by sending 16 bytes starting from the page address defined by the command argument. For example; if block\+Addr is 03h then pages 03h, 04h, 05h, 06h are returned. A roll-\/back is implemented\+: If block\+Addr is 0Eh, then the contents of pages 0Eh, 0Fh, 00h and 01h are returned.
+
+The buffer must be at least 18 bytes because a CRC\+\_\+A is also returned. Checks the CRC\+\_\+A before returning STATUS\+\_\+\+OK.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em block\+Addr} & MIFARE Classic\+: The block (0-\/0xff) number. MIFARE Ultralight\+: The first page to return data from.  \\
+\hline
+{\em buffer} & The buffer to store the data in  \\
+\hline
+{\em buffer\+Size} & Buffer size, at least 18 bytes. Also number of bytes returned if STATUS\+\_\+\+OK. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a946ba7e7e244f40adcb9f900d8fd3a48}\index{MFRC522@{MFRC522}!MIFARE\_Restore@{MIFARE\_Restore}}
+\index{MIFARE\_Restore@{MIFARE\_Restore}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_Restore()}{MIFARE\_Restore()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a946ba7e7e244f40adcb9f900d8fd3a48} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+MIFARE\+\_\+\+Restore (\begin{DoxyParamCaption}\item[{byte}]{block\+Addr}{}\end{DoxyParamCaption})}
+
+MIFARE Restore copies the value of the addressed block into a volatile memory. For MIFARE Classic only. The sector containing the block must be authenticated before calling this function. Only for blocks in "{}value block"{} mode, ie with access bits \mbox{[}C1 C2 C3\mbox{]} = \mbox{[}110\mbox{]} or \mbox{[}001\mbox{]}. Use \doxylink{class_m_f_r_c522_a16ee66df69fda8a3065bc9218b45de0b}{MIFARE\+\_\+\+Transfer()} to store the result in a block.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em block\+Addr} & The block (0-\/0xff) number. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_ab8c712963189654e9bc368be8783e2ab}\index{MFRC522@{MFRC522}!MIFARE\_SetAccessBits@{MIFARE\_SetAccessBits}}
+\index{MIFARE\_SetAccessBits@{MIFARE\_SetAccessBits}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_SetAccessBits()}{MIFARE\_SetAccessBits()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_ab8c712963189654e9bc368be8783e2ab} 
+void MFRC522\+::\+MIFARE\+\_\+\+Set\+Access\+Bits (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{access\+Bit\+Buffer}{, }\item[{byte}]{g0}{, }\item[{byte}]{g1}{, }\item[{byte}]{g2}{, }\item[{byte}]{g3}{}\end{DoxyParamCaption})}
+
+Calculates the bit pattern needed for the specified access bits. In the \mbox{[}C1 C2 C3\mbox{]} tuples C1 is MSB (=4) and C3 is LSB (=1). 
+\begin{DoxyParams}{Parameters}
+{\em access\+Bit\+Buffer} & Pointer to byte 6, 7 and 8 in the sector trailer. Bytes \mbox{[}0..2\mbox{]} will be set.  \\
+\hline
+{\em g0} & Access bits \mbox{[}C1 C2 C3\mbox{]} for block 0 (for sectors 0-\/31) or blocks 0-\/4 (for sectors 32-\/39)  \\
+\hline
+{\em g1} & Access bits C1 C2 C3\mbox{]} for block 1 (for sectors 0-\/31) or blocks 5-\/9 (for sectors 32-\/39)  \\
+\hline
+{\em g2} & Access bits C1 C2 C3\mbox{]} for block 2 (for sectors 0-\/31) or blocks 10-\/14 (for sectors 32-\/39)  \\
+\hline
+{\em g3} & Access bits C1 C2 C3\mbox{]} for the sector trailer, block 3 (for sectors 0-\/31) or block 15 (for sectors 32-\/39) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a2bdc18af4952ce99099607c84139b51c}\index{MFRC522@{MFRC522}!MIFARE\_SetUid@{MIFARE\_SetUid}}
+\index{MIFARE\_SetUid@{MIFARE\_SetUid}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_SetUid()}{MIFARE\_SetUid()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a2bdc18af4952ce99099607c84139b51c} 
+bool MFRC522\+::\+MIFARE\+\_\+\+Set\+Uid (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{new\+Uid}{, }\item[{byte}]{uid\+Size}{, }\item[{bool}]{log\+Errors}{}\end{DoxyParamCaption})}
+
+Reads entire block 0, including all manufacturer data, and overwrites that block with the new UID, a freshly calculated BCC, and the original manufacturer data.
+
+It assumes a default KEY A of 0x\+FFFFFFFFFFFF. Make sure to have selected the card before this function is called. \Hypertarget{class_m_f_r_c522_af19fc75e9415322fbe89245ed70a784b}\index{MFRC522@{MFRC522}!MIFARE\_SetValue@{MIFARE\_SetValue}}
+\index{MIFARE\_SetValue@{MIFARE\_SetValue}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_SetValue()}{MIFARE\_SetValue()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_af19fc75e9415322fbe89245ed70a784b} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+MIFARE\+\_\+\+Set\+Value (\begin{DoxyParamCaption}\item[{byte}]{block\+Addr}{, }\item[{int32\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+Helper routine to write a specific value into a Value Block.
+
+Only for MIFARE Classic and only for blocks in "{}value block"{} mode, that is\+: with access bits \mbox{[}C1 C2 C3\mbox{]} = \mbox{[}110\mbox{]} or \mbox{[}001\mbox{]}. The sector containing the block must be authenticated before calling this function.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em block\+Addr} & The block (0x00-\/0xff) number. \\
+\hline
+\mbox{\texttt{ in}}  & {\em value} & New value of the Value Block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_m_f_r_c522_a16ee66df69fda8a3065bc9218b45de0b}\index{MFRC522@{MFRC522}!MIFARE\_Transfer@{MIFARE\_Transfer}}
+\index{MIFARE\_Transfer@{MIFARE\_Transfer}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_Transfer()}{MIFARE\_Transfer()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a16ee66df69fda8a3065bc9218b45de0b} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+MIFARE\+\_\+\+Transfer (\begin{DoxyParamCaption}\item[{byte}]{block\+Addr}{}\end{DoxyParamCaption})}
+
+MIFARE Transfer writes the value stored in the volatile memory into one MIFARE Classic block. For MIFARE Classic only. The sector containing the block must be authenticated before calling this function. Only for blocks in "{}value block"{} mode, ie with access bits \mbox{[}C1 C2 C3\mbox{]} = \mbox{[}110\mbox{]} or \mbox{[}001\mbox{]}.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em block\+Addr} & The block (0-\/0xff) number. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a86cb4ad38f61b823dfe97103b1b1f9d6}\index{MFRC522@{MFRC522}!MIFARE\_TwoStepHelper@{MIFARE\_TwoStepHelper}}
+\index{MIFARE\_TwoStepHelper@{MIFARE\_TwoStepHelper}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_TwoStepHelper()}{MIFARE\_TwoStepHelper()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a86cb4ad38f61b823dfe97103b1b1f9d6} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+MIFARE\+\_\+\+Two\+Step\+Helper (\begin{DoxyParamCaption}\item[{byte}]{command}{, }\item[{byte}]{block\+Addr}{, }\item[{int32\+\_\+t}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Helper function for the two-\/step MIFARE Classic protocol operations Decrement, Increment and Restore.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command to use  \\
+\hline
+{\em block\+Addr} & The block (0-\/0xff) number.  \\
+\hline
+{\em data} & The data to transfer in step 2 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a7053e61540b68e6aa5c6cbea308836c4}\index{MFRC522@{MFRC522}!MIFARE\_Ultralight\_Write@{MIFARE\_Ultralight\_Write}}
+\index{MIFARE\_Ultralight\_Write@{MIFARE\_Ultralight\_Write}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_Ultralight\_Write()}{MIFARE\_Ultralight\_Write()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a7053e61540b68e6aa5c6cbea308836c4} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+MIFARE\+\_\+\+Ultralight\+\_\+\+Write (\begin{DoxyParamCaption}\item[{byte}]{page}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{byte}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+Writes a 4 byte page to the active MIFARE Ultralight PICC.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em page} & The page (2-\/15) to write to.  \\
+\hline
+{\em buffer} & The 4 bytes to write to the PICC  \\
+\hline
+{\em buffer\+Size} & Buffer size, must be at least 4 bytes. Exactly 4 bytes are written. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_afcbb15d925cb3bea9f58595111fbca48}\index{MFRC522@{MFRC522}!MIFARE\_UnbrickUidSector@{MIFARE\_UnbrickUidSector}}
+\index{MIFARE\_UnbrickUidSector@{MIFARE\_UnbrickUidSector}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_UnbrickUidSector()}{MIFARE\_UnbrickUidSector()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_afcbb15d925cb3bea9f58595111fbca48} 
+bool MFRC522\+::\+MIFARE\+\_\+\+Unbrick\+Uid\+Sector (\begin{DoxyParamCaption}\item[{bool}]{log\+Errors}{}\end{DoxyParamCaption})}
+
+Resets entire sector 0 to zeroes, so the card can be read again by readers. \Hypertarget{class_m_f_r_c522_a0dc5fb05769779ec3ed708bd153706b3}\index{MFRC522@{MFRC522}!MIFARE\_Write@{MIFARE\_Write}}
+\index{MIFARE\_Write@{MIFARE\_Write}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{MIFARE\_Write()}{MIFARE\_Write()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a0dc5fb05769779ec3ed708bd153706b3} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+MIFARE\+\_\+\+Write (\begin{DoxyParamCaption}\item[{byte}]{block\+Addr}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{byte}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+Writes 16 bytes to the active PICC.
+
+For MIFARE Classic the sector containing the block must be authenticated before calling this function.
+
+For MIFARE Ultralight the operation is called "{}\+COMPATIBILITY WRITE"{}. Even though 16 bytes are transferred to the Ultralight PICC, only the least significant 4 bytes (bytes 0 to 3) are written to the specified address. It is recommended to set the remaining bytes 04h to 0Fh to all logic 0.
+\begin{DoxyItemize}
+\item \begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\end{DoxyItemize}
+\begin{DoxyParams}{Parameters}
+{\em block\+Addr} & MIFARE Classic\+: The block (0-\/0xff) number. MIFARE Ultralight\+: The page (2-\/15) to write to.  \\
+\hline
+{\em buffer} & The 16 bytes to write to the PICC  \\
+\hline
+{\em buffer\+Size} & Buffer size, must be at least 16 bytes. Exactly 16 bytes are written. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a2098ebe85700109b20c5026643f1dad7}\index{MFRC522@{MFRC522}!PCD\_AntennaOff@{PCD\_AntennaOff}}
+\index{PCD\_AntennaOff@{PCD\_AntennaOff}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_AntennaOff()}{PCD\_AntennaOff()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a2098ebe85700109b20c5026643f1dad7} 
+void MFRC522\+::\+PCD\+\_\+\+Antenna\+Off (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Turns the antenna off by disabling pins TX1 and TX2. \Hypertarget{class_m_f_r_c522_a044be037a5f172e9cea7d8ce1dcf32e0}\index{MFRC522@{MFRC522}!PCD\_AntennaOn@{PCD\_AntennaOn}}
+\index{PCD\_AntennaOn@{PCD\_AntennaOn}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_AntennaOn()}{PCD\_AntennaOn()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a044be037a5f172e9cea7d8ce1dcf32e0} 
+void MFRC522\+::\+PCD\+\_\+\+Antenna\+On (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Turns the antenna on by enabling pins TX1 and TX2. After a reset these pins are disabled. \Hypertarget{class_m_f_r_c522_a6c2313c4aa98806cc2bf0e9cca993ec0}\index{MFRC522@{MFRC522}!PCD\_Authenticate@{PCD\_Authenticate}}
+\index{PCD\_Authenticate@{PCD\_Authenticate}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_Authenticate()}{PCD\_Authenticate()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a6c2313c4aa98806cc2bf0e9cca993ec0} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+PCD\+\_\+\+Authenticate (\begin{DoxyParamCaption}\item[{byte}]{command}{, }\item[{byte}]{block\+Addr}{, }\item[{\mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MIFARE\+\_\+\+Key}} \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}}]{uid}{}\end{DoxyParamCaption})}
+
+Executes the \doxylink{class_m_f_r_c522}{MFRC522} MFAuthent command. This command manages MIFARE authentication to enable a secure communication to any MIFARE Mini, MIFARE 1K and MIFARE 4K card. The authentication is described in the \doxylink{class_m_f_r_c522}{MFRC522} datasheet section 10.\+3.\+1.\+9 and \href{http://www.nxp.com/documents/data_sheet/MF1S503x.pdf}{\texttt{ http\+://www.\+nxp.\+com/documents/data\+\_\+sheet/\+MF1\+S503x.\+pdf}} section 10.\+1. For use with MIFARE Classic PICCs. The PICC must be selected -\/ ie in state ACTIVE(\texorpdfstring{$\ast$}{*}) -\/ before calling this function. Remember to call \doxylink{class_m_f_r_c522_a24d3ab7b2170fdfa3f0121a7256f12d9}{PCD\+\_\+\+Stop\+Crypto1()} after communicating with the authenticated PICC -\/ otherwise no new communications can start.
+
+All keys are set to FFFFFFFFFFFFh at chip delivery.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. Probably STATUS\+\_\+\+TIMEOUT if you supply the wrong key. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em command} & PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+AUTH\+\_\+\+KEY\+\_\+A or PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+AUTH\+\_\+\+KEY\+\_\+B  \\
+\hline
+{\em block\+Addr} & The block number. See numbering in the comments in the .h file.  \\
+\hline
+{\em key} & Pointer to the Crypteo1 key to use (6 bytes)  \\
+\hline
+{\em uid} & Pointer to \doxylink{struct_m_f_r_c522_1_1_uid}{Uid} struct. The first 4 bytes of the UID is used. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a7c65647b1d72b6ee7557797322030643}\index{MFRC522@{MFRC522}!PCD\_CalculateCRC@{PCD\_CalculateCRC}}
+\index{PCD\_CalculateCRC@{PCD\_CalculateCRC}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_CalculateCRC()}{PCD\_CalculateCRC()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a7c65647b1d72b6ee7557797322030643} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+PCD\+\_\+\+Calculate\+CRC (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{byte}]{length}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+Use the CRC coprocessor in the \doxylink{class_m_f_r_c522}{MFRC522} to calculate a CRC\+\_\+A.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & In\+: Pointer to the data to transfer to the FIFO for CRC calculation.  \\
+\hline
+{\em length} & In\+: The number of bytes to transfer.  \\
+\hline
+{\em result} & Out\+: Pointer to result buffer. Result is written to result\mbox{[}0..1\mbox{]}, low byte first. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a76193f4f8916f688fe2b7976d0fd1dc2}\index{MFRC522@{MFRC522}!PCD\_ClearRegisterBitMask@{PCD\_ClearRegisterBitMask}}
+\index{PCD\_ClearRegisterBitMask@{PCD\_ClearRegisterBitMask}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_ClearRegisterBitMask()}{PCD\_ClearRegisterBitMask()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a76193f4f8916f688fe2b7976d0fd1dc2} 
+void MFRC522\+::\+PCD\+\_\+\+Clear\+Register\+Bit\+Mask (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}}}]{reg}{, }\item[{byte}]{mask}{}\end{DoxyParamCaption})}
+
+Clears the bits given in mask from register reg. 
+\begin{DoxyParams}{Parameters}
+{\em reg} & The register to update. One of the \doxylink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register} enums.  \\
+\hline
+{\em mask} & The bits to clear. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_acb2b1e74bc49fda2704450a684faa845}\index{MFRC522@{MFRC522}!PCD\_CommunicateWithPICC@{PCD\_CommunicateWithPICC}}
+\index{PCD\_CommunicateWithPICC@{PCD\_CommunicateWithPICC}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_CommunicateWithPICC()}{PCD\_CommunicateWithPICC()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_acb2b1e74bc49fda2704450a684faa845} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+PCD\+\_\+\+Communicate\+With\+PICC (\begin{DoxyParamCaption}\item[{byte}]{command}{, }\item[{byte}]{wait\+IRq}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{send\+Data}{, }\item[{byte}]{send\+Len}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{back\+Data}{ = {\ttfamily nullptr}, }\item[{byte \texorpdfstring{$\ast$}{*}}]{back\+Len}{ = {\ttfamily nullptr}, }\item[{byte \texorpdfstring{$\ast$}{*}}]{valid\+Bits}{ = {\ttfamily nullptr}, }\item[{byte}]{rx\+Align}{ = {\ttfamily 0}, }\item[{bool}]{check\+CRC}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+Transfers data to the \doxylink{class_m_f_r_c522}{MFRC522} FIFO, executes a command, waits for completion and transfers data back from the FIFO. CRC validation can only be done if back\+Data and back\+Len are specified.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command to execute. One of the \doxylink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8}{PCD\+\_\+\+Command} enums.  \\
+\hline
+{\em wait\+IRq} & The bits in the Com\+Irq\+Reg register that signals successful completion of the command.  \\
+\hline
+{\em send\+Data} & Pointer to the data to transfer to the FIFO.  \\
+\hline
+{\em send\+Len} & Number of bytes to transfer to the FIFO.  \\
+\hline
+{\em back\+Data} & nullptr or pointer to buffer if data should be read back after executing the command.  \\
+\hline
+{\em back\+Len} & In\+: Max number of bytes to write to \texorpdfstring{$\ast$}{*}back\+Data. Out\+: The number of bytes returned.  \\
+\hline
+{\em valid\+Bits} & In/\+Out\+: The number of valid bits in the last byte. 0 for 8 valid bits.  \\
+\hline
+{\em rx\+Align} & In\+: Defines the bit position in back\+Data\mbox{[}0\mbox{]} for the first bit received. Default 0.  \\
+\hline
+{\em check\+CRC} & In\+: True =\texorpdfstring{$>$}{>} The last two bytes of the response is assumed to be a CRC\+\_\+A that must be validated. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a41c31c6932a59646eeff470c60a4d20d}\index{MFRC522@{MFRC522}!PCD\_DumpVersionToSerial@{PCD\_DumpVersionToSerial}}
+\index{PCD\_DumpVersionToSerial@{PCD\_DumpVersionToSerial}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_DumpVersionToSerial()}{PCD\_DumpVersionToSerial()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a41c31c6932a59646eeff470c60a4d20d} 
+void MFRC522\+::\+PCD\+\_\+\+Dump\+Version\+To\+Serial (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Dumps debug info about the connected PCD to Serial. Shows all known firmware versions \Hypertarget{class_m_f_r_c522_aa02ae994a9ebf146475f46fc538cef28}\index{MFRC522@{MFRC522}!PCD\_GetAntennaGain@{PCD\_GetAntennaGain}}
+\index{PCD\_GetAntennaGain@{PCD\_GetAntennaGain}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_GetAntennaGain()}{PCD\_GetAntennaGain()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_aa02ae994a9ebf146475f46fc538cef28} 
+byte MFRC522\+::\+PCD\+\_\+\+Get\+Antenna\+Gain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Get the current \doxylink{class_m_f_r_c522}{MFRC522} Receiver Gain (Rx\+Gain\mbox{[}2\+:0\mbox{]}) value. See 9.\+3.\+3.\+6 / table 98 in \href{http://www.nxp.com/documents/data_sheet/MFRC522.pdf}{\texttt{ http\+://www.\+nxp.\+com/documents/data\+\_\+sheet/\+MFRC522.\+pdf}} NOTE\+: Return value scrubbed with (0x07\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}4)=01110000b as RCFfg\+Reg may use reserved bits.
+
+\begin{DoxyReturn}{Returns}
+Value of the Rx\+Gain, scrubbed to the 3 bits used. 
+\end{DoxyReturn}
+\Hypertarget{class_m_f_r_c522_ad681e424fc68a57941bea5702cee05eb}\index{MFRC522@{MFRC522}!PCD\_Init@{PCD\_Init}}
+\index{PCD\_Init@{PCD\_Init}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_Init()}{PCD\_Init()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_ad681e424fc68a57941bea5702cee05eb} 
+void MFRC522\+::\+PCD\+\_\+\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Initializes the \doxylink{class_m_f_r_c522}{MFRC522} chip. \Hypertarget{class_m_f_r_c522_a3a14c851e9a2f62956db01d5666c284b}\index{MFRC522@{MFRC522}!PCD\_Init@{PCD\_Init}}
+\index{PCD\_Init@{PCD\_Init}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_Init()}{PCD\_Init()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a3a14c851e9a2f62956db01d5666c284b} 
+void MFRC522\+::\+PCD\+\_\+\+Init (\begin{DoxyParamCaption}\item[{byte}]{chip\+Select\+Pin}{, }\item[{byte}]{reset\+Power\+Down\+Pin}{}\end{DoxyParamCaption})}
+
+Initializes the \doxylink{class_m_f_r_c522}{MFRC522} chip. 
+\begin{DoxyParams}{Parameters}
+{\em chip\+Select\+Pin} & Arduino pin connected to \doxylink{class_m_f_r_c522}{MFRC522}\textquotesingle{}s SPI slave select input (Pin 24, NSS, active low)  \\
+\hline
+{\em reset\+Power\+Down\+Pin} & Arduino pin connected to \doxylink{class_m_f_r_c522}{MFRC522}\textquotesingle{}s reset and power down input (Pin 6, NRSTPD, active low) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a50a743c6c0c3ced652cb7fdca61949ab}\index{MFRC522@{MFRC522}!PCD\_Init@{PCD\_Init}}
+\index{PCD\_Init@{PCD\_Init}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_Init()}{PCD\_Init()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a50a743c6c0c3ced652cb7fdca61949ab} 
+void MFRC522\+::\+PCD\+\_\+\+Init (\begin{DoxyParamCaption}\item[{byte}]{reset\+Power\+Down\+Pin}{}\end{DoxyParamCaption})}
+
+Initializes the \doxylink{class_m_f_r_c522}{MFRC522} chip. 
+\begin{DoxyParams}{Parameters}
+{\em reset\+Power\+Down\+Pin} & Arduino pin connected to \doxylink{class_m_f_r_c522}{MFRC522}\textquotesingle{}s reset and power down input (Pin 6, NRSTPD, active low) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_aa88d28676b3ffb5985af8db35d39077b}\index{MFRC522@{MFRC522}!PCD\_MIFARE\_Transceive@{PCD\_MIFARE\_Transceive}}
+\index{PCD\_MIFARE\_Transceive@{PCD\_MIFARE\_Transceive}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_MIFARE\_Transceive()}{PCD\_MIFARE\_Transceive()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_aa88d28676b3ffb5985af8db35d39077b} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+PCD\+\_\+\+MIFARE\+\_\+\+Transceive (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{send\+Data}{, }\item[{byte}]{send\+Len}{, }\item[{bool}]{accept\+Timeout}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+Wrapper for MIFARE protocol communication. Adds CRC\+\_\+A, executes the Transceive command and checks that the response is MF\+\_\+\+ACK or a timeout.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em send\+Data} & Pointer to the data to transfer to the FIFO. Do NOT include the CRC\+\_\+A.  \\
+\hline
+{\em send\+Len} & Number of bytes in send\+Data.  \\
+\hline
+{\em accept\+Timeout} & True =\texorpdfstring{$>$}{>} A timeout is also success \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_acb47eb7a05ae58825b4085efeb7a09bb}\index{MFRC522@{MFRC522}!PCD\_NTAG216\_AUTH@{PCD\_NTAG216\_AUTH}}
+\index{PCD\_NTAG216\_AUTH@{PCD\_NTAG216\_AUTH}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_NTAG216\_AUTH()}{PCD\_NTAG216\_AUTH()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_acb47eb7a05ae58825b4085efeb7a09bb} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+PCD\+\_\+\+NTAG216\+\_\+\+AUTH (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{pass\+Word}{, }\item[{byte}]{p\+ACK}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+Authenticate with a NTAG216.
+
+Only for NTAG216. First implemented by Gargantuanman.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em pass\+Word} & password. \\
+\hline
+\mbox{\texttt{ in}}  & {\em p\+ACK} & result success???. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_m_f_r_c522_a25f052c9c340da34128c365662370b01}\index{MFRC522@{MFRC522}!PCD\_PerformSelfTest@{PCD\_PerformSelfTest}}
+\index{PCD\_PerformSelfTest@{PCD\_PerformSelfTest}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_PerformSelfTest()}{PCD\_PerformSelfTest()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a25f052c9c340da34128c365662370b01} 
+bool MFRC522\+::\+PCD\+\_\+\+Perform\+Self\+Test (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Performs a self-\/test of the \doxylink{class_m_f_r_c522}{MFRC522} See 16.\+1.\+1 in \href{http://www.nxp.com/documents/data_sheet/MFRC522.pdf}{\texttt{ http\+://www.\+nxp.\+com/documents/data\+\_\+sheet/\+MFRC522.\+pdf}}
+
+\begin{DoxyReturn}{Returns}
+Whether or not the test passed. Or false if no firmware reference is available. 
+\end{DoxyReturn}
+\Hypertarget{class_m_f_r_c522_a4289838c6f24f2d62eb8dc0e7a6647d1}\index{MFRC522@{MFRC522}!PCD\_ReadRegister@{PCD\_ReadRegister}}
+\index{PCD\_ReadRegister@{PCD\_ReadRegister}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_ReadRegister()}{PCD\_ReadRegister()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a4289838c6f24f2d62eb8dc0e7a6647d1} 
+byte MFRC522\+::\+PCD\+\_\+\+Read\+Register (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}}}]{reg}{}\end{DoxyParamCaption})}
+
+Reads a byte from the specified register in the \doxylink{class_m_f_r_c522}{MFRC522} chip. The interface is described in the datasheet section 8.\+1.\+2. 
+\begin{DoxyParams}{Parameters}
+{\em reg} & The register to read from. One of the \doxylink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register} enums. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_ae84aeb5b0cab567ac0445ae76c16a86b}\index{MFRC522@{MFRC522}!PCD\_ReadRegister@{PCD\_ReadRegister}}
+\index{PCD\_ReadRegister@{PCD\_ReadRegister}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_ReadRegister()}{PCD\_ReadRegister()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_ae84aeb5b0cab567ac0445ae76c16a86b} 
+void MFRC522\+::\+PCD\+\_\+\+Read\+Register (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}}}]{reg}{, }\item[{byte}]{count}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{values}{, }\item[{byte}]{rx\+Align}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+Reads a number of bytes from the specified register in the \doxylink{class_m_f_r_c522}{MFRC522} chip. The interface is described in the datasheet section 8.\+1.\+2. 
+\begin{DoxyParams}{Parameters}
+{\em reg} & The register to read from. One of the \doxylink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register} enums.  \\
+\hline
+{\em count} & The number of bytes to read  \\
+\hline
+{\em values} & Byte array to store the values in.  \\
+\hline
+{\em rx\+Align} & Only bit positions rx\+Align..7 in values\mbox{[}0\mbox{]} are updated. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a9886678ea0a65021bf602cfb110caa15}\index{MFRC522@{MFRC522}!PCD\_Reset@{PCD\_Reset}}
+\index{PCD\_Reset@{PCD\_Reset}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_Reset()}{PCD\_Reset()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a9886678ea0a65021bf602cfb110caa15} 
+void MFRC522\+::\+PCD\+\_\+\+Reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Performs a soft reset on the \doxylink{class_m_f_r_c522}{MFRC522} chip and waits for it to be ready again. \Hypertarget{class_m_f_r_c522_a5ce84dd855f2ae297dd00fafaf62ef78}\index{MFRC522@{MFRC522}!PCD\_SetAntennaGain@{PCD\_SetAntennaGain}}
+\index{PCD\_SetAntennaGain@{PCD\_SetAntennaGain}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_SetAntennaGain()}{PCD\_SetAntennaGain()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a5ce84dd855f2ae297dd00fafaf62ef78} 
+void MFRC522\+::\+PCD\+\_\+\+Set\+Antenna\+Gain (\begin{DoxyParamCaption}\item[{byte}]{mask}{}\end{DoxyParamCaption})}
+
+Set the \doxylink{class_m_f_r_c522}{MFRC522} Receiver Gain (Rx\+Gain) to value specified by given mask. See 9.\+3.\+3.\+6 / table 98 in \href{http://www.nxp.com/documents/data_sheet/MFRC522.pdf}{\texttt{ http\+://www.\+nxp.\+com/documents/data\+\_\+sheet/\+MFRC522.\+pdf}} NOTE\+: Given mask is scrubbed with (0x07\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}4)=01110000b as RCFfg\+Reg may use reserved bits. \Hypertarget{class_m_f_r_c522_acebb9a90249419f2a53281c4a13727d1}\index{MFRC522@{MFRC522}!PCD\_SetRegisterBitMask@{PCD\_SetRegisterBitMask}}
+\index{PCD\_SetRegisterBitMask@{PCD\_SetRegisterBitMask}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_SetRegisterBitMask()}{PCD\_SetRegisterBitMask()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_acebb9a90249419f2a53281c4a13727d1} 
+void MFRC522\+::\+PCD\+\_\+\+Set\+Register\+Bit\+Mask (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}}}]{reg}{, }\item[{byte}]{mask}{}\end{DoxyParamCaption})}
+
+Sets the bits given in mask in register reg. 
+\begin{DoxyParams}{Parameters}
+{\em reg} & The register to update. One of the \doxylink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register} enums.  \\
+\hline
+{\em mask} & The bits to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a98befa52f6df765779dce6bf616ff009}\index{MFRC522@{MFRC522}!PCD\_SoftPowerDown@{PCD\_SoftPowerDown}}
+\index{PCD\_SoftPowerDown@{PCD\_SoftPowerDown}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_SoftPowerDown()}{PCD\_SoftPowerDown()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a98befa52f6df765779dce6bf616ff009} 
+void MFRC522\+::\+PCD\+\_\+\+Soft\+Power\+Down (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_m_f_r_c522_ad6559531854fba81f7440babe617c90e}\index{MFRC522@{MFRC522}!PCD\_SoftPowerUp@{PCD\_SoftPowerUp}}
+\index{PCD\_SoftPowerUp@{PCD\_SoftPowerUp}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_SoftPowerUp()}{PCD\_SoftPowerUp()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_ad6559531854fba81f7440babe617c90e} 
+void MFRC522\+::\+PCD\+\_\+\+Soft\+Power\+Up (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_m_f_r_c522_a24d3ab7b2170fdfa3f0121a7256f12d9}\index{MFRC522@{MFRC522}!PCD\_StopCrypto1@{PCD\_StopCrypto1}}
+\index{PCD\_StopCrypto1@{PCD\_StopCrypto1}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_StopCrypto1()}{PCD\_StopCrypto1()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a24d3ab7b2170fdfa3f0121a7256f12d9} 
+void MFRC522\+::\+PCD\+\_\+\+Stop\+Crypto1 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Used to exit the PCD from its authenticated state. Remember to call this function after communicating with an authenticated PICC -\/ otherwise no new communications can start. \Hypertarget{class_m_f_r_c522_aaa96aa7ec4f95e0835cb758ad0450d74}\index{MFRC522@{MFRC522}!PCD\_TransceiveData@{PCD\_TransceiveData}}
+\index{PCD\_TransceiveData@{PCD\_TransceiveData}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_TransceiveData()}{PCD\_TransceiveData()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_aaa96aa7ec4f95e0835cb758ad0450d74} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+PCD\+\_\+\+Transceive\+Data (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{send\+Data}{, }\item[{byte}]{send\+Len}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{back\+Data}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{back\+Len}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{valid\+Bits}{ = {\ttfamily nullptr}, }\item[{byte}]{rx\+Align}{ = {\ttfamily 0}, }\item[{bool}]{check\+CRC}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+Executes the Transceive command. CRC validation can only be done if back\+Data and back\+Len are specified.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em send\+Data} & Pointer to the data to transfer to the FIFO.  \\
+\hline
+{\em send\+Len} & Number of bytes to transfer to the FIFO.  \\
+\hline
+{\em back\+Data} & nullptr or pointer to buffer if data should be read back after executing the command.  \\
+\hline
+{\em back\+Len} & In\+: Max number of bytes to write to \texorpdfstring{$\ast$}{*}back\+Data. Out\+: The number of bytes returned.  \\
+\hline
+{\em valid\+Bits} & In/\+Out\+: The number of valid bits in the last byte. 0 for 8 valid bits. Default nullptr.  \\
+\hline
+{\em rx\+Align} & In\+: Defines the bit position in back\+Data\mbox{[}0\mbox{]} for the first bit received. Default 0.  \\
+\hline
+{\em check\+CRC} & In\+: True =\texorpdfstring{$>$}{>} The last two bytes of the response is assumed to be a CRC\+\_\+A that must be validated. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a846b4b9d0468b62d853b125d4b269054}\index{MFRC522@{MFRC522}!PCD\_WriteRegister@{PCD\_WriteRegister}}
+\index{PCD\_WriteRegister@{PCD\_WriteRegister}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_WriteRegister()}{PCD\_WriteRegister()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a846b4b9d0468b62d853b125d4b269054} 
+void MFRC522\+::\+PCD\+\_\+\+Write\+Register (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}}}]{reg}{, }\item[{byte}]{count}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{values}{}\end{DoxyParamCaption})}
+
+Writes a number of bytes to the specified register in the \doxylink{class_m_f_r_c522}{MFRC522} chip. The interface is described in the datasheet section 8.\+1.\+2. 
+\begin{DoxyParams}{Parameters}
+{\em reg} & The register to write to. One of the \doxylink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register} enums.  \\
+\hline
+{\em count} & The number of bytes to write to the register  \\
+\hline
+{\em values} & The values to write. Byte array. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_aa5e5825adb4c784d8a5a60242c135fb7}\index{MFRC522@{MFRC522}!PCD\_WriteRegister@{PCD\_WriteRegister}}
+\index{PCD\_WriteRegister@{PCD\_WriteRegister}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PCD\_WriteRegister()}{PCD\_WriteRegister()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_aa5e5825adb4c784d8a5a60242c135fb7} 
+void MFRC522\+::\+PCD\+\_\+\+Write\+Register (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register}}}]{reg}{, }\item[{byte}]{value}{}\end{DoxyParamCaption})}
+
+Writes a byte to the specified register in the \doxylink{class_m_f_r_c522}{MFRC522} chip. The interface is described in the datasheet section 8.\+1.\+2. 
+\begin{DoxyParams}{Parameters}
+{\em reg} & The register to write to. One of the \doxylink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\+\_\+\+Register} enums.  \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a3b9a2c6da6505e0ff7b58c37d7aeff37}\index{MFRC522@{MFRC522}!PICC\_DumpDetailsToSerial@{PICC\_DumpDetailsToSerial}}
+\index{PICC\_DumpDetailsToSerial@{PICC\_DumpDetailsToSerial}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_DumpDetailsToSerial()}{PICC\_DumpDetailsToSerial()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a3b9a2c6da6505e0ff7b58c37d7aeff37} 
+void MFRC522\+::\+PICC\+\_\+\+Dump\+Details\+To\+Serial (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}}]{uid}{}\end{DoxyParamCaption})}
+
+Dumps card info (UID,SAK,Type) about the selected PICC to Serial. 
+\begin{DoxyParams}{Parameters}
+{\em uid} & Pointer to \doxylink{struct_m_f_r_c522_1_1_uid}{Uid} struct returned from a successful \doxylink{class_m_f_r_c522_a7a78c629cb4e1d90cc2d7526b17d6c22}{PICC\+\_\+\+Select()}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a20c559f09927a7c5f91295f6158e4342}\index{MFRC522@{MFRC522}!PICC\_DumpMifareClassicSectorToSerial@{PICC\_DumpMifareClassicSectorToSerial}}
+\index{PICC\_DumpMifareClassicSectorToSerial@{PICC\_DumpMifareClassicSectorToSerial}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_DumpMifareClassicSectorToSerial()}{PICC\_DumpMifareClassicSectorToSerial()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a20c559f09927a7c5f91295f6158e4342} 
+void MFRC522\+::\+PICC\+\_\+\+Dump\+Mifare\+Classic\+Sector\+To\+Serial (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}}]{uid}{, }\item[{\mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MIFARE\+\_\+\+Key}} \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{byte}]{sector}{}\end{DoxyParamCaption})}
+
+Dumps memory contents of a sector of a MIFARE Classic PICC. Uses \doxylink{class_m_f_r_c522_a6c2313c4aa98806cc2bf0e9cca993ec0}{PCD\+\_\+\+Authenticate()}, \doxylink{class_m_f_r_c522_a6ed93e88913ea104420f3bb4a88cce52}{MIFARE\+\_\+\+Read()} and PCD\+\_\+\+Stop\+Crypto1. Always uses PICC\+\_\+\+CMD\+\_\+\+MF\+\_\+\+AUTH\+\_\+\+KEY\+\_\+A because only Key A can always read the sector trailer access bits. 
+\begin{DoxyParams}{Parameters}
+{\em uid} & Pointer to \doxylink{struct_m_f_r_c522_1_1_uid}{Uid} struct returned from a successful \doxylink{class_m_f_r_c522_a7a78c629cb4e1d90cc2d7526b17d6c22}{PICC\+\_\+\+Select()}.  \\
+\hline
+{\em key} & Key A for the sector.  \\
+\hline
+{\em sector} & The sector to dump, 0..39. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_aafba2e74124efa2d736c1672ea104190}\index{MFRC522@{MFRC522}!PICC\_DumpMifareClassicToSerial@{PICC\_DumpMifareClassicToSerial}}
+\index{PICC\_DumpMifareClassicToSerial@{PICC\_DumpMifareClassicToSerial}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_DumpMifareClassicToSerial()}{PICC\_DumpMifareClassicToSerial()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_aafba2e74124efa2d736c1672ea104190} 
+void MFRC522\+::\+PICC\+\_\+\+Dump\+Mifare\+Classic\+To\+Serial (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}}]{uid}{, }\item[{\mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\+\_\+\+Type}}}]{picc\+Type}{, }\item[{\mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MIFARE\+\_\+\+Key}} \texorpdfstring{$\ast$}{*}}]{key}{}\end{DoxyParamCaption})}
+
+Dumps memory contents of a MIFARE Classic PICC. On success the PICC is halted after dumping the data. 
+\begin{DoxyParams}{Parameters}
+{\em uid} & Pointer to \doxylink{struct_m_f_r_c522_1_1_uid}{Uid} struct returned from a successful \doxylink{class_m_f_r_c522_a7a78c629cb4e1d90cc2d7526b17d6c22}{PICC\+\_\+\+Select()}.  \\
+\hline
+{\em picc\+Type} & One of the \doxylink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\+\_\+\+Type} enums.  \\
+\hline
+{\em key} & Key A used for all sectors. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_ac148d28877dd577606a28e9e7e4b6809}\index{MFRC522@{MFRC522}!PICC\_DumpMifareUltralightToSerial@{PICC\_DumpMifareUltralightToSerial}}
+\index{PICC\_DumpMifareUltralightToSerial@{PICC\_DumpMifareUltralightToSerial}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_DumpMifareUltralightToSerial()}{PICC\_DumpMifareUltralightToSerial()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_ac148d28877dd577606a28e9e7e4b6809} 
+void MFRC522\+::\+PICC\+\_\+\+Dump\+Mifare\+Ultralight\+To\+Serial (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Dumps memory contents of a MIFARE Ultralight PICC. \Hypertarget{class_m_f_r_c522_a6f324d43c6fbbd0e260b171747186037}\index{MFRC522@{MFRC522}!PICC\_DumpToSerial@{PICC\_DumpToSerial}}
+\index{PICC\_DumpToSerial@{PICC\_DumpToSerial}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_DumpToSerial()}{PICC\_DumpToSerial()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a6f324d43c6fbbd0e260b171747186037} 
+void MFRC522\+::\+PICC\+\_\+\+Dump\+To\+Serial (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}}]{uid}{}\end{DoxyParamCaption})}
+
+Dumps debug info about the selected PICC to Serial. On success the PICC is halted after dumping the data. For MIFARE Classic the factory default key of 0x\+FFFFFFFFFFFF is tried. 
+\begin{DoxyParams}{Parameters}
+{\em uid} & Pointer to \doxylink{struct_m_f_r_c522_1_1_uid}{Uid} struct returned from a successful \doxylink{class_m_f_r_c522_a7a78c629cb4e1d90cc2d7526b17d6c22}{PICC\+\_\+\+Select()}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_ac80a18228260bdde07dff5d4ac23bb53}\index{MFRC522@{MFRC522}!PICC\_GetType@{PICC\_GetType}}
+\index{PICC\_GetType@{PICC\_GetType}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_GetType()}{PICC\_GetType()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_ac80a18228260bdde07dff5d4ac23bb53} 
+\mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{MFRC522\+::\+PICC\+\_\+\+Type}} MFRC522\+::\+PICC\+\_\+\+Get\+Type (\begin{DoxyParamCaption}\item[{byte}]{sak}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Translates the SAK (Select Acknowledge) to a PICC type.
+
+\begin{DoxyReturn}{Returns}
+\doxylink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\+\_\+\+Type} 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em sak} & The SAK byte returned from \doxylink{class_m_f_r_c522_a7a78c629cb4e1d90cc2d7526b17d6c22}{PICC\+\_\+\+Select()}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_aae4a482352d4d4b7d7a9714b0b0b7c38}\index{MFRC522@{MFRC522}!PICC\_GetTypeName@{PICC\_GetTypeName}}
+\index{PICC\_GetTypeName@{PICC\_GetTypeName}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_GetTypeName()}{PICC\_GetTypeName()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_aae4a482352d4d4b7d7a9714b0b0b7c38} 
+const \+\_\+\+\_\+\+Flash\+String\+Helper \texorpdfstring{$\ast$}{*} MFRC522\+::\+PICC\+\_\+\+Get\+Type\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\+\_\+\+Type}}}]{picc\+Type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns a \+\_\+\+\_\+\+Flash\+String\+Helper pointer to the PICC type name.
+
+\begin{DoxyReturn}{Returns}
+const \+\_\+\+\_\+\+Flash\+String\+Helper \texorpdfstring{$\ast$}{*} 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em picc\+Type} & One of the \doxylink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\+\_\+\+Type} enums. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a8874921b4ed26c5b73d89c90f76d4933}\index{MFRC522@{MFRC522}!PICC\_HaltA@{PICC\_HaltA}}
+\index{PICC\_HaltA@{PICC\_HaltA}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_HaltA()}{PICC\_HaltA()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a8874921b4ed26c5b73d89c90f76d4933} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+PICC\+\_\+\+HaltA (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Instructs a PICC in state ACTIVE(\texorpdfstring{$\ast$}{*}) to go to state HALT.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_m_f_r_c522_a3adca9d3b455c680ebcde3b74c4e567b}\index{MFRC522@{MFRC522}!PICC\_IsNewCardPresent@{PICC\_IsNewCardPresent}}
+\index{PICC\_IsNewCardPresent@{PICC\_IsNewCardPresent}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_IsNewCardPresent()}{PICC\_IsNewCardPresent()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a3adca9d3b455c680ebcde3b74c4e567b} 
+bool MFRC522\+::\+PICC\+\_\+\+Is\+New\+Card\+Present (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Returns true if a PICC responds to PICC\+\_\+\+CMD\+\_\+\+REQA. Only "{}new"{} cards in state IDLE are invited. Sleeping cards in state HALT are ignored.
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_m_f_r_c522_extended_afaa1289052274755acec885017507b64}{MFRC522\+Extended}}.
+
+\Hypertarget{class_m_f_r_c522_aab1218c71cec9cc17ee3ac8a683df106}\index{MFRC522@{MFRC522}!PICC\_ReadCardSerial@{PICC\_ReadCardSerial}}
+\index{PICC\_ReadCardSerial@{PICC\_ReadCardSerial}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_ReadCardSerial()}{PICC\_ReadCardSerial()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_aab1218c71cec9cc17ee3ac8a683df106} 
+bool MFRC522\+::\+PICC\+\_\+\+Read\+Card\+Serial (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Simple wrapper around PICC\+\_\+\+Select. Returns true if a UID could be read. Remember to call \doxylink{class_m_f_r_c522_a3adca9d3b455c680ebcde3b74c4e567b}{PICC\+\_\+\+Is\+New\+Card\+Present()}, \doxylink{class_m_f_r_c522_a4e0ac6edf5e8f6ade351b009278fbbc7}{PICC\+\_\+\+Request\+A()} or \doxylink{class_m_f_r_c522_ad00a1efcfa6dc203ca885d43f4d02125}{PICC\+\_\+\+Wakeup\+A()} first. The read UID is available in the class variable uid.
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_m_f_r_c522_extended_ae68a2f90cec039dc856089aee08119ee}{MFRC522\+Extended}}.
+
+\Hypertarget{class_m_f_r_c522_a639d27ac072bc0dfa478d0957591afcc}\index{MFRC522@{MFRC522}!PICC\_REQA\_or\_WUPA@{PICC\_REQA\_or\_WUPA}}
+\index{PICC\_REQA\_or\_WUPA@{PICC\_REQA\_or\_WUPA}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_REQA\_or\_WUPA()}{PICC\_REQA\_or\_WUPA()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a639d27ac072bc0dfa478d0957591afcc} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+PICC\+\_\+\+REQA\+\_\+or\+\_\+\+WUPA (\begin{DoxyParamCaption}\item[{byte}]{command}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer\+ATQA}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+Transmits REQA or WUPA commands. Beware\+: When two PICCs are in the field at the same time I often get STATUS\+\_\+\+TIMEOUT -\/ probably due do bad antenna design.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command to send -\/ PICC\+\_\+\+CMD\+\_\+\+REQA or PICC\+\_\+\+CMD\+\_\+\+WUPA  \\
+\hline
+{\em buffer\+ATQA} & The buffer to store the ATQA (Answer to request) in  \\
+\hline
+{\em buffer\+Size} & Buffer size, at least two bytes. Also number of bytes returned if STATUS\+\_\+\+OK. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a4e0ac6edf5e8f6ade351b009278fbbc7}\index{MFRC522@{MFRC522}!PICC\_RequestA@{PICC\_RequestA}}
+\index{PICC\_RequestA@{PICC\_RequestA}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_RequestA()}{PICC\_RequestA()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a4e0ac6edf5e8f6ade351b009278fbbc7} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+PICC\+\_\+\+RequestA (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer\+ATQA}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+Transmits a REQuest command, Type A. Invites PICCs in state IDLE to go to READY and prepare for anticollision or selection. 7 bit frame. Beware\+: When two PICCs are in the field at the same time I often get STATUS\+\_\+\+TIMEOUT -\/ probably due do bad antenna design.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em buffer\+ATQA} & The buffer to store the ATQA (Answer to request) in  \\
+\hline
+{\em buffer\+Size} & Buffer size, at least two bytes. Also number of bytes returned if STATUS\+\_\+\+OK. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_m_f_r_c522_a7a78c629cb4e1d90cc2d7526b17d6c22}\index{MFRC522@{MFRC522}!PICC\_Select@{PICC\_Select}}
+\index{PICC\_Select@{PICC\_Select}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_Select()}{PICC\_Select()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a7a78c629cb4e1d90cc2d7526b17d6c22} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+PICC\+\_\+\+Select (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} \texorpdfstring{$\ast$}{*}}]{uid}{, }\item[{byte}]{valid\+Bits}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Transmits SELECT/\+ANTICOLLISION commands to select a single PICC. Before calling this function the PICCs must be placed in the READY(\texorpdfstring{$\ast$}{*}) state by calling \doxylink{class_m_f_r_c522_a4e0ac6edf5e8f6ade351b009278fbbc7}{PICC\+\_\+\+Request\+A()} or \doxylink{class_m_f_r_c522_ad00a1efcfa6dc203ca885d43f4d02125}{PICC\+\_\+\+Wakeup\+A()}. On success\+:
+\begin{DoxyItemize}
+\item The chosen PICC is in state ACTIVE(\texorpdfstring{$\ast$}{*}) and all other PICCs have returned to state IDLE/\+HALT. (Figure 7 of the ISO/\+IEC 14443-\/3 draft.)
+\item The UID size and value of the chosen PICC is returned in \texorpdfstring{$\ast$}{*}uid along with the SAK.
+\end{DoxyItemize}
+
+A PICC UID consists of 4, 7 or 10 bytes. Only 4 bytes can be specified in a SELECT command, so for the longer UIDs two or three iterations are used\+: UID size Number of UID bytes Cascade levels Example of PICC ======== =================== ============== =============== single 4 1 MIFARE Classic double 7 2 MIFARE Ultralight triple 10 3 Not currently in use?
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em uid} & Pointer to \doxylink{struct_m_f_r_c522_1_1_uid}{Uid} struct. Normally output, but can also be used to supply a known UID.  \\
+\hline
+{\em valid\+Bits} & The number of known UID bits supplied in \texorpdfstring{$\ast$}{*}uid. Normally 0. If set you must also supply uid-\/\texorpdfstring{$>$}{>}size. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{class_m_f_r_c522_extended_a0740187cc7f336b0aaea2db432185cb5}{MFRC522\+Extended}}.
+
+\Hypertarget{class_m_f_r_c522_ad00a1efcfa6dc203ca885d43f4d02125}\index{MFRC522@{MFRC522}!PICC\_WakeupA@{PICC\_WakeupA}}
+\index{PICC\_WakeupA@{PICC\_WakeupA}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{PICC\_WakeupA()}{PICC\_WakeupA()}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_ad00a1efcfa6dc203ca885d43f4d02125} 
+\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{MFRC522\+::\+Status\+Code}} MFRC522\+::\+PICC\+\_\+\+WakeupA (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer\+ATQA}{, }\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+Transmits a Wake-\/\+UP command, Type A. Invites PICCs in state IDLE and HALT to go to READY(\texorpdfstring{$\ast$}{*}) and prepare for anticollision or selection. 7 bit frame. Beware\+: When two PICCs are in the field at the same time I often get STATUS\+\_\+\+TIMEOUT -\/ probably due do bad antenna design.
+
+\begin{DoxyReturn}{Returns}
+STATUS\+\_\+\+OK on success, STATUS\+\_\+??? otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em buffer\+ATQA} & The buffer to store the ATQA (Answer to request) in  \\
+\hline
+{\em buffer\+Size} & Buffer size, at least two bytes. Also number of bytes returned if STATUS\+\_\+\+OK. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_m_f_r_c522_affaa7030ec6e5984cce845a8ed6df1b2}\index{MFRC522@{MFRC522}!\_chipSelectPin@{\_chipSelectPin}}
+\index{\_chipSelectPin@{\_chipSelectPin}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{\_chipSelectPin}{\_chipSelectPin}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_affaa7030ec6e5984cce845a8ed6df1b2} 
+byte MFRC522\+::\+\_\+chip\+Select\+Pin\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_m_f_r_c522_a3885cb4bb582de0045cff2829d59006f}\index{MFRC522@{MFRC522}!\_resetPowerDownPin@{\_resetPowerDownPin}}
+\index{\_resetPowerDownPin@{\_resetPowerDownPin}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{\_resetPowerDownPin}{\_resetPowerDownPin}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a3885cb4bb582de0045cff2829d59006f} 
+byte MFRC522\+::\+\_\+reset\+Power\+Down\+Pin\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_m_f_r_c522_a37ca1cca79286c98755584f2256bbe1b}\index{MFRC522@{MFRC522}!FIFO\_SIZE@{FIFO\_SIZE}}
+\index{FIFO\_SIZE@{FIFO\_SIZE}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{FIFO\_SIZE}{FIFO\_SIZE}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a37ca1cca79286c98755584f2256bbe1b} 
+byte MFRC522\+::\+FIFO\+\_\+\+SIZE = 64\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}\index{MFRC522@{MFRC522}!uid@{uid}}
+\index{uid@{uid}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{uid}{uid}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498} 
+\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}} MFRC522\+::uid}
+
+\Hypertarget{class_m_f_r_c522_a41313d0e4a8a674271e64362d24e1d6b}\index{MFRC522@{MFRC522}!UNUSED\_PIN@{UNUSED\_PIN}}
+\index{UNUSED\_PIN@{UNUSED\_PIN}!MFRC522@{MFRC522}}
+\doxysubsubsection{\texorpdfstring{UNUSED\_PIN}{UNUSED\_PIN}}
+{\footnotesize\ttfamily \label{class_m_f_r_c522_a41313d0e4a8a674271e64362d24e1d6b} 
+uint8\+\_\+t MFRC522\+::\+UNUSED\+\_\+\+PIN = UINT8\+\_\+\+MAX\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+CODE/\+RFID/rfid-\/master/src/\mbox{\hyperlink{_m_f_r_c522_8h}{MFRC522.\+h}}\item 
+CODE/\+RFID/rfid-\/master/src/\mbox{\hyperlink{_m_f_r_c522_8cpp}{MFRC522.\+cpp}}\end{DoxyCompactItemize}

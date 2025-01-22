@@ -1,0 +1,96 @@
+\doxysection{CODE/\+WIFI\+\_\+server/esp\+\_\+wifi.ino File Reference}
+\hypertarget{esp__wifi_8ino}{}\label{esp__wifi_8ino}\index{CODE/WIFI\_server/esp\_wifi.ino@{CODE/WIFI\_server/esp\_wifi.ino}}
+{\ttfamily \#include $<$ESP8266\+Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include "{}Thing\+Speak.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{esp__wifi_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{esp__wifi_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{esp__wifi_8ino_a587ba0cb07f02913598610049a3bbb79}{ssid}} = "{}Jarls Galaxy"{}
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{esp__wifi_8ino_a3bef28806edf8f4c8cb82584b7e8c3cb}{pass}} = "{}jarlvep26"{}
+\item 
+Wi\+Fi\+Client \mbox{\hyperlink{esp__wifi_8ino_a323dfc205549b3c13f0a25c1b670708a}{client}}
+\item 
+unsigned long \mbox{\hyperlink{esp__wifi_8ino_ac45cf487b7a438e2176288955a338f25}{channel\+ID}} = 2808163
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{esp__wifi_8ino_a3fe2d87e95035781883990bf38554c9f}{APIKey}} = "{}XS1\+Z5\+OLYIGIWYLPP"{}
+\item 
+const int \mbox{\hyperlink{esp__wifi_8ino_a00ec26ab986577077a8b60ba18b0da52}{post\+Delay}} = 20 \texorpdfstring{$\ast$}{*} 1000
+\item 
+const int \mbox{\hyperlink{esp__wifi_8ino_a2cd9f0d96c9cd0637798de3baa7aee60}{led\+Pin}} = LED\+\_\+\+BUILTIN
+\item 
+bool \mbox{\hyperlink{esp__wifi_8ino_ad43bbd53ee15610b1c213b0b6412d175}{led\+State}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{esp__wifi_8ino_afe461d27b9c48d5921c00d521181f12f}\index{esp\_wifi.ino@{esp\_wifi.ino}!loop@{loop}}
+\index{loop@{loop}!esp\_wifi.ino@{esp\_wifi.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{esp__wifi_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{esp__wifi_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{esp\_wifi.ino@{esp\_wifi.ino}!setup@{setup}}
+\index{setup@{setup}!esp\_wifi.ino@{esp\_wifi.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{esp__wifi_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{esp__wifi_8ino_a3fe2d87e95035781883990bf38554c9f}\index{esp\_wifi.ino@{esp\_wifi.ino}!APIKey@{APIKey}}
+\index{APIKey@{APIKey}!esp\_wifi.ino@{esp\_wifi.ino}}
+\doxysubsubsection{\texorpdfstring{APIKey}{APIKey}}
+{\footnotesize\ttfamily \label{esp__wifi_8ino_a3fe2d87e95035781883990bf38554c9f} 
+const char\texorpdfstring{$\ast$}{*} APIKey = "{}XS1\+Z5\+OLYIGIWYLPP"{}}
+
+\Hypertarget{esp__wifi_8ino_ac45cf487b7a438e2176288955a338f25}\index{esp\_wifi.ino@{esp\_wifi.ino}!channelID@{channelID}}
+\index{channelID@{channelID}!esp\_wifi.ino@{esp\_wifi.ino}}
+\doxysubsubsection{\texorpdfstring{channelID}{channelID}}
+{\footnotesize\ttfamily \label{esp__wifi_8ino_ac45cf487b7a438e2176288955a338f25} 
+unsigned long channel\+ID = 2808163}
+
+\Hypertarget{esp__wifi_8ino_a323dfc205549b3c13f0a25c1b670708a}\index{esp\_wifi.ino@{esp\_wifi.ino}!client@{client}}
+\index{client@{client}!esp\_wifi.ino@{esp\_wifi.ino}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily \label{esp__wifi_8ino_a323dfc205549b3c13f0a25c1b670708a} 
+Wi\+Fi\+Client client}
+
+\Hypertarget{esp__wifi_8ino_a2cd9f0d96c9cd0637798de3baa7aee60}\index{esp\_wifi.ino@{esp\_wifi.ino}!ledPin@{ledPin}}
+\index{ledPin@{ledPin}!esp\_wifi.ino@{esp\_wifi.ino}}
+\doxysubsubsection{\texorpdfstring{ledPin}{ledPin}}
+{\footnotesize\ttfamily \label{esp__wifi_8ino_a2cd9f0d96c9cd0637798de3baa7aee60} 
+const int led\+Pin = LED\+\_\+\+BUILTIN}
+
+\Hypertarget{esp__wifi_8ino_ad43bbd53ee15610b1c213b0b6412d175}\index{esp\_wifi.ino@{esp\_wifi.ino}!ledState@{ledState}}
+\index{ledState@{ledState}!esp\_wifi.ino@{esp\_wifi.ino}}
+\doxysubsubsection{\texorpdfstring{ledState}{ledState}}
+{\footnotesize\ttfamily \label{esp__wifi_8ino_ad43bbd53ee15610b1c213b0b6412d175} 
+bool led\+State = 0}
+
+\Hypertarget{esp__wifi_8ino_a3bef28806edf8f4c8cb82584b7e8c3cb}\index{esp\_wifi.ino@{esp\_wifi.ino}!pass@{pass}}
+\index{pass@{pass}!esp\_wifi.ino@{esp\_wifi.ino}}
+\doxysubsubsection{\texorpdfstring{pass}{pass}}
+{\footnotesize\ttfamily \label{esp__wifi_8ino_a3bef28806edf8f4c8cb82584b7e8c3cb} 
+const char\texorpdfstring{$\ast$}{*} pass = "{}jarlvep26"{}}
+
+\Hypertarget{esp__wifi_8ino_a00ec26ab986577077a8b60ba18b0da52}\index{esp\_wifi.ino@{esp\_wifi.ino}!postDelay@{postDelay}}
+\index{postDelay@{postDelay}!esp\_wifi.ino@{esp\_wifi.ino}}
+\doxysubsubsection{\texorpdfstring{postDelay}{postDelay}}
+{\footnotesize\ttfamily \label{esp__wifi_8ino_a00ec26ab986577077a8b60ba18b0da52} 
+const int post\+Delay = 20 \texorpdfstring{$\ast$}{*} 1000}
+
+\Hypertarget{esp__wifi_8ino_a587ba0cb07f02913598610049a3bbb79}\index{esp\_wifi.ino@{esp\_wifi.ino}!ssid@{ssid}}
+\index{ssid@{ssid}!esp\_wifi.ino@{esp\_wifi.ino}}
+\doxysubsubsection{\texorpdfstring{ssid}{ssid}}
+{\footnotesize\ttfamily \label{esp__wifi_8ino_a587ba0cb07f02913598610049a3bbb79} 
+const char\texorpdfstring{$\ast$}{*} ssid = "{}Jarls Galaxy"{}}
+

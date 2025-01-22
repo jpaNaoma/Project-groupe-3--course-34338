@@ -1,0 +1,353 @@
+\doxysection{MFRC522.\+h}
+\hypertarget{_m_f_r_c522_8h_source}{}\label{_m_f_r_c522_8h_source}\index{CODE/RFID/rfid-\/master/src/MFRC522.h@{CODE/RFID/rfid-\/master/src/MFRC522.h}}
+\mbox{\hyperlink{_m_f_r_c522_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ MFRC522\_h}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ MFRC522\_h}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{require__cpp11_8h}{require\_cpp11.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{deprecated_8h}{deprecated.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ Enable\ integer\ limits}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ \_\_STDC\_LIMIT\_MACROS}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <SPI.h>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ MFRC522\_SPICLOCK}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ MFRC522\_SPICLOCK\ (4000000u)\ }\textcolor{comment}{//\ MFRC522\ accept\ upto\ 10MHz,\ set\ to\ 4MHz.}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ Firmware\ data\ for\ self-\/test}}
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ Reference\ values\ based\ on\ firmware\ version}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ Hint:\ if\ needed,\ you\ can\ remove\ unused\ self-\/test\ data\ to\ save\ flash\ memory}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Version\ 0.0\ (0x90)}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ Philips\ Semiconductors;\ Preliminary\ Specification\ Revision\ 2.0\ -\/\ 01\ August\ 2005;\ 16.1\ self-\/test}}
+\DoxyCodeLine{00031\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{byte}\ MFRC522\_firmware\_referenceV0\_0[]\ \mbox{\hyperlink{_m_f_r_c522_8h_a0e31f2ae877b434ad1cfa62eda66c29b}{PROGMEM}}\ =\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ 0x00,\ 0x87,\ 0x98,\ 0x0f,\ 0x49,\ 0xFF,\ 0x07,\ 0x19,}
+\DoxyCodeLine{00033\ \ \ \ \ 0xBF,\ 0x22,\ 0x30,\ 0x49,\ 0x59,\ 0x63,\ 0xAD,\ 0xCA,}
+\DoxyCodeLine{00034\ \ \ \ \ 0x7F,\ 0xE3,\ 0x4E,\ 0x03,\ 0x5C,\ 0x4E,\ 0x49,\ 0x50,}
+\DoxyCodeLine{00035\ \ \ \ \ 0x47,\ 0x9A,\ 0x37,\ 0x61,\ 0xE7,\ 0xE2,\ 0xC6,\ 0x2E,}
+\DoxyCodeLine{00036\ \ \ \ \ 0x75,\ 0x5A,\ 0xED,\ 0x04,\ 0x3D,\ 0x02,\ 0x4B,\ 0x78,}
+\DoxyCodeLine{00037\ \ \ \ \ 0x32,\ 0xFF,\ 0x58,\ 0x3B,\ 0x7C,\ 0xE9,\ 0x00,\ 0x94,}
+\DoxyCodeLine{00038\ \ \ \ \ 0xB4,\ 0x4A,\ 0x59,\ 0x5B,\ 0xFD,\ 0xC9,\ 0x29,\ 0xDF,}
+\DoxyCodeLine{00039\ \ \ \ \ 0x35,\ 0x96,\ 0x98,\ 0x9E,\ 0x4F,\ 0x30,\ 0x32,\ 0x8D}
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ Version\ 1.0\ (0x91)}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ NXP\ Semiconductors;\ Rev.\ 3.8\ -\/\ 17\ September\ 2014;\ 16.1.1\ self-\/test}}
+\DoxyCodeLine{00043\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{byte}\ MFRC522\_firmware\_referenceV1\_0[]\ \mbox{\hyperlink{_m_f_r_c522_8h_a0e31f2ae877b434ad1cfa62eda66c29b}{PROGMEM}}\ =\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ 0x00,\ 0xC6,\ 0x37,\ 0xD5,\ 0x32,\ 0xB7,\ 0x57,\ 0x5C,}
+\DoxyCodeLine{00045\ \ \ \ \ 0xC2,\ 0xD8,\ 0x7C,\ 0x4D,\ 0xD9,\ 0x70,\ 0xC7,\ 0x73,}
+\DoxyCodeLine{00046\ \ \ \ \ 0x10,\ 0xE6,\ 0xD2,\ 0xAA,\ 0x5E,\ 0xA1,\ 0x3E,\ 0x5A,}
+\DoxyCodeLine{00047\ \ \ \ \ 0x14,\ 0xAF,\ 0x30,\ 0x61,\ 0xC9,\ 0x70,\ 0xDB,\ 0x2E,}
+\DoxyCodeLine{00048\ \ \ \ \ 0x64,\ 0x22,\ 0x72,\ 0xB5,\ 0xBD,\ 0x65,\ 0xF4,\ 0xEC,}
+\DoxyCodeLine{00049\ \ \ \ \ 0x22,\ 0xBC,\ 0xD3,\ 0x72,\ 0x35,\ 0xCD,\ 0xAA,\ 0x41,}
+\DoxyCodeLine{00050\ \ \ \ \ 0x1F,\ 0xA7,\ 0xF3,\ 0x53,\ 0x14,\ 0xDE,\ 0x7E,\ 0x02,}
+\DoxyCodeLine{00051\ \ \ \ \ 0xD9,\ 0x0F,\ 0xB5,\ 0x5E,\ 0x25,\ 0x1D,\ 0x29,\ 0x79}
+\DoxyCodeLine{00052\ \};}
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ Version\ 2.0\ (0x92)}}
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ NXP\ Semiconductors;\ Rev.\ 3.8\ -\/\ 17\ September\ 2014;\ 16.1.1\ self-\/test}}
+\DoxyCodeLine{00055\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{byte}\ MFRC522\_firmware\_referenceV2\_0[]\ \mbox{\hyperlink{_m_f_r_c522_8h_a0e31f2ae877b434ad1cfa62eda66c29b}{PROGMEM}}\ =\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ 0x00,\ 0xEB,\ 0x66,\ 0xBA,\ 0x57,\ 0xBF,\ 0x23,\ 0x95,}
+\DoxyCodeLine{00057\ \ \ \ \ 0xD0,\ 0xE3,\ 0x0D,\ 0x3D,\ 0x27,\ 0x89,\ 0x5C,\ 0xDE,}
+\DoxyCodeLine{00058\ \ \ \ \ 0x9D,\ 0x3B,\ 0xA7,\ 0x00,\ 0x21,\ 0x5B,\ 0x89,\ 0x82,}
+\DoxyCodeLine{00059\ \ \ \ \ 0x51,\ 0x3A,\ 0xEB,\ 0x02,\ 0x0C,\ 0xA5,\ 0x00,\ 0x49,}
+\DoxyCodeLine{00060\ \ \ \ \ 0x7C,\ 0x84,\ 0x4D,\ 0xB3,\ 0xCC,\ 0xD2,\ 0x1B,\ 0x81,}
+\DoxyCodeLine{00061\ \ \ \ \ 0x5D,\ 0x48,\ 0x76,\ 0xD5,\ 0x71,\ 0x61,\ 0x21,\ 0xA9,}
+\DoxyCodeLine{00062\ \ \ \ \ 0x86,\ 0x96,\ 0x83,\ 0x38,\ 0xCF,\ 0x9D,\ 0x5B,\ 0x6D,}
+\DoxyCodeLine{00063\ \ \ \ \ 0xDC,\ 0x15,\ 0xBA,\ 0x3E,\ 0x7D,\ 0x95,\ 0x3B,\ 0x2F}
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ \textcolor{comment}{//\ Clone}}
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ Fudan\ Semiconductor\ FM17522\ (0x88)}}
+\DoxyCodeLine{00067\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{byte}\ FM17522\_firmware\_reference[]\ \mbox{\hyperlink{_m_f_r_c522_8h_a0e31f2ae877b434ad1cfa62eda66c29b}{PROGMEM}}\ =\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ 0x00,\ 0xD6,\ 0x78,\ 0x8C,\ 0xE2,\ 0xAA,\ 0x0C,\ 0x18,}
+\DoxyCodeLine{00069\ \ \ \ \ 0x2A,\ 0xB8,\ 0x7A,\ 0x7F,\ 0xD3,\ 0x6A,\ 0xCF,\ 0x0B,}
+\DoxyCodeLine{00070\ \ \ \ \ 0xB1,\ 0x37,\ 0x63,\ 0x4B,\ 0x69,\ 0xAE,\ 0x91,\ 0xC7,}
+\DoxyCodeLine{00071\ \ \ \ \ 0xC3,\ 0x97,\ 0xAE,\ 0x77,\ 0xF4,\ 0x37,\ 0xD7,\ 0x9B,}
+\DoxyCodeLine{00072\ \ \ \ \ 0x7C,\ 0xF5,\ 0x3C,\ 0x11,\ 0x8F,\ 0x15,\ 0xC3,\ 0xD7,}
+\DoxyCodeLine{00073\ \ \ \ \ 0xC1,\ 0x5B,\ 0x00,\ 0x2A,\ 0xD0,\ 0x75,\ 0xDE,\ 0x9E,}
+\DoxyCodeLine{00074\ \ \ \ \ 0x51,\ 0x64,\ 0xAB,\ 0x3E,\ 0xE9,\ 0x15,\ 0xB5,\ 0xAB,}
+\DoxyCodeLine{00075\ \ \ \ \ 0x56,\ 0x9A,\ 0x98,\ 0x82,\ 0x26,\ 0xEA,\ 0x2A,\ 0x62}
+\DoxyCodeLine{00076\ \};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_m_f_r_c522_a999d0301e800f479e1ecfa2fd06e28c8}{MFRC522}}\ \{}
+\DoxyCodeLine{00079\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//\ Size\ of\ the\ MFRC522\ FIFO}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{byte}\ \mbox{\hyperlink{class_m_f_r_c522_a37ca1cca79286c98755584f2256bbe1b}{FIFO\_SIZE}}\ =\ 64;\ \ \ \ \ \ \textcolor{comment}{//\ The\ FIFO\ is\ 64\ bytes.}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{comment}{//\ Default\ value\ for\ unused\ pin}}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{class_m_f_r_c522_a41313d0e4a8a674271e64362d24e1d6b}{UNUSED\_PIN}}\ =\ UINT8\_MAX;}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{comment}{//\ MFRC522\ registers.\ Described\ in\ chapter\ 9\ of\ the\ datasheet.}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{comment}{//\ When\ using\ SPI\ all\ addresses\ are\ shifted\ one\ bit\ left\ in\ the\ "{}SPI\ address\ byte"{}\ (section\ 8.1.2.3)}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\_Register}}\ :\ \textcolor{keywordtype}{byte}\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Page\ 0:\ Command\ and\ status}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ future\ use}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a0ec37643fa721f476b0cd4359e3c7ef1}{CommandReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x01\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ starts\ and\ stops\ command\ execution}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad956725472615518dfb99f2d7dccc50e}{ComIEnReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x02\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ enable\ and\ disable\ interrupt\ request\ control\ bits}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afb4527cc3e364cce3fe3e62cdcde7da0}{DivIEnReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x03\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ enable\ and\ disable\ interrupt\ request\ control\ bits}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a76b2a615444982e04566784bdb5c9841}{ComIrqReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x04\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ interrupt\ request\ bits}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a95e26d5ece97ae43c34d08797205a356}{DivIrqReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x05\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ interrupt\ request\ bits}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a240aa03a1d9542235b89cdef377a5796}{ErrorReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x06\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ error\ bits\ showing\ the\ error\ status\ of\ the\ last\ command\ executed\ }}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9f8b10dda6868e74226ab7ccca8d5be0}{Status1Reg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x07\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ communication\ status\ bits}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a8fb1a8c28b7a860793831566373f172f}{Status2Reg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x08\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ receiver\ and\ transmitter\ status\ bits}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afdbfd2f397b96d1043c808ec26e80328}{FIFODataReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x09\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ input\ and\ output\ of\ 64\ byte\ FIFO\ buffer}}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a35e5daf30358a0a271dadf50ba6bb4e7}{FIFOLevelReg}}\ \ \ \ \ \ \ \ \ \ \ \ =\ 0x0A\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ number\ of\ bytes\ stored\ in\ the\ FIFO\ buffer}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aee5f7c4d0d34d93e5ac67a47e886b224}{WaterLevelReg}}\ \ \ \ \ \ \ \ \ \ =\ 0x0B\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ level\ for\ FIFO\ underflow\ and\ overflow\ warning}}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9d0df9e03ad6706004b003e20127a76a}{ControlReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x0C\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ miscellaneous\ control\ registers}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aaf8beb5a739cd8bf94b8b5c8d2d109ce}{BitFramingReg}}\ \ \ \ \ \ \ \ \ \ =\ 0x0D\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ adjustments\ for\ bit-\/oriented\ frames}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afafb7ec88f79c9b1f195195497d0ca07}{CollReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x0E\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ bit\ position\ of\ the\ first\ bit-\/collision\ detected\ on\ the\ RF\ interface}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0F\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ future\ use}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Page\ 1:\ Command}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x10\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ future\ use}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a2cd647ad1ac1327d2a632115cd9c4477}{ModeReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x11\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ defines\ general\ modes\ for\ transmitting\ and\ receiving\ }}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad4fe18ad01abc83d4559369226fe7992}{TxModeReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x12\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ defines\ transmission\ data\ rate\ and\ framing}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a7e0d6ae1fdd25be6d80d1b76b2274764}{RxModeReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x13\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ defines\ reception\ data\ rate\ and\ framing}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a73dc12b03f05177a400263e5e2bcf0cc}{TxControlReg}}\ \ \ \ \ \ \ \ \ \ \ \ =\ 0x14\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ controls\ the\ logical\ behavior\ of\ the\ antenna\ driver\ pins\ TX1\ and\ TX2}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac9de33ca066ca9481bd01d5642a0c879}{TxASKReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x15\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ controls\ the\ setting\ of\ the\ transmission\ modulation}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a6cf11e077148648aaec0492317be5177}{TxSelReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x16\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ selects\ the\ internal\ sources\ for\ the\ antenna\ driver}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a669c0c9418d5437566b4b42da326c05f}{RxSelReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x17\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ selects\ internal\ receiver\ settings}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a50d7af7ddc6c606c2b3b9c07df2f22ab}{RxThresholdReg}}\ \ \ \ \ \ \ \ \ \ \ \ =\ 0x18\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ selects\ thresholds\ for\ the\ bit\ decoder}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a37b01e93fff19ca62364e8f4f797a5c4}{DemodReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x19\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ defines\ demodulator\ settings}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1A\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ future\ use}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1B\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ future\ use}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a08eb51f4d08a41ceb4b34189bb712dc7}{MfTxReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x1C\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ controls\ some\ MIFARE\ communication\ transmit\ parameters}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a92fbf63612de021d242465d4685f1754}{MfRxReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x1D\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ controls\ some\ MIFARE\ communication\ receive\ parameters}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1E\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ future\ use}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a23529258de3c3f5655afa2849f547f68}{SerialSpeedReg}}\ \ \ \ \ \ \ \ \ \ \ \ =\ 0x1F\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ selects\ the\ speed\ of\ the\ serial\ UART\ interface}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Page\ 2:\ Configuration}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x20\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ future\ use}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a430d34a355d45528d674ad839a187494}{CRCResultRegH}}\ \ \ \ \ \ \ \ \ \ =\ 0x21\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ shows\ the\ MSB\ and\ LSB\ values\ of\ the\ CRC\ calculation}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a4be013336d7bab727dc0e7e150dcd03c}{CRCResultRegL}}\ \ \ \ \ \ \ \ \ \ =\ 0x22\ <<\ 1,}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x23\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ future\ use}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad69a6a3d883ebfc993fc6fbdbc035508}{ModWidthReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x24\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ controls\ the\ ModWidth\ setting?}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x25\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ future\ use}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a0c99eea491c71e9d2a02bf8a86988adf}{RFCfgReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x26\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ configures\ the\ receiver\ gain}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a2f81aa5f433fa51bb4b41cd8955de794}{GsNReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x27\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ selects\ the\ conductance\ of\ the\ antenna\ driver\ pins\ TX1\ and\ TX2\ for\ modulation\ }}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a02925dc7a230fcf039c597bf8cfa113f}{CWGsPReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x28\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ defines\ the\ conductance\ of\ the\ p-\/driver\ output\ during\ periods\ of\ no\ modulation}}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669acf6ed89766ba2a4e6483b3209b1aa74e}{ModGsPReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x29\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ defines\ the\ conductance\ of\ the\ p-\/driver\ output\ during\ periods\ of\ modulation}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a1ed52e7f88c8bf3fda91bf31bb62afe4}{TModeReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x2A\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ defines\ settings\ for\ the\ internal\ timer}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a88c2ad7cdfb7178ea775c157f4ce5213}{TPrescalerReg}}\ \ \ \ \ \ \ \ \ \ =\ 0x2B\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ the\ lower\ 8\ bits\ of\ the\ TPrescaler\ value.\ The\ 4\ high\ bits\ are\ in\ TModeReg.}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac9a037a517ada62924c47d5e4b62a14c}{TReloadRegH}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x2C\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ defines\ the\ 16-\/bit\ timer\ reload\ value}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669afa3348d82b026de8fecdd18d58e92e2a}{TReloadRegL}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x2D\ <<\ 1,}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ab32cff60c4488866726d4a3930ad8995}{TCounterValueRegH}}\ \ \ \ \ \ =\ 0x2E\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ shows\ the\ 16-\/bit\ timer\ value}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ad70c519d4928690a1d8e7835532ce146}{TCounterValueRegL}}\ \ \ \ \ \ =\ 0x2F\ <<\ 1,}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Page\ 3:\ Test\ Registers}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x30\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ future\ use}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a3fd81beec1ed6566ff1897aac235890f}{TestSel1Reg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x31\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ general\ test\ signal\ configuration}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669ac1053bcb64682eba4a767caaea677807}{TestSel2Reg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x32\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ general\ test\ signal\ configuration}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a62a7871c0d3452a8f642bbea0ca7cb34}{TestPinEnReg}}\ \ \ \ \ \ \ \ \ \ \ \ =\ 0x33\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ enables\ pin\ output\ driver\ on\ pins\ D1\ to\ D7}}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669aa5bb4445abb525ddf46c6efcb21e8811}{TestPinValueReg}}\ \ \ \ \ \ \ \ \ \ =\ 0x34\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ defines\ the\ values\ for\ D1\ to\ D7\ when\ it\ is\ used\ as\ an\ I/O\ bus}}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a37bc0188996dc1ee5332d40961bffb4b}{TestBusReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x35\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ shows\ the\ status\ of\ the\ internal\ test\ bus}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a9583618ad17a8a20b7a735c7677c8e56}{AutoTestReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x36\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ controls\ the\ digital\ self-\/test}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a4281c25cf6743163ed2e2f903cf17ba9}{VersionReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x37\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ shows\ the\ software\ version}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669af1d5966b064c10a672e0064d3ccc55c3}{AnalogTestReg}}\ \ \ \ \ \ \ \ \ \ =\ 0x38\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ controls\ the\ pins\ AUX1\ and\ AUX2}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a25334abb5ff680a530e95e6fb0e48a5b}{TestDAC1Reg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x39\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ defines\ the\ test\ value\ for\ TestDAC1}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a505b75aac860302b2959da7fe607e5eb}{TestDAC2Reg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x3A\ <<\ 1,\ \ \ \ \textcolor{comment}{//\ defines\ the\ test\ value\ for\ TestDAC2}}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669a1042587aeb71f82f884975ca54c8854a}{TestADCReg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x3B\ <<\ 1\ \ \ \ \ \textcolor{comment}{//\ shows\ the\ value\ of\ ADC\ I\ and\ Q\ channels}}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3C\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ production\ tests}}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3D\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ production\ tests}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3E\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ production\ tests}}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3F\ \ \ \ \ \ \ \ \ \ //\ reserved\ for\ production\ tests}}
+\DoxyCodeLine{00159\ \ \ \ \ \};}
+\DoxyCodeLine{00160\ \ \ \ \ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{//\ MFRC522\ commands.\ Described\ in\ chapter\ 10\ of\ the\ datasheet.}}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8}{PCD\_Command}}\ :\ \textcolor{keywordtype}{byte}\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8afe5ffdce88fe7544cbc49f8947df9ad9}{PCD\_Idle}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x00,\ \ \ \ \ \textcolor{comment}{//\ no\ action,\ cancels\ current\ command\ execution}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2f3a9f820c74cb11fabdc00e20c7e2fe}{PCD\_Mem}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x01,\ \ \ \ \ \textcolor{comment}{//\ stores\ 25\ bytes\ into\ the\ internal\ buffer}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a3b9535f3e1eb589c05ca9f22f380647a}{PCD\_GenerateRandomID}}\ \ \ \ =\ 0x02,\ \ \ \ \ \textcolor{comment}{//\ generates\ a\ 10-\/byte\ random\ ID\ number}}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a61d1786d5518a1ad71aac8413941f0ac}{PCD\_CalcCRC}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x03,\ \ \ \ \ \textcolor{comment}{//\ activates\ the\ CRC\ coprocessor\ or\ performs\ a\ self-\/test}}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8af91e3fb8471c0953d69b83b1baf55ae1}{PCD\_Transmit}}\ \ \ \ \ \ \ \ \ \ \ \ =\ 0x04,\ \ \ \ \ \textcolor{comment}{//\ transmits\ data\ from\ the\ FIFO\ buffer}}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2d0df8c6384dd59ad6276510b4fe992d}{PCD\_NoCmdChange}}\ \ \ \ \ \ \ \ \ \ =\ 0x07,\ \ \ \ \ \textcolor{comment}{//\ no\ command\ change,\ can\ be\ used\ to\ modify\ the\ CommandReg\ register\ bits\ without\ affecting\ the\ command,\ for\ example,\ the\ PowerDown\ bit}}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a2ec760e26c27fff63bebee7e9cf844e7}{PCD\_Receive}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x08,\ \ \ \ \ \textcolor{comment}{//\ activates\ the\ receiver\ circuits}}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8af0b7178e7638038db6f8e7016892fafd}{PCD\_Transceive}}\ \ \ \ \ \ \ \ \ \ \ \ =\ 0x0C,\ \ \ \ \ \textcolor{comment}{//\ transmits\ data\ from\ FIFO\ buffer\ to\ antenna\ and\ automatically\ activates\ the\ receiver\ after\ transmission}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a903753278eed75d5d1af2390649ec0c2}{PCD\_MFAuthent}}\ \ \ \ \ \ \ \ \ \ =\ 0x0E,\ \ \ \ \ \textcolor{comment}{//\ performs\ the\ MIFARE\ standard\ authentication\ as\ a\ reader}}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a9a9be34ff94660db8bf098745d9fc1d8a8f54a569867f812163c6a9bc3461d03a}{PCD\_SoftReset}}\ \ \ \ \ \ \ \ \ \ =\ 0x0F\ \ \ \ \ \ \textcolor{comment}{//\ resets\ the\ MFRC522}}
+\DoxyCodeLine{00173\ \ \ \ \ \};}
+\DoxyCodeLine{00174\ \ \ \ \ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{comment}{//\ MFRC522\ RxGain[2:0]\ masks,\ defines\ the\ receiver's\ signal\ voltage\ gain\ factor\ (on\ the\ PCD).}}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{comment}{//\ Described\ in\ 9.3.3.6\ /\ table\ 98\ of\ the\ datasheet\ at\ http://www.nxp.com/documents/data\_sheet/MFRC522.pdf}}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1}{PCD\_RxGain}}\ :\ \textcolor{keywordtype}{byte}\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a4d5e7f6b74ce3912ffdf3305ea263497}{RxGain\_18dB}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x00\ <<\ 4,\ \ \ \ \textcolor{comment}{//\ 000b\ -\/\ 18\ dB,\ minimum}}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1aab1ac5ba97a5e07ff487f1996352a8e6}{RxGain\_23dB}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x01\ <<\ 4,\ \ \ \ \textcolor{comment}{//\ 001b\ -\/\ 23\ dB}}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1ac918bee80fae5c763094684ae08bff82}{RxGain\_18dB\_2}}\ \ \ \ \ \ \ \ \ \ =\ 0x02\ <<\ 4,\ \ \ \ \textcolor{comment}{//\ 010b\ -\/\ 18\ dB,\ it\ seems\ 010b\ is\ a\ duplicate\ for\ 000b}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1ac3b5b39560b326ac91971a41ad167c15}{RxGain\_23dB\_2}}\ \ \ \ \ \ \ \ \ \ =\ 0x03\ <<\ 4,\ \ \ \ \textcolor{comment}{//\ 011b\ -\/\ 23\ dB,\ it\ seems\ 011b\ is\ a\ duplicate\ for\ 001b}}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a721f1c7082ea232324d8660844996158}{RxGain\_33dB}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x04\ <<\ 4,\ \ \ \ \textcolor{comment}{//\ 100b\ -\/\ 33\ dB,\ average,\ and\ typical\ default}}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1af2f57fe1d71de1d17204933084649368}{RxGain\_38dB}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x05\ <<\ 4,\ \ \ \ \textcolor{comment}{//\ 101b\ -\/\ 38\ dB}}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1abc9602260b5733a23e0be7e0c03b1ec9}{RxGain\_43dB}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x06\ <<\ 4,\ \ \ \ \textcolor{comment}{//\ 110b\ -\/\ 43\ dB}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a13227ab5e3143489b0888671d284301b}{RxGain\_48dB}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x07\ <<\ 4,\ \ \ \ \textcolor{comment}{//\ 111b\ -\/\ 48\ dB,\ maximum}}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a97ffca230ea898a78b5734ae0dd44506}{RxGain\_min}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x00\ <<\ 4,\ \ \ \ \textcolor{comment}{//\ 000b\ -\/\ 18\ dB,\ minimum,\ convenience\ for\ RxGain\_18dB}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a2b5b3bd5efdc06adc7c5e190919f5568}{RxGain\_avg}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x04\ <<\ 4,\ \ \ \ \textcolor{comment}{//\ 100b\ -\/\ 33\ dB,\ average,\ convenience\ for\ RxGain\_33dB}}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a5aafab5cf00bb9a8ba4240b97d72cca1a3c59e553655b4e44c10d7deef54576a0}{RxGain\_max}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x07\ <<\ 4\ \ \ \ \ \textcolor{comment}{//\ 111b\ -\/\ 48\ dB,\ maximum,\ convenience\ for\ RxGain\_48dB}}
+\DoxyCodeLine{00189\ \ \ \ \ \};}
+\DoxyCodeLine{00190\ \ \ \ \ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{comment}{//\ Commands\ sent\ to\ the\ PICC.}}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341}{PICC\_Command}}\ :\ \textcolor{keywordtype}{byte}\ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ commands\ used\ by\ the\ PCD\ to\ manage\ communication\ with\ several\ PICCs\ (ISO\ 14443-\/3,\ Type\ A,\ section\ 6.4)}}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341aee3203a0a40028d3059861464198b688}{PICC\_CMD\_REQA}}\ \ \ \ \ \ \ \ \ \ =\ 0x26,\ \ \ \ \ \textcolor{comment}{//\ REQuest\ command,\ Type\ A.\ Invites\ PICCs\ in\ state\ IDLE\ to\ go\ to\ READY\ and\ prepare\ for\ anticollision\ or\ selection.\ 7\ bit\ frame.}}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a9b8fbd1c87d0a6bbe2ef78d192001b3a}{PICC\_CMD\_WUPA}}\ \ \ \ \ \ \ \ \ \ =\ 0x52,\ \ \ \ \ \textcolor{comment}{//\ Wake-\/UP\ command,\ Type\ A.\ Invites\ PICCs\ in\ state\ IDLE\ and\ HALT\ to\ go\ to\ READY(*)\ and\ prepare\ for\ anticollision\ or\ selection.\ 7\ bit\ frame.}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ac532079d67a5325cc5b3505cccf6ac8b}{PICC\_CMD\_CT}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x88,\ \ \ \ \ \textcolor{comment}{//\ Cascade\ Tag.\ Not\ really\ a\ command,\ but\ used\ during\ anti\ collision.}}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341aa9329ee8f72f61f5d73bb893b64c08d0}{PICC\_CMD\_SEL\_CL1}}\ \ \ \ \ \ \ \ =\ 0x93,\ \ \ \ \ \textcolor{comment}{//\ Anti\ collision/Select,\ Cascade\ Level\ 1}}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ab0399cde7122f0bb6dedb584254455c2}{PICC\_CMD\_SEL\_CL2}}\ \ \ \ \ \ \ \ =\ 0x95,\ \ \ \ \ \textcolor{comment}{//\ Anti\ collision/Select,\ Cascade\ Level\ 2}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a291c265bc0a7b3f303b361582b95cc85}{PICC\_CMD\_SEL\_CL3}}\ \ \ \ \ \ \ \ =\ 0x97,\ \ \ \ \ \textcolor{comment}{//\ Anti\ collision/Select,\ Cascade\ Level\ 3}}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ad1e0cf89f52ca1b503297e59c600ca57}{PICC\_CMD\_HLTA}}\ \ \ \ \ \ \ \ \ \ =\ 0x50,\ \ \ \ \ \textcolor{comment}{//\ HaLT\ command,\ Type\ A.\ Instructs\ an\ ACTIVE\ PICC\ to\ go\ to\ state\ HALT.}}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a4201da4f3f107dac7f4a9de95c413288}{PICC\_CMD\_RATS}}\ \ \ \ \ \ \ \ \ \ \ =\ 0xE0,\ \ \ \ \ \textcolor{comment}{//\ Request\ command\ for\ Answer\ To\ Reset.}}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ commands\ used\ for\ MIFARE\ Classic\ (from\ http://www.mouser.com/ds/2/302/MF1S503x-\/89574.pdf,\ Section\ 9)}}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ PCD\_MFAuthent\ to\ authenticate\ access\ to\ a\ sector,\ then\ use\ these\ commands\ to\ read/write/modify\ the\ blocks\ on\ the\ sector.}}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ read/write\ commands\ can\ also\ be\ used\ for\ MIFARE\ Ultralight.}}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a7ab2b1b2d0f0d668dfb3ac53ec7f08d6}{PICC\_CMD\_MF\_AUTH\_KEY\_A}}\ \ \ \ =\ 0x60,\ \ \ \ \ \textcolor{comment}{//\ Perform\ authentication\ with\ Key\ A}}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a7b37f0b5fd5406b4cebe306608e5be3f}{PICC\_CMD\_MF\_AUTH\_KEY\_B}}\ \ \ \ =\ 0x61,\ \ \ \ \ \textcolor{comment}{//\ Perform\ authentication\ with\ Key\ B}}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a2ea95497e35adbc7acbc32c0cb8a574a}{PICC\_CMD\_MF\_READ}}\ \ \ \ \ \ \ \ =\ 0x30,\ \ \ \ \ \textcolor{comment}{//\ Reads\ one\ 16\ byte\ block\ from\ the\ authenticated\ sector\ of\ the\ PICC.\ Also\ used\ for\ MIFARE\ Ultralight.}}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a02ccb020ccc6d49d563f0ed1489d8025}{PICC\_CMD\_MF\_WRITE}}\ \ \ \ \ \ =\ 0xA0,\ \ \ \ \ \textcolor{comment}{//\ Writes\ one\ 16\ byte\ block\ to\ the\ authenticated\ sector\ of\ the\ PICC.\ Called\ "{}COMPATIBILITY\ WRITE"{}\ for\ MIFARE\ Ultralight.}}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a69b2bb1cd2dc0437d6d1fb11eb2796e7}{PICC\_CMD\_MF\_DECREMENT}}\ \ =\ 0xC0,\ \ \ \ \ \textcolor{comment}{//\ Decrements\ the\ contents\ of\ a\ block\ and\ stores\ the\ result\ in\ the\ internal\ data\ register.}}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a454e12c2c815a861a0450d40273f98ef}{PICC\_CMD\_MF\_INCREMENT}}\ \ =\ 0xC1,\ \ \ \ \ \textcolor{comment}{//\ Increments\ the\ contents\ of\ a\ block\ and\ stores\ the\ result\ in\ the\ internal\ data\ register.}}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ab8ed49cb6ed6228acb0c911d60758486}{PICC\_CMD\_MF\_RESTORE}}\ \ \ \ \ \ =\ 0xC2,\ \ \ \ \ \textcolor{comment}{//\ Reads\ the\ contents\ of\ a\ block\ into\ the\ internal\ data\ register.}}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341a5d2309094d9fa17125dc90394e5aeaa0}{PICC\_CMD\_MF\_TRANSFER}}\ \ \ \ =\ 0xB0,\ \ \ \ \ \textcolor{comment}{//\ Writes\ the\ contents\ of\ the\ internal\ data\ register\ to\ a\ block.}}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ commands\ used\ for\ MIFARE\ Ultralight\ (from\ http://www.nxp.com/documents/data\_sheet/MF0ICU1.pdf,\ Section\ 8.6)}}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ PICC\_CMD\_MF\_READ\ and\ PICC\_CMD\_MF\_WRITE\ can\ also\ be\ used\ for\ MIFARE\ Ultralight.}}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_ab57242c2e8a0ca7de1a968c2ccb55341ae8aeabd1ddb73db2f04259c76eaccd8e}{PICC\_CMD\_UL\_WRITE}}\ \ \ \ \ \ =\ 0xA2\ \ \ \ \ \ \textcolor{comment}{//\ Writes\ one\ 4\ byte\ page\ to\ the\ PICC.}}
+\DoxyCodeLine{00216\ \ \ \ \ \};}
+\DoxyCodeLine{00217\ \ \ \ \ }
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{comment}{//\ MIFARE\ constants\ that\ does\ not\ fit\ anywhere\ else}}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eede}{MIFARE\_Misc}}\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eedea3b5fce9bf15481d218872d4584743a1c}{MF\_ACK}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xA,\ \ \ \ \ \ \textcolor{comment}{//\ The\ MIFARE\ Classic\ uses\ a\ 4\ bit\ ACK/NAK.\ Any\ other\ value\ than\ 0xA\ is\ NAK.}}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eedea410c51021b253b680b7ec518ccc818ce}{MF\_KEY\_SIZE}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 6\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ A\ Mifare\ Crypto1\ key\ is\ 6\ bytes.}}
+\DoxyCodeLine{00222\ \ \ \ \ \};}
+\DoxyCodeLine{00223\ \ \ \ \ }
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{comment}{//\ PICC\ types\ we\ can\ detect.\ Remember\ to\ update\ PICC\_GetTypeName()\ if\ you\ add\ more.}}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{comment}{//\ last\ value\ set\ to\ 0xff,\ then\ compiler\ uses\ less\ ram,\ it\ seems\ some\ optimisations\ are\ triggered}}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\_Type}}\ :\ \textcolor{keywordtype}{byte}\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2aceba425b4eb6fd85de456a04e1ce1565}{PICC\_TYPE\_UNKNOWN}}\ \ \ \ \ \ ,}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a5c8147b0f3970c9db0a177cb44592bc7}{PICC\_TYPE\_ISO\_14443\_4}}\ \ ,\ \ \ \textcolor{comment}{//\ PICC\ compliant\ with\ ISO/IEC\ 14443-\/4\ }}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a6d211bf0d6e1bed8f7cdb375e9137360}{PICC\_TYPE\_ISO\_18092}}\ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ PICC\ compliant\ with\ ISO/IEC\ 18092\ (NFC)}}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a58d34a16ef064d4679cae921ecc4b505}{PICC\_TYPE\_MIFARE\_MINI}}\ \ ,\ \ \ \textcolor{comment}{//\ MIFARE\ Classic\ protocol,\ 320\ bytes}}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a948d034c12fd457923b65f929b1538fb}{PICC\_TYPE\_MIFARE\_1K}}\ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ MIFARE\ Classic\ protocol,\ 1KB}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a7d2d0cfef1abe1c457fb72ebcf81fad4}{PICC\_TYPE\_MIFARE\_4K}}\ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ MIFARE\ Classic\ protocol,\ 4KB}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a905f84b972470f7d80ed017817ae300c}{PICC\_TYPE\_MIFARE\_UL}}\ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ MIFARE\ Ultralight\ or\ Ultralight\ C}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a16d53e0355d6214dbe7faf7e37c99002}{PICC\_TYPE\_MIFARE\_PLUS}}\ \ ,\ \ \ \textcolor{comment}{//\ MIFARE\ Plus}}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2ac6d7ac25fc66f5a56bd60d618ba072d4}{PICC\_TYPE\_MIFARE\_DESFIRE}},\ \ \ \textcolor{comment}{//\ MIFARE\ DESFire}}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a3efaeaa8963b24323f274bab4c1eaf8f}{PICC\_TYPE\_TNP3XXX}}\ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ Only\ mentioned\ in\ NXP\ AN\ 10833\ MIFARE\ Type\ Identification\ Procedure}}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2a06fbbb7628bd0c595c58b96547cb8960}{PICC\_TYPE\_NOT\_COMPLETE}}\ \ \ \ =\ 0xff\ \ \textcolor{comment}{//\ SAK\ indicates\ UID\ is\ not\ complete.}}
+\DoxyCodeLine{00238\ \ \ \ \ \};}
+\DoxyCodeLine{00239\ \ \ \ \ }
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{comment}{//\ Return\ codes\ from\ the\ functions\ in\ this\ class.\ Remember\ to\ update\ GetStatusCodeName()\ if\ you\ add\ more.}}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{comment}{//\ last\ value\ set\ to\ 0xff,\ then\ compiler\ uses\ less\ ram,\ it\ seems\ some\ optimisations\ are\ triggered}}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ :\ \textcolor{keywordtype}{byte}\ \{}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a3e34ac777020ad63ef7e346dfb813fe7}{STATUS\_OK}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ Success}}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9aa3b0624b83ba5934292d671c73638a54}{STATUS\_ERROR}}\ \ \ \ \ \ \ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ Error\ in\ communication}}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a2ad63357ec8c38f712ea6fd811056993}{STATUS\_COLLISION}}\ \ \ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ Collission\ detected}}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a1db4d2ed757f0a638e5018fb994071ae}{STATUS\_TIMEOUT}}\ \ \ \ \ \ \ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ Timeout\ in\ communication.}}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a45ce24f67052f4813df3b0f4efaafea8}{STATUS\_NO\_ROOM}}\ \ \ \ \ \ \ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ A\ buffer\ is\ not\ big\ enough.}}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a851307266f677fd58db61540ffe76855}{STATUS\_INTERNAL\_ERROR}}\ \ ,\ \ \ \textcolor{comment}{//\ Internal\ error\ in\ the\ code.\ Should\ not\ happen\ ;-\/)}}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9a88d450f43a9d22ead5db926808599fb5}{STATUS\_INVALID}}\ \ \ \ \ \ \ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ Invalid\ argument.}}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9ac25a91c2efa2dc7638758321374f7566}{STATUS\_CRC\_WRONG}}\ \ \ \ \ \ \ \ ,\ \ \ \textcolor{comment}{//\ The\ CRC\_A\ does\ not\ match}}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9ad14f5e1a33047c90b50fa829cb669109}{STATUS\_MIFARE\_NACK}}\ \ \ \ \ \ \ \ =\ 0xff\ \ \textcolor{comment}{//\ A\ MIFARE\ PICC\ responded\ with\ NAK.}}
+\DoxyCodeLine{00252\ \ \ \ \ \};}
+\DoxyCodeLine{00253\ \ \ \ \ }
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{comment}{//\ A\ struct\ used\ for\ passing\ the\ UID\ of\ a\ PICC.}}
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_m_f_r_c522_1_1_uid_a49c06f93c7748abe00a9ab5899d479b7}{size}};\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ bytes\ in\ the\ UID.\ 4,\ 7\ or\ 10.}}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_m_f_r_c522_1_1_uid_a5581167c1e1c8beb98c44ff86f4fbc52}{uidByte}}[10];}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_m_f_r_c522_1_1_uid_a90aa2fd57a03011252148c2ccdc8875b}{sak}};\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ SAK\ (Select\ acknowledge)\ byte\ returned\ from\ the\ PICC\ after\ successful\ selection.}}
+\DoxyCodeLine{00259\ \ \ \ \ \}\ \mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}};}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{comment}{//\ A\ struct\ used\ for\ passing\ a\ MIFARE\ Crypto1\ key}}
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}\ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key_af4b154f686bfbb46e6ee780ce154cefa}{keyByte}}[\mbox{\hyperlink{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eedea410c51021b253b680b7ec518ccc818ce}{MF\_KEY\_SIZE}}];}
+\DoxyCodeLine{00264\ \ \ \ \ \}\ \mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MIFARE\_Key}};}
+\DoxyCodeLine{00265\ \ \ \ \ }
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{comment}{//\ Member\ variables}}
+\DoxyCodeLine{00267\ \ \ \ \ \mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}}\ \mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Used\ by\ PICC\_ReadCardSerial().}}
+\DoxyCodeLine{00268\ \ \ \ \ }
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{comment}{//\ Functions\ for\ setting\ up\ the\ Arduino}}
+\DoxyCodeLine{00272\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a999d0301e800f479e1ecfa2fd06e28c8}{MFRC522}}();}
+\DoxyCodeLine{00273\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a999d0301e800f479e1ecfa2fd06e28c8}{MFRC522}}(\textcolor{keywordtype}{byte}\ resetPowerDownPin);}
+\DoxyCodeLine{00274\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a999d0301e800f479e1ecfa2fd06e28c8}{MFRC522}}(\textcolor{keywordtype}{byte}\ chipSelectPin,\ \textcolor{keywordtype}{byte}\ resetPowerDownPin);}
+\DoxyCodeLine{00275\ \ \ \ \ }
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{comment}{//\ Basic\ interface\ functions\ for\ communicating\ with\ the\ MFRC522}}
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_aa5e5825adb4c784d8a5a60242c135fb7}{PCD\_WriteRegister}}(\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\_Register}}\ reg,\ \textcolor{keywordtype}{byte}\ value);}
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_aa5e5825adb4c784d8a5a60242c135fb7}{PCD\_WriteRegister}}(\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\_Register}}\ reg,\ \textcolor{keywordtype}{byte}\ count,\ \textcolor{keywordtype}{byte}\ *values);}
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{keywordtype}{byte}\ \mbox{\hyperlink{class_m_f_r_c522_a4289838c6f24f2d62eb8dc0e7a6647d1}{PCD\_ReadRegister}}(\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\_Register}}\ reg);}
+\DoxyCodeLine{00282\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a4289838c6f24f2d62eb8dc0e7a6647d1}{PCD\_ReadRegister}}(\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\_Register}}\ reg,\ \textcolor{keywordtype}{byte}\ count,\ \textcolor{keywordtype}{byte}\ *values,\ \textcolor{keywordtype}{byte}\ rxAlign\ =\ 0);}
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_acebb9a90249419f2a53281c4a13727d1}{PCD\_SetRegisterBitMask}}(\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\_Register}}\ reg,\ \textcolor{keywordtype}{byte}\ mask);}
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a76193f4f8916f688fe2b7976d0fd1dc2}{PCD\_ClearRegisterBitMask}}(\mbox{\hyperlink{class_m_f_r_c522_a3f25eb3421a80d3aeca247c9640f0669}{PCD\_Register}}\ reg,\ \textcolor{keywordtype}{byte}\ mask);}
+\DoxyCodeLine{00285\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a7c65647b1d72b6ee7557797322030643}{PCD\_CalculateCRC}}(\textcolor{keywordtype}{byte}\ *data,\ \textcolor{keywordtype}{byte}\ length,\ \textcolor{keywordtype}{byte}\ *result);}
+\DoxyCodeLine{00286\ \ \ \ \ }
+\DoxyCodeLine{00288\ \ \ \ \ \textcolor{comment}{//\ Functions\ for\ manipulating\ the\ MFRC522}}
+\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_ad681e424fc68a57941bea5702cee05eb}{PCD\_Init}}();}
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_ad681e424fc68a57941bea5702cee05eb}{PCD\_Init}}(\textcolor{keywordtype}{byte}\ resetPowerDownPin);}
+\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_ad681e424fc68a57941bea5702cee05eb}{PCD\_Init}}(\textcolor{keywordtype}{byte}\ chipSelectPin,\ \textcolor{keywordtype}{byte}\ resetPowerDownPin);}
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a9886678ea0a65021bf602cfb110caa15}{PCD\_Reset}}();}
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a044be037a5f172e9cea7d8ce1dcf32e0}{PCD\_AntennaOn}}();}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a2098ebe85700109b20c5026643f1dad7}{PCD\_AntennaOff}}();}
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keywordtype}{byte}\ \mbox{\hyperlink{class_m_f_r_c522_aa02ae994a9ebf146475f46fc538cef28}{PCD\_GetAntennaGain}}();}
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a5ce84dd855f2ae297dd00fafaf62ef78}{PCD\_SetAntennaGain}}(\textcolor{keywordtype}{byte}\ mask);}
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_m_f_r_c522_a25f052c9c340da34128c365662370b01}{PCD\_PerformSelfTest}}();}
+\DoxyCodeLine{00299\ \ \ \ \ }
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{comment}{//\ Power\ control\ functions}}
+\DoxyCodeLine{00303\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a98befa52f6df765779dce6bf616ff009}{PCD\_SoftPowerDown}}();}
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_ad6559531854fba81f7440babe617c90e}{PCD\_SoftPowerUp}}();}
+\DoxyCodeLine{00305\ \ \ \ \ }
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{comment}{//\ Functions\ for\ communicating\ with\ PICCs}}
+\DoxyCodeLine{00309\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_aaa96aa7ec4f95e0835cb758ad0450d74}{PCD\_TransceiveData}}(\textcolor{keywordtype}{byte}\ *sendData,\ \textcolor{keywordtype}{byte}\ sendLen,\ \textcolor{keywordtype}{byte}\ *backData,\ \textcolor{keywordtype}{byte}\ *backLen,\ \textcolor{keywordtype}{byte}\ *validBits\ =\ \textcolor{keyword}{nullptr},\ \textcolor{keywordtype}{byte}\ rxAlign\ =\ 0,\ \textcolor{keywordtype}{bool}\ checkCRC\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00310\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_acb2b1e74bc49fda2704450a684faa845}{PCD\_CommunicateWithPICC}}(\textcolor{keywordtype}{byte}\ command,\ \textcolor{keywordtype}{byte}\ waitIRq,\ \textcolor{keywordtype}{byte}\ *sendData,\ \textcolor{keywordtype}{byte}\ sendLen,\ \textcolor{keywordtype}{byte}\ *backData\ =\ \textcolor{keyword}{nullptr},\ \textcolor{keywordtype}{byte}\ *backLen\ =\ \textcolor{keyword}{nullptr},\ \textcolor{keywordtype}{byte}\ *validBits\ =\ \textcolor{keyword}{nullptr},\ \textcolor{keywordtype}{byte}\ rxAlign\ =\ 0,\ \textcolor{keywordtype}{bool}\ checkCRC\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00311\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a4e0ac6edf5e8f6ade351b009278fbbc7}{PICC\_RequestA}}(\textcolor{keywordtype}{byte}\ *bufferATQA,\ \textcolor{keywordtype}{byte}\ *bufferSize);}
+\DoxyCodeLine{00312\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_ad00a1efcfa6dc203ca885d43f4d02125}{PICC\_WakeupA}}(\textcolor{keywordtype}{byte}\ *bufferATQA,\ \textcolor{keywordtype}{byte}\ *bufferSize);}
+\DoxyCodeLine{00313\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a639d27ac072bc0dfa478d0957591afcc}{PICC\_REQA\_or\_WUPA}}(\textcolor{keywordtype}{byte}\ command,\ \textcolor{keywordtype}{byte}\ *bufferATQA,\ \textcolor{keywordtype}{byte}\ *bufferSize);}
+\DoxyCodeLine{00314\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a7a78c629cb4e1d90cc2d7526b17d6c22}{PICC\_Select}}(\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}}\ *\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}},\ \textcolor{keywordtype}{byte}\ validBits\ =\ 0);}
+\DoxyCodeLine{00315\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a8874921b4ed26c5b73d89c90f76d4933}{PICC\_HaltA}}();}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00318\ \ \ \ \ \textcolor{comment}{//\ Functions\ for\ communicating\ with\ MIFARE\ PICCs}}
+\DoxyCodeLine{00320\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a6c2313c4aa98806cc2bf0e9cca993ec0}{PCD\_Authenticate}}(\textcolor{keywordtype}{byte}\ command,\ \textcolor{keywordtype}{byte}\ blockAddr,\ \mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MIFARE\_Key}}\ *\mbox{\hyperlink{_mifare_classic_value_block_8ino_a74db86b29b9d826a8007113e1fd3d2d4}{key}},\ \mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}}\ *\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}});}
+\DoxyCodeLine{00321\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a24d3ab7b2170fdfa3f0121a7256f12d9}{PCD\_StopCrypto1}}();}
+\DoxyCodeLine{00322\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a6ed93e88913ea104420f3bb4a88cce52}{MIFARE\_Read}}(\textcolor{keywordtype}{byte}\ blockAddr,\ \textcolor{keywordtype}{byte}\ *\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a0dc32c681766921ea9cb757927be6dd3}{buffer}},\ \textcolor{keywordtype}{byte}\ *bufferSize);}
+\DoxyCodeLine{00323\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a0dc5fb05769779ec3ed708bd153706b3}{MIFARE\_Write}}(\textcolor{keywordtype}{byte}\ blockAddr,\ \textcolor{keywordtype}{byte}\ *\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a0dc32c681766921ea9cb757927be6dd3}{buffer}},\ \textcolor{keywordtype}{byte}\ bufferSize);}
+\DoxyCodeLine{00324\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a7053e61540b68e6aa5c6cbea308836c4}{MIFARE\_Ultralight\_Write}}(\textcolor{keywordtype}{byte}\ page,\ \textcolor{keywordtype}{byte}\ *\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a0dc32c681766921ea9cb757927be6dd3}{buffer}},\ \textcolor{keywordtype}{byte}\ bufferSize);}
+\DoxyCodeLine{00325\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_aeab21496c761cdecb29c69f9f3fa6150}{MIFARE\_Decrement}}(\textcolor{keywordtype}{byte}\ blockAddr,\ int32\_t\ delta);}
+\DoxyCodeLine{00326\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_af9566664f23d4d67efd270e42c3dc723}{MIFARE\_Increment}}(\textcolor{keywordtype}{byte}\ blockAddr,\ int32\_t\ delta);}
+\DoxyCodeLine{00327\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a946ba7e7e244f40adcb9f900d8fd3a48}{MIFARE\_Restore}}(\textcolor{keywordtype}{byte}\ blockAddr);}
+\DoxyCodeLine{00328\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a16ee66df69fda8a3065bc9218b45de0b}{MIFARE\_Transfer}}(\textcolor{keywordtype}{byte}\ blockAddr);}
+\DoxyCodeLine{00329\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_ab4009cbdd5150b1b3a62084aa2033807}{MIFARE\_GetValue}}(\textcolor{keywordtype}{byte}\ blockAddr,\ int32\_t\ *value);}
+\DoxyCodeLine{00330\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_af19fc75e9415322fbe89245ed70a784b}{MIFARE\_SetValue}}(\textcolor{keywordtype}{byte}\ blockAddr,\ int32\_t\ value);}
+\DoxyCodeLine{00331\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_acb47eb7a05ae58825b4085efeb7a09bb}{PCD\_NTAG216\_AUTH}}(\textcolor{keywordtype}{byte}\ *passWord,\ \textcolor{keywordtype}{byte}\ pACK[]);}
+\DoxyCodeLine{00332\ \ \ \ \ }
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{comment}{//\ Support\ functions}}
+\DoxyCodeLine{00336\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_aa88d28676b3ffb5985af8db35d39077b}{PCD\_MIFARE\_Transceive}}(\textcolor{keywordtype}{byte}\ *sendData,\ \textcolor{keywordtype}{byte}\ sendLen,\ \textcolor{keywordtype}{bool}\ acceptTimeout\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00337\ \ \ \ \ \textcolor{comment}{//\ old\ function\ used\ too\ much\ memory,\ now\ name\ moved\ to\ flash;\ if\ you\ need\ char,\ copy\ from\ flash\ to\ memory}}
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{comment}{//const\ char\ *GetStatusCodeName(byte\ code);}}
+\DoxyCodeLine{00339\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \_\_FlashStringHelper\ *\mbox{\hyperlink{class_m_f_r_c522_a32f88620ab97f7fef3693280c58cb4bb}{GetStatusCodeName}}(\mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ code);}
+\DoxyCodeLine{00340\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\_Type}}\ \mbox{\hyperlink{class_m_f_r_c522_ac80a18228260bdde07dff5d4ac23bb53}{PICC\_GetType}}(\textcolor{keywordtype}{byte}\ sak);}
+\DoxyCodeLine{00341\ \ \ \ \ \textcolor{comment}{//\ old\ function\ used\ too\ much\ memory,\ now\ name\ moved\ to\ flash;\ if\ you\ need\ char,\ copy\ from\ flash\ to\ memory}}
+\DoxyCodeLine{00342\ \ \ \ \ \textcolor{comment}{//const\ char\ *PICC\_GetTypeName(byte\ type);}}
+\DoxyCodeLine{00343\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \_\_FlashStringHelper\ *\mbox{\hyperlink{class_m_f_r_c522_aae4a482352d4d4b7d7a9714b0b0b7c38}{PICC\_GetTypeName}}(\mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\_Type}}\ type);}
+\DoxyCodeLine{00344\ \ \ \ \ }
+\DoxyCodeLine{00345\ \ \ \ \ \textcolor{comment}{//\ Support\ functions\ for\ debuging}}
+\DoxyCodeLine{00346\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a41c31c6932a59646eeff470c60a4d20d}{PCD\_DumpVersionToSerial}}();}
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a6f324d43c6fbbd0e260b171747186037}{PICC\_DumpToSerial}}(\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}}\ *\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}});}
+\DoxyCodeLine{00348\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a3b9a2c6da6505e0ff7b58c37d7aeff37}{PICC\_DumpDetailsToSerial}}(\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}}\ *\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}});}
+\DoxyCodeLine{00349\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_aafba2e74124efa2d736c1672ea104190}{PICC\_DumpMifareClassicToSerial}}(\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}}\ *\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}},\ \mbox{\hyperlink{class_m_f_r_c522_aafd15c276e5cf3b677885b7b95e71ca2}{PICC\_Type}}\ piccType,\ \mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MIFARE\_Key}}\ *\mbox{\hyperlink{_mifare_classic_value_block_8ino_a74db86b29b9d826a8007113e1fd3d2d4}{key}});}
+\DoxyCodeLine{00350\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_a20c559f09927a7c5f91295f6158e4342}{PICC\_DumpMifareClassicSectorToSerial}}(\mbox{\hyperlink{struct_m_f_r_c522_1_1_uid}{Uid}}\ *\mbox{\hyperlink{class_m_f_r_c522_ad456545d41962dd7f8bd4210f5618498}{uid}},\ \mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MIFARE\_Key}}\ *\mbox{\hyperlink{_mifare_classic_value_block_8ino_a74db86b29b9d826a8007113e1fd3d2d4}{key}},\ \textcolor{keywordtype}{byte}\ sector);}
+\DoxyCodeLine{00351\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_ac148d28877dd577606a28e9e7e4b6809}{PICC\_DumpMifareUltralightToSerial}}();}
+\DoxyCodeLine{00352\ \ \ \ \ }
+\DoxyCodeLine{00353\ \ \ \ \ \textcolor{comment}{//\ Advanced\ functions\ for\ MIFARE}}
+\DoxyCodeLine{00354\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_m_f_r_c522_ab8c712963189654e9bc368be8783e2ab}{MIFARE\_SetAccessBits}}(\textcolor{keywordtype}{byte}\ *accessBitBuffer,\ \textcolor{keywordtype}{byte}\ g0,\ \textcolor{keywordtype}{byte}\ g1,\ \textcolor{keywordtype}{byte}\ g2,\ \textcolor{keywordtype}{byte}\ g3);}
+\DoxyCodeLine{00355\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_m_f_r_c522_a925607adc9382720c222578bd236a9c8}{MIFARE\_OpenUidBackdoor}}(\textcolor{keywordtype}{bool}\ logErrors);}
+\DoxyCodeLine{00356\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_m_f_r_c522_a2bdc18af4952ce99099607c84139b51c}{MIFARE\_SetUid}}(\textcolor{keywordtype}{byte}\ *newUid,\ \textcolor{keywordtype}{byte}\ uidSize,\ \textcolor{keywordtype}{bool}\ logErrors);}
+\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_m_f_r_c522_afcbb15d925cb3bea9f58595111fbca48}{MIFARE\_UnbrickUidSector}}(\textcolor{keywordtype}{bool}\ logErrors);}
+\DoxyCodeLine{00358\ \ \ \ \ }
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{comment}{//\ Convenience\ functions\ -\/\ does\ not\ add\ extra\ functionality}}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_m_f_r_c522_a3adca9d3b455c680ebcde3b74c4e567b}{PICC\_IsNewCardPresent}}();}
+\DoxyCodeLine{00363\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_m_f_r_c522_aab1218c71cec9cc17ee3ac8a683df106}{PICC\_ReadCardSerial}}();}
+\DoxyCodeLine{00364\ \ \ \ \ }
+\DoxyCodeLine{00365\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00366\ \ \ \ \ \textcolor{keywordtype}{byte}\ \mbox{\hyperlink{class_m_f_r_c522_affaa7030ec6e5984cce845a8ed6df1b2}{\_chipSelectPin}};\ \ \ \ \ \ \textcolor{comment}{//\ Arduino\ pin\ connected\ to\ MFRC522's\ SPI\ slave\ select\ input\ (Pin\ 24,\ NSS,\ active\ low)}}
+\DoxyCodeLine{00367\ \ \ \ \ \textcolor{keywordtype}{byte}\ \mbox{\hyperlink{class_m_f_r_c522_a3885cb4bb582de0045cff2829d59006f}{\_resetPowerDownPin}};\ \ \textcolor{comment}{//\ Arduino\ pin\ connected\ to\ MFRC522's\ reset\ and\ power\ down\ input\ (Pin\ 6,\ NRSTPD,\ active\ low)}}
+\DoxyCodeLine{00368\ \ \ \ \ \mbox{\hyperlink{class_m_f_r_c522_a7cb2a1ad6f06e49fddac5c62399c81a9}{StatusCode}}\ \mbox{\hyperlink{class_m_f_r_c522_a86cb4ad38f61b823dfe97103b1b1f9d6}{MIFARE\_TwoStepHelper}}(\textcolor{keywordtype}{byte}\ command,\ \textcolor{keywordtype}{byte}\ blockAddr,\ int32\_t\ data);}
+\DoxyCodeLine{00369\ \};}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

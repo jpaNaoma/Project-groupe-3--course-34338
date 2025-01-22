@@ -1,0 +1,62 @@
+\doxysection{CODE/\+RFID/rfid-\/master/examples/firmware\+\_\+check/firmware\+\_\+check.ino File Reference}
+\hypertarget{firmware__check_8ino}{}\label{firmware__check_8ino}\index{CODE/RFID/rfid-\/master/examples/firmware\_check/firmware\_check.ino@{CODE/RFID/rfid-\/master/examples/firmware\_check/firmware\_check.ino}}
+{\ttfamily \#include $<$SPI.\+h$>$}\newline
+{\ttfamily \#include $<$MFRC522.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{firmware__check_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}~9
+\item 
+\#define \mbox{\hyperlink{firmware__check_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}~10
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{firmware__check_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{firmware__check_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} \mbox{\hyperlink{firmware__check_8ino_ac64ce4c8758bf4e4c9cc49c065a182eb}{mfrc522}} (\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}, \mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{firmware__check_8ino_a36932b0e869e0114f32e255f61306d6b}\index{firmware\_check.ino@{firmware\_check.ino}!RST\_PIN@{RST\_PIN}}
+\index{RST\_PIN@{RST\_PIN}!firmware\_check.ino@{firmware\_check.ino}}
+\doxysubsubsection{\texorpdfstring{RST\_PIN}{RST\_PIN}}
+{\footnotesize\ttfamily \label{firmware__check_8ino_a36932b0e869e0114f32e255f61306d6b} 
+\#define RST\+\_\+\+PIN~9}
+
+\Hypertarget{firmware__check_8ino_a86fac98c9b4c98a3e50fc45440878391}\index{firmware\_check.ino@{firmware\_check.ino}!SS\_PIN@{SS\_PIN}}
+\index{SS\_PIN@{SS\_PIN}!firmware\_check.ino@{firmware\_check.ino}}
+\doxysubsubsection{\texorpdfstring{SS\_PIN}{SS\_PIN}}
+{\footnotesize\ttfamily \label{firmware__check_8ino_a86fac98c9b4c98a3e50fc45440878391} 
+\#define SS\+\_\+\+PIN~10}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{firmware__check_8ino_afe461d27b9c48d5921c00d521181f12f}\index{firmware\_check.ino@{firmware\_check.ino}!loop@{loop}}
+\index{loop@{loop}!firmware\_check.ino@{firmware\_check.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{firmware__check_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{firmware__check_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{firmware\_check.ino@{firmware\_check.ino}!setup@{setup}}
+\index{setup@{setup}!firmware\_check.ino@{firmware\_check.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{firmware__check_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Check firmware only once at startup 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{firmware__check_8ino_ac64ce4c8758bf4e4c9cc49c065a182eb}\index{firmware\_check.ino@{firmware\_check.ino}!mfrc522@{mfrc522}}
+\index{mfrc522@{mfrc522}!firmware\_check.ino@{firmware\_check.ino}}
+\doxysubsubsection{\texorpdfstring{mfrc522}{mfrc522}}
+{\footnotesize\ttfamily \label{firmware__check_8ino_ac64ce4c8758bf4e4c9cc49c065a182eb} 
+\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} mfrc522(\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}, \mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}) (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}}]{}{, }\item[{\mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}}]{}{}\end{DoxyParamCaption})}
+

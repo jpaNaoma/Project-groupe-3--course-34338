@@ -1,0 +1,93 @@
+\doxysection{CODE/\+RFID/\+Servo\+Timer2-\/master/\+Servo\+Timer2-\/master/examples/threeservos/threeservos.ino File Reference}
+\hypertarget{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino}{}\label{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino}\index{CODE/RFID/ServoTimer2-\/master/ServoTimer2-\/master/examples/threeservos/threeservos.ino@{CODE/RFID/ServoTimer2-\/master/ServoTimer2-\/master/examples/threeservos/threeservos.ino}}
+{\ttfamily \#include $<$Servo\+Timer2.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a63496ed39bfe22576cbdee2cca582704}{roll\+Pin}}~2
+\item 
+\#define \mbox{\hyperlink{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_ad20df0862fe7a3fe5bb401b3f1c8334f}{pitch\+Pin}}~3
+\item 
+\#define \mbox{\hyperlink{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a475af4bc8b53b978912e9c5c2ba9a7fa}{yaw\+Pin}}~4
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+int \mbox{\hyperlink{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a4430afc91eab8ad6c4378efcffa25167}{inc\+Pulse}} (int val, int inc)
+\item 
+void \mbox{\hyperlink{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_servo_timer2}{Servo\+Timer2}} \mbox{\hyperlink{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_acdbe2119f16e8814316f5d11aa9f931b}{servo\+Roll}}
+\item 
+\mbox{\hyperlink{class_servo_timer2}{Servo\+Timer2}} \mbox{\hyperlink{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a66ef074a2b494e492041215edcc59084}{servo\+Pitch}}
+\item 
+\mbox{\hyperlink{class_servo_timer2}{Servo\+Timer2}} \mbox{\hyperlink{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a798a400bb2af6d92598417ff949666cb}{servo\+Yaw}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_ad20df0862fe7a3fe5bb401b3f1c8334f}\index{threeservos.ino@{threeservos.ino}!pitchPin@{pitchPin}}
+\index{pitchPin@{pitchPin}!threeservos.ino@{threeservos.ino}}
+\doxysubsubsection{\texorpdfstring{pitchPin}{pitchPin}}
+{\footnotesize\ttfamily \label{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_ad20df0862fe7a3fe5bb401b3f1c8334f} 
+\#define pitch\+Pin~3}
+
+\Hypertarget{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a63496ed39bfe22576cbdee2cca582704}\index{threeservos.ino@{threeservos.ino}!rollPin@{rollPin}}
+\index{rollPin@{rollPin}!threeservos.ino@{threeservos.ino}}
+\doxysubsubsection{\texorpdfstring{rollPin}{rollPin}}
+{\footnotesize\ttfamily \label{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a63496ed39bfe22576cbdee2cca582704} 
+\#define roll\+Pin~2}
+
+\Hypertarget{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a475af4bc8b53b978912e9c5c2ba9a7fa}\index{threeservos.ino@{threeservos.ino}!yawPin@{yawPin}}
+\index{yawPin@{yawPin}!threeservos.ino@{threeservos.ino}}
+\doxysubsubsection{\texorpdfstring{yawPin}{yawPin}}
+{\footnotesize\ttfamily \label{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a475af4bc8b53b978912e9c5c2ba9a7fa} 
+\#define yaw\+Pin~4}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a4430afc91eab8ad6c4378efcffa25167}\index{threeservos.ino@{threeservos.ino}!incPulse@{incPulse}}
+\index{incPulse@{incPulse}!threeservos.ino@{threeservos.ino}}
+\doxysubsubsection{\texorpdfstring{incPulse()}{incPulse()}}
+{\footnotesize\ttfamily \label{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a4430afc91eab8ad6c4378efcffa25167} 
+int inc\+Pulse (\begin{DoxyParamCaption}\item[{int}]{val}{, }\item[{int}]{inc}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_afe461d27b9c48d5921c00d521181f12f}\index{threeservos.ino@{threeservos.ino}!loop@{loop}}
+\index{loop@{loop}!threeservos.ino@{threeservos.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{threeservos.ino@{threeservos.ino}!setup@{setup}}
+\index{setup@{setup}!threeservos.ino@{threeservos.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a66ef074a2b494e492041215edcc59084}\index{threeservos.ino@{threeservos.ino}!servoPitch@{servoPitch}}
+\index{servoPitch@{servoPitch}!threeservos.ino@{threeservos.ino}}
+\doxysubsubsection{\texorpdfstring{servoPitch}{servoPitch}}
+{\footnotesize\ttfamily \label{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a66ef074a2b494e492041215edcc59084} 
+\mbox{\hyperlink{class_servo_timer2}{Servo\+Timer2}} servo\+Pitch}
+
+\Hypertarget{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_acdbe2119f16e8814316f5d11aa9f931b}\index{threeservos.ino@{threeservos.ino}!servoRoll@{servoRoll}}
+\index{servoRoll@{servoRoll}!threeservos.ino@{threeservos.ino}}
+\doxysubsubsection{\texorpdfstring{servoRoll}{servoRoll}}
+{\footnotesize\ttfamily \label{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_acdbe2119f16e8814316f5d11aa9f931b} 
+\mbox{\hyperlink{class_servo_timer2}{Servo\+Timer2}} servo\+Roll}
+
+\Hypertarget{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a798a400bb2af6d92598417ff949666cb}\index{threeservos.ino@{threeservos.ino}!servoYaw@{servoYaw}}
+\index{servoYaw@{servoYaw}!threeservos.ino@{threeservos.ino}}
+\doxysubsubsection{\texorpdfstring{servoYaw}{servoYaw}}
+{\footnotesize\ttfamily \label{_servo_timer2-master_2_servo_timer2-master_2examples_2threeservos_2threeservos_8ino_a798a400bb2af6d92598417ff949666cb} 
+\mbox{\hyperlink{class_servo_timer2}{Servo\+Timer2}} servo\+Yaw}
+

@@ -1,193 +1,162 @@
-#include <RH_ASK.h> // RadioHead library, downloaded from arduino library manager
-#include "SPI.h"
-#include "Servo.h"
-#include <ESP8266WiFi.h>
-#include <ThingSpeak.h>
+/**
+ * @file lock_sensor_radio_alarm_thingspeak_setup.ino
+ * @author Jarl Pallesen, Thomas Niebuhr, Anders Hansen
+ * @version 0.1
+ * @date 2025-01-22
+ * 
+ * @brief This program integrates multiple hardware components to provide a secure locking system with alert mechanisms. 
+ * It uses Wi-Fi to send data to ThingSpeak for monitoring and logging, and employs RF communication for inter-module data transfer.
+ * 
+ * @details The system controls a lock, monitors tilt switch and light sensor states, and triggers an alarm when required.
+ * ThingSpeak is used for real-time monitoring, while the servo and RF receiver manage the lock mechanism.
+ * 
+ * @copyright Copyright (c) 2025
+ */
 
+#include <RH_ASK.h> ///< RadioHead library for RF communication.
+#include "SPI.h" ///< SPI library for serial communication.
+#include "Servo.h" ///< Servo library for controlling the lock mechanism.
+#include <ESP8266WiFi.h> ///< ESP8266 library for Wi-Fi connectivity.
+#include <ThingSpeak.h> ///< ThingSpeak library for cloud-based data logging.
 
-//variables for tilt switch and light sensor
-const int photocellPin = A0; ///< Analog pin connected to the photocell sensor.
-const int tiltPin = 4; ///< Digital pin connected to the tilt switch. D2
+// Variables for tilt switch and light sensor
+const int photocellPin = A0; ///< @brief Analog pin connected to the photocell sensor.
+const int tiltPin = 4; ///< @brief Digital pin connected to the tilt switch.
 
-int prevStateTilt = LOW; ///< Previous state of the tilt switch.
-int counterPhotoTilt = 0; ///< Counter for sensor readings.
-int sumPhotocell = 0; ///< Accumulated photocell sensor values.
+int prevStateTilt = LOW; ///< @brief Previous state of the tilt switch. 0 = LOW, 1 = HIGH.
+int counterPhotoTilt = 0; ///< @brief Counter to aggregate light sensor readings.
+int sumPhotocell = 0; ///< @brief Sum of light sensor readings over a set period.
+int tilt = 0; ///< @brief Tilt state indicator. 0 = normal, 1 = break-in detected.
 
-int tilt=0;
-
-//variables for the door and the alarm system
-int i=0;
-int alarm=0;
-int door=0;
+// Variables for the door and alarm system
+int door = 0; ///< @brief Door state indicator. 0 = locked, 1 = unlocked.
+int alarm = 0; ///< @brief Alarm state indicator. 0 = off, 1 = triggered.
+int i = 0; ///< @brief Counter used in logic processing (unused currently).
 
 // Wi-Fi credentials
-const char* ssid = "Xperia_50";
-const char* password = "detvedjegikke";
+const char* ssid = "Xperia_50"; ///< @brief Wi-Fi network SSID.
+const char* password = "detvedjegikke"; ///< @brief Wi-Fi password.
 
 // ThingSpeak settings
-WiFiClient client; 
-unsigned long channelID = 2814485;
-const char* APIKey = "6COFCODQXCAV6F9O";
-// const int postDelay = 20 * 1000; // 20-second delay
+WiFiClient client; ///< @brief Wi-Fi client object for network communication.
+unsigned long channelID = 2814485; ///< @brief ThingSpeak channel ID for data logging.
+const char* APIKey = "6COFCODQXCAV6F9O"; ///< @brief ThingSpeak API key for authentication.
 
-Servo lock;  
-// Create Amplitude Shift Keying Object
-RH_ASK rf_driver(2000,2);
+Servo lock; ///< @brief Servo object to control the locking mechanism.
 
-// set LCD address, number of columns and rows
-// if you don't know your display address, run an I2C scanner sketch
+// RF communication setup
+RH_ASK rf_driver(2000, 2); ///< @brief RF driver object initialized with a 2000 baud rate and D2 as the data pin.
 
+// Variables for ThingSpeak data posting
+unsigned long previousMillis = 0; ///< @brief Timestamp for the last ThingSpeak data post.
+const unsigned long postDelay = 20000; ///< @brief Delay between ThingSpeak data posts (20 seconds).
+int loopCounter = 0; ///< @brief Counter to track iterations of the main loop.
+
+/**
+ * @brief Sets up the hardware and network components.
+ * 
+ * Initializes RF receiver, servo motor, Wi-Fi connection, and ThingSpeak communication. 
+ * Configures pins for the tilt switch and light sensor.
+ */
 void setup() {
+    rf_driver.init(); ///< @brief Initializes the RF receiver.
+    lock.attach(14); ///< @brief Attaches the servo to pin D5 (GPIO14).
+    Serial.begin(115200); ///< @brief Starts serial communication with the PC.
+    SPI.begin(); ///< @brief Initializes the SPI bus.
 
-  rf_driver.init();      // Initialize receiver
-  lock.attach(14);        //D5 , GPIO14, "14"
-  Serial.begin(115200);  // Initialize serial communications with the PC
-  SPI.begin();           // Init SPI bus
-  delay(4);              // Optional delay. Some board do need more time after init to be ready, see Readme
+    // Connect to Wi-Fi
+    Serial.print("Connecting to WiFi");
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500); ///< @brief Waits for Wi-Fi connection.
+        Serial.print(".");
+    }
+    Serial.println("\nWiFi connected!");
 
-  WiFi.begin(ssid, password);
+    ThingSpeak.begin(client); ///< @brief Initializes ThingSpeak communication.
 
-  // Connect to Wi-Fi
-  Serial.print("Connecting to WiFi");
-    delay(50);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-    delay(50);
-  }
-  Serial.println("\nWiFi connected!");
-
-  // Initialize ThingSpeak
-  ThingSpeak.begin(client);
-
-     // Tilts switch and light sensor
-  pinMode(photocellPin, INPUT);
-  pinMode(tiltPin, INPUT);
-
+    pinMode(photocellPin, INPUT); ///< @brief Configures the photocell pin as an input.
+    pinMode(tiltPin, INPUT); ///< @brief Configures the tilt switch pin as an input.
 }
 
-unsigned long previousMillis = 0;
-const unsigned long postDelay = 20000; // 20 seconds
-int loopCounter = 0; // Global counter to track loop iterations
-
+/**
+ * @brief Main operational loop for the system.
+ * 
+ * Handles RF communication, ThingSpeak data posting, and sensor monitoring. 
+ * Manages lock and alarm states based on RF commands and sensor inputs.
+ */
 void loop() {
+    unsigned long currentMillis = millis(); ///< @brief Captures the current system time in milliseconds.
 
- unsigned long currentMillis = millis();
+    // RF message handling
+    uint8_t buf[25 + 1]; ///< @brief Buffer to store incoming RF data.
+    uint8_t buflen = sizeof(buf); ///< @brief Size of the RF data buffer.
 
-  uint8_t buf[25 + 1];
-  uint8_t buflen = sizeof(buf);
-  // Check if received packet is correct size
-    if (rf_driver.recv(buf, &buflen)){
-      buf[buflen] = '\0'; // will not overflow since we added the +1 
-      // Message received with valid checksum
-      if (strcmp((char*)buf , "LockedNFar") == 0){
+    if (rf_driver.recv(buf, &buflen)) { ///< @brief Checks if RF data is received.
+        buf[buflen] = '\0'; ///< @brief Null-terminates the received string.
         
-        door=0;
-        alarm = 0;
-         Serial.println("Locking the door");
-         delay(50);
-
-        lock.write(160);
-      }
-      else if(strcmp((char*)buf , "LockedNClose") == 0) {
-      Serial.println("Locking the door223");
-      delay(50);
-      door = 0;
-
-      alarm = 0; // Ensure the alarm starts off
-      loopCounter = 0; // Reset the loop counter
-
-      lock.write(160); // Lock the door immediately
-
-    
-}
-      else if(strcmp((char* )buf , "UnlockNFar") == 0){
-        Serial.println("Unlocking the door");
-        delay(50);
-        door=1;
-        alarm = 0;
-        
-        lock.write(0);
-      }
-      else if(strcmp((char* )buf , "UnlockNClose") == 0){
-        Serial.println("Unlocking the door");
-        delay(50);
-
-        door=1;
-        alarm = 0;
-
-        lock.write(0);
-      }
-      else{
-
-        Serial.print("Message Received: ");
-        delay(50);
-        Serial.print((char*)buf);
-        delay(50);
-
-      }
-
+        if (strcmp((char*)buf, "LockedNFar") == 0 || strcmp((char*)buf, "LockedNClose") == 0) {
+            door = 0; ///< @brief Sets the door state to locked.
+            alarm = 0; ///< @brief Turns off the alarm.
+            lock.write(160); ///< @brief Locks the door by rotating the servo to 160°.
+        } else if (strcmp((char*)buf, "UnlockNFar") == 0 || strcmp((char*)buf, "UnlockNClose") == 0) {
+            door = 1; ///< @brief Sets the door state to unlocked.
+            alarm = 0; ///< @brief Turns off the alarm.
+            lock.write(0); ///< @brief Unlocks the door by rotating the servo to 0°.
+        } else {
+            Serial.print("Message Received: ");
+            Serial.print((char*)buf);
+        }
     }
 
-     if (loopCounter < 10) {
-    loopCounter++;
-      } else if (loopCounter == 10 && alarm == 0 && door == 0) {
-    alarm = 1; // Trigger the alarm
-    Serial.println("Alarm goes off");
-    delay(50);
-    loopCounter = 0;
+    // Alarm logic
+    if (loopCounter < 10) {
+        loopCounter++;
+    } else if (loopCounter == 10 && alarm == 0 && door == 0) {
+        alarm = 1; ///< @brief Triggers the alarm if door is locked and loop reaches 10 iterations.
+        Serial.println("Alarm goes off");
+        loopCounter = 0; ///< @brief Resets the loop counter.
     }
 
- // Message handling logic here
-
+    // ThingSpeak data posting
     if (currentMillis - previousMillis >= postDelay) {
         previousMillis = currentMillis;
+        ThingSpeak.setField(1, door); ///< @brief Sets field 1 to the door state.
+        ThingSpeak.setField(2, alarm); ///< @brief Sets field 2 to the alarm state.
+        ThingSpeak.setField(3, tilt); ///< @brief Sets field 3 to the tilt state.
 
-        // Send data to ThingSpeak
-        ThingSpeak.setField(1, door);
-        ThingSpeak.setField(2, alarm);
-        ThingSpeak.setField(3, tilt);
-
-        int response = ThingSpeak.writeFields(channelID, APIKey);
-
+        int response = ThingSpeak.writeFields(channelID, APIKey); ///< @brief Sends data to ThingSpeak.
         if (response == 200) {
             Serial.println("Data sent to ThingSpeak successfully!");
-            delay(50);
         } else {
             Serial.print("Error sending data to ThingSpeak: ");
-            delay(50);
             Serial.println(response);
-            delay(50);
         }
     }
 
-//tilt switch and light sensor
- int valuePhotocell = analogRead(photocellPin); ///< Read the current photocell value.
-    int currentStateTilt = digitalRead(tiltPin);  ///< Read the current tilt switch state.
+    // Sensor monitoring
+    int valuePhotocell = analogRead(photocellPin); ///< @brief Reads the photocell sensor value.
+    int currentStateTilt = digitalRead(tiltPin); ///< @brief Reads the tilt switch state.
 
-    sumPhotocell += valuePhotocell; ///< Add photocell reading to sum.
-    counterPhotoTilt++; ///< Increment reading counter.
+    sumPhotocell += valuePhotocell; ///< @brief Accumulates photocell readings.
+    counterPhotoTilt++; ///< @brief Increments the photocell reading counter.
 
-    if (counterPhotoTilt == 10) { ///< Process data every 10 readings.
-        if ((abs(sumPhotocell) / 10) > 150) { ///< Check for high average changes brightness.
+    if (counterPhotoTilt == 10) {
+        if ((abs(sumPhotocell) / 10) > 150) { ///< @brief Checks for significant brightness changes.
             Serial.println("Be on alert. Someone is looking around the system.");
-            delay(50);
-            tilt=0;
+            tilt = 0; ///< @brief Resets tilt indicator.
         }
 
-        if (currentStateTilt != prevStateTilt) { ///< Detect tilt state changes.
+        if (currentStateTilt != prevStateTilt) { ///< @brief Detects changes in the tilt state.
             if (currentStateTilt == LOW) {
-                Serial.println("Forceful break in"); ///< Alert for a break-in.
-                delay(50);
-                tilt = 1;
+                Serial.println("Forceful break in detected!");
+                tilt = 1; ///< @brief Triggers tilt alert.
             }
-            prevStateTilt = currentStateTilt; ///< Update tilt state.
+            prevStateTilt = currentStateTilt; ///< @brief Updates the tilt state.
         }
 
-        sumPhotocell = 0; ///< Reset photocell sum.
-        counterPhotoTilt = 0; ///< Reset counter.
+        sumPhotocell = 0; ///< @brief Resets the photocell sum.
+        counterPhotoTilt = 0; ///< @brief Resets the counter.
     }
 
-    delay(200); 
-
+    delay(200); ///< @brief Adds a short delay between loop iterations.
 }

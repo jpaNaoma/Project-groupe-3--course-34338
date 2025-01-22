@@ -1,0 +1,367 @@
+\doxysection{CODE/lock\+\_\+sensor\+\_\+radio\+\_\+alarm\+\_\+thingspeak\+\_\+setup.ino File Reference}
+\hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino}{}\label{lock__sensor__radio__alarm__thingspeak__setup_8ino}\index{CODE/lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{CODE/lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+
+
+This program integrates multiple hardware components to provide a secure locking system with alert mechanisms. It uses Wi-\/\+Fi to send data to Thing\+Speak for monitoring and logging, and employs RF communication for inter-\/module data transfer.  
+
+
+{\ttfamily \#include $<$RH\+\_\+\+ASK.\+h$>$}\newline
+{\ttfamily \#include "{}SPI.\+h"{}}\newline
+{\ttfamily \#include "{}Servo.\+h"{}}\newline
+{\ttfamily \#include $<$ESP8266\+Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$Thing\+Speak.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+RH\+\_\+\+ASK \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_abcaa4452b81fc04d4abe5ea07ea75334}{rf\+\_\+driver}} (2000, 2)
+\begin{DoxyCompactList}\small\item\em RF driver object initialized with a 2000 baud rate and D2 as the data pin. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Sets up the hardware and network components. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\begin{DoxyCompactList}\small\item\em Main operational loop for the system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a8450960731db3add8cee227018677825}{photocell\+Pin}} = A0
+\begin{DoxyCompactList}\small\item\em Analog pin connected to the photocell sensor. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a47b0dff059305f50185674797b2731e5}{tilt\+Pin}} = 4
+\begin{DoxyCompactList}\small\item\em Digital pin connected to the tilt switch. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a815a8f8cd56a44135955c48e1f269842}{prev\+State\+Tilt}} = LOW
+\begin{DoxyCompactList}\small\item\em Previous state of the tilt switch. 0 = LOW, 1 = HIGH. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_ae1593812281d8ea606acb5a3c47a6ba0}{counter\+Photo\+Tilt}} = 0
+\begin{DoxyCompactList}\small\item\em Counter to aggregate light sensor readings. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a4a42ca9e43e3eefdabca412627bc8ba7}{sum\+Photocell}} = 0
+\begin{DoxyCompactList}\small\item\em Sum of light sensor readings over a set period. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_ac9b882b085644b5b89b27948fb963771}{tilt}} = 0
+\begin{DoxyCompactList}\small\item\em Tilt state indicator. 0 = normal, 1 = break-\/in detected. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a80788b5999566e5fd5e551c862390530}{door}} = 0
+\begin{DoxyCompactList}\small\item\em Door state indicator. 0 = locked, 1 = unlocked. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a9e3b50e48c757ee5067da367f779839a}{alarm}} = 0
+\begin{DoxyCompactList}\small\item\em Alarm state indicator. 0 = off, 1 = triggered. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_acb559820d9ca11295b4500f179ef6392}{i}} = 0
+\begin{DoxyCompactList}\small\item\em Counter used in logic processing (unused currently). \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a587ba0cb07f02913598610049a3bbb79}{ssid}} = "{}Xperia\+\_\+50"{}
+\begin{DoxyCompactList}\small\item\em Wi-\/\+Fi network SSID. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_aa4a2ebcb494493f648ae1e6975672575}{password}} = "{}detvedjegikke"{}
+\begin{DoxyCompactList}\small\item\em Wi-\/\+Fi password. \end{DoxyCompactList}\item 
+Wi\+Fi\+Client \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a323dfc205549b3c13f0a25c1b670708a}{client}}
+\begin{DoxyCompactList}\small\item\em Wi-\/\+Fi client object for network communication. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_ac45cf487b7a438e2176288955a338f25}{channel\+ID}} = 2814485
+\begin{DoxyCompactList}\small\item\em Thing\+Speak channel ID for data logging. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a3fe2d87e95035781883990bf38554c9f}{APIKey}} = "{}6COFCODQXCAV6\+F9\+O"{}
+\begin{DoxyCompactList}\small\item\em Thing\+Speak API key for authentication. \end{DoxyCompactList}\item 
+Servo \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_adad9499a803515d704d2d755988592cd}{lock}}
+\begin{DoxyCompactList}\small\item\em Servo object to control the locking mechanism. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a86027ad9c9159f02624d136fb63364fe}{previous\+Millis}} = 0
+\begin{DoxyCompactList}\small\item\em Timestamp for the last Thing\+Speak data post. \end{DoxyCompactList}\item 
+const unsigned long \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a7d81bed69a26114de6cde86ad1746f6e}{post\+Delay}} = 20000
+\begin{DoxyCompactList}\small\item\em Delay between Thing\+Speak data posts (20 seconds). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{lock__sensor__radio__alarm__thingspeak__setup_8ino_a86262625e3099f82a3c01b1c9fb26e25}{loop\+Counter}} = 0
+\begin{DoxyCompactList}\small\item\em Counter to track iterations of the main loop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This program integrates multiple hardware components to provide a secure locking system with alert mechanisms. It uses Wi-\/\+Fi to send data to Thing\+Speak for monitoring and logging, and employs RF communication for inter-\/module data transfer. 
+
+\begin{DoxyAuthor}{Author}
+Jarl Pallesen, Thomas Niebuhr, Anders Hansen 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/22
+\end{DoxyDate}
+
+
+The system controls a lock, monitors tilt switch and light sensor states, and triggers an alarm when required. Thing\+Speak is used for real-\/time monitoring, while the servo and RF receiver manage the lock mechanism.
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_afe461d27b9c48d5921c00d521181f12f}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!loop@{loop}}
+\index{loop@{loop}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Main operational loop for the system. 
+
+Handles RF communication, Thing\+Speak data posting, and sensor monitoring. Manages lock and alarm states based on RF commands and sensor inputs. \texorpdfstring{$<$}{<}Captures the current system time in milliseconds.
+
+\texorpdfstring{$<$}{<}Buffer to store incoming RF data.
+
+\texorpdfstring{$<$}{<}Size of the RF data buffer.
+
+\texorpdfstring{$<$}{<}Checks if RF data is received.
+
+\texorpdfstring{$<$}{<}Null-\/terminates the received string.
+
+\texorpdfstring{$<$}{<}Sets the door state to locked.
+
+\texorpdfstring{$<$}{<}Turns off the alarm.
+
+\texorpdfstring{$<$}{<}Locks the door by rotating the servo to 160°.
+
+\texorpdfstring{$<$}{<}Sets the door state to unlocked.
+
+\texorpdfstring{$<$}{<}Turns off the alarm.
+
+\texorpdfstring{$<$}{<}Unlocks the door by rotating the servo to 0°.
+
+\texorpdfstring{$<$}{<}Triggers the alarm if door is locked and loop reaches 10 iterations.
+
+\texorpdfstring{$<$}{<}Resets the loop counter.
+
+\texorpdfstring{$<$}{<}Sets field 1 to the door state.
+
+\texorpdfstring{$<$}{<}Sets field 2 to the alarm state.
+
+\texorpdfstring{$<$}{<}Sets field 3 to the tilt state.
+
+\texorpdfstring{$<$}{<}Sends data to Thing\+Speak.
+
+\texorpdfstring{$<$}{<}Reads the photocell sensor value.
+
+\texorpdfstring{$<$}{<}Reads the tilt switch state.
+
+\texorpdfstring{$<$}{<}Accumulates photocell readings.
+
+\texorpdfstring{$<$}{<}Increments the photocell reading counter.
+
+\texorpdfstring{$<$}{<}Checks for significant brightness changes.
+
+\texorpdfstring{$<$}{<}Resets tilt indicator.
+
+\texorpdfstring{$<$}{<}Detects changes in the tilt state.
+
+\texorpdfstring{$<$}{<}Triggers tilt alert.
+
+\texorpdfstring{$<$}{<}Updates the tilt state.
+
+\texorpdfstring{$<$}{<}Resets the photocell sum.
+
+\texorpdfstring{$<$}{<}Resets the counter.
+
+\texorpdfstring{$<$}{<}Adds a short delay between loop iterations.\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_abcaa4452b81fc04d4abe5ea07ea75334}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!rf\_driver@{rf\_driver}}
+\index{rf\_driver@{rf\_driver}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{rf\_driver()}{rf\_driver()}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_abcaa4452b81fc04d4abe5ea07ea75334} 
+RH\+\_\+\+ASK rf\+\_\+driver (\begin{DoxyParamCaption}\item[{2000}]{}{, }\item[{2}]{}{}\end{DoxyParamCaption})}
+
+
+
+RF driver object initialized with a 2000 baud rate and D2 as the data pin. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!setup@{setup}}
+\index{setup@{setup}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Sets up the hardware and network components. 
+
+Initializes RF receiver, servo motor, Wi-\/\+Fi connection, and Thing\+Speak communication. Configures pins for the tilt switch and light sensor. \texorpdfstring{$<$}{<}Initializes the RF receiver.
+
+\texorpdfstring{$<$}{<}Attaches the servo to pin D5 (GPIO14).
+
+\texorpdfstring{$<$}{<}Starts serial communication with the PC.
+
+\texorpdfstring{$<$}{<}Initializes the SPI bus.
+
+\texorpdfstring{$<$}{<}Waits for Wi-\/\+Fi connection.
+
+\texorpdfstring{$<$}{<}Initializes Thing\+Speak communication.
+
+\texorpdfstring{$<$}{<}Configures the photocell pin as an input.
+
+\texorpdfstring{$<$}{<}Configures the tilt switch pin as an input.
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a9e3b50e48c757ee5067da367f779839a}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!alarm@{alarm}}
+\index{alarm@{alarm}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{alarm}{alarm}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a9e3b50e48c757ee5067da367f779839a} 
+int alarm = 0}
+
+
+
+Alarm state indicator. 0 = off, 1 = triggered. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a3fe2d87e95035781883990bf38554c9f}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!APIKey@{APIKey}}
+\index{APIKey@{APIKey}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{APIKey}{APIKey}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a3fe2d87e95035781883990bf38554c9f} 
+const char\texorpdfstring{$\ast$}{*} APIKey = "{}6COFCODQXCAV6\+F9\+O"{}}
+
+
+
+Thing\+Speak API key for authentication. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_ac45cf487b7a438e2176288955a338f25}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!channelID@{channelID}}
+\index{channelID@{channelID}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{channelID}{channelID}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_ac45cf487b7a438e2176288955a338f25} 
+unsigned long channel\+ID = 2814485}
+
+
+
+Thing\+Speak channel ID for data logging. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a323dfc205549b3c13f0a25c1b670708a}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!client@{client}}
+\index{client@{client}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a323dfc205549b3c13f0a25c1b670708a} 
+Wi\+Fi\+Client client}
+
+
+
+Wi-\/\+Fi client object for network communication. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_ae1593812281d8ea606acb5a3c47a6ba0}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!counterPhotoTilt@{counterPhotoTilt}}
+\index{counterPhotoTilt@{counterPhotoTilt}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{counterPhotoTilt}{counterPhotoTilt}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_ae1593812281d8ea606acb5a3c47a6ba0} 
+int counter\+Photo\+Tilt = 0}
+
+
+
+Counter to aggregate light sensor readings. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a80788b5999566e5fd5e551c862390530}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!door@{door}}
+\index{door@{door}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{door}{door}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a80788b5999566e5fd5e551c862390530} 
+int door = 0}
+
+
+
+Door state indicator. 0 = locked, 1 = unlocked. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_acb559820d9ca11295b4500f179ef6392}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!i@{i}}
+\index{i@{i}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{i}{i}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_acb559820d9ca11295b4500f179ef6392} 
+int i = 0}
+
+
+
+Counter used in logic processing (unused currently). 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_adad9499a803515d704d2d755988592cd}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!lock@{lock}}
+\index{lock@{lock}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{lock}{lock}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_adad9499a803515d704d2d755988592cd} 
+Servo lock}
+
+
+
+Servo object to control the locking mechanism. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a86262625e3099f82a3c01b1c9fb26e25}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!loopCounter@{loopCounter}}
+\index{loopCounter@{loopCounter}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{loopCounter}{loopCounter}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a86262625e3099f82a3c01b1c9fb26e25} 
+int loop\+Counter = 0}
+
+
+
+Counter to track iterations of the main loop. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_aa4a2ebcb494493f648ae1e6975672575}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!password@{password}}
+\index{password@{password}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{password}{password}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_aa4a2ebcb494493f648ae1e6975672575} 
+const char\texorpdfstring{$\ast$}{*} password = "{}detvedjegikke"{}}
+
+
+
+Wi-\/\+Fi password. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a8450960731db3add8cee227018677825}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!photocellPin@{photocellPin}}
+\index{photocellPin@{photocellPin}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{photocellPin}{photocellPin}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a8450960731db3add8cee227018677825} 
+const int photocell\+Pin = A0}
+
+
+
+Analog pin connected to the photocell sensor. 
+
+\texorpdfstring{$<$}{<} Radio\+Head library for RF communication. SPI library for serial communication. Servo library for controlling the lock mechanism. ESP8266 library for Wi-\/\+Fi connectivity. Thing\+Speak library for cloud-\/based data logging. \Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a7d81bed69a26114de6cde86ad1746f6e}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!postDelay@{postDelay}}
+\index{postDelay@{postDelay}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{postDelay}{postDelay}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a7d81bed69a26114de6cde86ad1746f6e} 
+const unsigned long post\+Delay = 20000}
+
+
+
+Delay between Thing\+Speak data posts (20 seconds). 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a86027ad9c9159f02624d136fb63364fe}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!previousMillis@{previousMillis}}
+\index{previousMillis@{previousMillis}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{previousMillis}{previousMillis}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a86027ad9c9159f02624d136fb63364fe} 
+unsigned long previous\+Millis = 0}
+
+
+
+Timestamp for the last Thing\+Speak data post. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a815a8f8cd56a44135955c48e1f269842}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!prevStateTilt@{prevStateTilt}}
+\index{prevStateTilt@{prevStateTilt}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{prevStateTilt}{prevStateTilt}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a815a8f8cd56a44135955c48e1f269842} 
+int prev\+State\+Tilt = LOW}
+
+
+
+Previous state of the tilt switch. 0 = LOW, 1 = HIGH. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a587ba0cb07f02913598610049a3bbb79}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!ssid@{ssid}}
+\index{ssid@{ssid}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{ssid}{ssid}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a587ba0cb07f02913598610049a3bbb79} 
+const char\texorpdfstring{$\ast$}{*} ssid = "{}Xperia\+\_\+50"{}}
+
+
+
+Wi-\/\+Fi network SSID. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a4a42ca9e43e3eefdabca412627bc8ba7}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!sumPhotocell@{sumPhotocell}}
+\index{sumPhotocell@{sumPhotocell}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{sumPhotocell}{sumPhotocell}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a4a42ca9e43e3eefdabca412627bc8ba7} 
+int sum\+Photocell = 0}
+
+
+
+Sum of light sensor readings over a set period. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_ac9b882b085644b5b89b27948fb963771}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!tilt@{tilt}}
+\index{tilt@{tilt}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{tilt}{tilt}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_ac9b882b085644b5b89b27948fb963771} 
+int tilt = 0}
+
+
+
+Tilt state indicator. 0 = normal, 1 = break-\/in detected. 
+
+\Hypertarget{lock__sensor__radio__alarm__thingspeak__setup_8ino_a47b0dff059305f50185674797b2731e5}\index{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}!tiltPin@{tiltPin}}
+\index{tiltPin@{tiltPin}!lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino@{lock\_sensor\_radio\_alarm\_thingspeak\_setup.ino}}
+\doxysubsubsection{\texorpdfstring{tiltPin}{tiltPin}}
+{\footnotesize\ttfamily \label{lock__sensor__radio__alarm__thingspeak__setup_8ino_a47b0dff059305f50185674797b2731e5} 
+const int tilt\+Pin = 4}
+
+
+
+Digital pin connected to the tilt switch. 
+

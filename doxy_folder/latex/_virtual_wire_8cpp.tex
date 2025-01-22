@@ -1,0 +1,163 @@
+\doxysection{CODE/\+Radio\+Test/\+Transmitter/\+Virtual\+Wire-\/master/\+Virtual\+Wire-\/master/\+Virtual\+Wire.cpp File Reference}
+\hypertarget{_virtual_wire_8cpp}{}\label{_virtual_wire_8cpp}\index{CODE/RadioTest/Transmitter/VirtualWire-\/master/VirtualWire-\/master/VirtualWire.cpp@{CODE/RadioTest/Transmitter/VirtualWire-\/master/VirtualWire-\/master/VirtualWire.cpp}}
+{\ttfamily \#include "{}WProgram.\+h"{}}\newline
+{\ttfamily \#include "{}Virtual\+Wire.\+h"{}}\newline
+{\ttfamily \#include $<$util/crc16.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{_virtual_wire_8cpp_aaf43bad86ec479208b4071c4a5816b6d}{vw\+\_\+crc}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}ptr, uint8\+\_\+t count)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{_virtual_wire_8cpp_ace286b4c75ee0a2e05f1ba33dd767c24}{vw\+\_\+symbol\+\_\+6to4}} (uint8\+\_\+t symbol)
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_ad271843c34028a27831703d561fc1eab}{vw\+\_\+set\+\_\+tx\+\_\+pin}} (uint8\+\_\+t pin)
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_ae62b601260ae59e7e83c1e63ae0c064b}{vw\+\_\+set\+\_\+rx\+\_\+pin}} (uint8\+\_\+t pin)
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_aca84a8cff0d24bc736ab2ce327e6c517}{vw\+\_\+set\+\_\+ptt\+\_\+pin}} (uint8\+\_\+t pin)
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_afed4337c63b2e784774c415120db3d02}{vw\+\_\+set\+\_\+ptt\+\_\+inverted}} (uint8\+\_\+t inverted)
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_a5a072285815a3ab6e9e824f701e0e1fd}{vw\+\_\+pll}} ()
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_a9f9d92761cce2886e5ca3d194374b220}{vw\+\_\+setup}} (uint16\+\_\+t speed)
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_ab00794375b4a031838daa7688c414d74}{vw\+\_\+tx\+\_\+start}} ()
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_af4d82afaa75245c0c7746eb51bcf1653}{vw\+\_\+tx\+\_\+stop}} ()
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_a679b3f838975d923d083446fed38ba28}{vw\+\_\+rx\+\_\+start}} ()
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_af4b28feb2cbe309a45ac46bf6a5f6c16}{vw\+\_\+rx\+\_\+stop}} ()
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_a32419e4ef39d639ef06978bb496f1d0c}{vw\+\_\+wait\+\_\+tx}} ()
+\item 
+void \mbox{\hyperlink{_virtual_wire_8cpp_a9845b089ad98c22fc472ced943ba0a83}{vw\+\_\+wait\+\_\+rx}} ()
+\item 
+uint8\+\_\+t \mbox{\hyperlink{_virtual_wire_8cpp_abe6b9ab869f0367aca1b0fa4237070f8}{vw\+\_\+wait\+\_\+rx\+\_\+max}} (unsigned long milliseconds)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{_virtual_wire_8cpp_afe452c485bfe43b1c9088f66ec3b63b2}{vw\+\_\+send}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint8\+\_\+t len)
+\item 
+\mbox{\hyperlink{_virtual_wire_8cpp_aec4a52c5480f4a10feedda6a96dd7196}{SIGNAL}} (TIMER1\+\_\+\+COMPA\+\_\+vect)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{_virtual_wire_8cpp_adda86a5d05bbe2c16a34d498ce954fba}{vw\+\_\+have\+\_\+message}} ()
+\item 
+uint8\+\_\+t \mbox{\hyperlink{_virtual_wire_8cpp_a30fe9c9ebfe7e52ca713a1785cd3aac9}{vw\+\_\+get\+\_\+message}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buf, uint8\+\_\+t \texorpdfstring{$\ast$}{*}len)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_virtual_wire_8cpp_aec4a52c5480f4a10feedda6a96dd7196}\index{VirtualWire.cpp@{VirtualWire.cpp}!SIGNAL@{SIGNAL}}
+\index{SIGNAL@{SIGNAL}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{SIGNAL()}{SIGNAL()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_aec4a52c5480f4a10feedda6a96dd7196} 
+SIGNAL (\begin{DoxyParamCaption}\item[{TIMER1\+\_\+\+COMPA\+\_\+vect}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_aaf43bad86ec479208b4071c4a5816b6d}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_crc@{vw\_crc}}
+\index{vw\_crc@{vw\_crc}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_crc()}{vw\_crc()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_aaf43bad86ec479208b4071c4a5816b6d} 
+uint16\+\_\+t vw\+\_\+crc (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{ptr}{, }\item[{uint8\+\_\+t}]{count}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_a30fe9c9ebfe7e52ca713a1785cd3aac9}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_get\_message@{vw\_get\_message}}
+\index{vw\_get\_message@{vw\_get\_message}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_get\_message()}{vw\_get\_message()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_a30fe9c9ebfe7e52ca713a1785cd3aac9} 
+uint8\+\_\+t vw\+\_\+get\+\_\+message (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{len}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_adda86a5d05bbe2c16a34d498ce954fba}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_have\_message@{vw\_have\_message}}
+\index{vw\_have\_message@{vw\_have\_message}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_have\_message()}{vw\_have\_message()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_adda86a5d05bbe2c16a34d498ce954fba} 
+uint8\+\_\+t vw\+\_\+have\+\_\+message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_a5a072285815a3ab6e9e824f701e0e1fd}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_pll@{vw\_pll}}
+\index{vw\_pll@{vw\_pll}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_pll()}{vw\_pll()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_a5a072285815a3ab6e9e824f701e0e1fd} 
+void vw\+\_\+pll (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_a679b3f838975d923d083446fed38ba28}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_rx\_start@{vw\_rx\_start}}
+\index{vw\_rx\_start@{vw\_rx\_start}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_rx\_start()}{vw\_rx\_start()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_a679b3f838975d923d083446fed38ba28} 
+void vw\+\_\+rx\+\_\+start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_af4b28feb2cbe309a45ac46bf6a5f6c16}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_rx\_stop@{vw\_rx\_stop}}
+\index{vw\_rx\_stop@{vw\_rx\_stop}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_rx\_stop()}{vw\_rx\_stop()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_af4b28feb2cbe309a45ac46bf6a5f6c16} 
+void vw\+\_\+rx\+\_\+stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_afe452c485bfe43b1c9088f66ec3b63b2}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_send@{vw\_send}}
+\index{vw\_send@{vw\_send}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_send()}{vw\_send()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_afe452c485bfe43b1c9088f66ec3b63b2} 
+uint8\+\_\+t vw\+\_\+send (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{uint8\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_afed4337c63b2e784774c415120db3d02}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_set\_ptt\_inverted@{vw\_set\_ptt\_inverted}}
+\index{vw\_set\_ptt\_inverted@{vw\_set\_ptt\_inverted}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_set\_ptt\_inverted()}{vw\_set\_ptt\_inverted()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_afed4337c63b2e784774c415120db3d02} 
+void vw\+\_\+set\+\_\+ptt\+\_\+inverted (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{inverted}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_aca84a8cff0d24bc736ab2ce327e6c517}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_set\_ptt\_pin@{vw\_set\_ptt\_pin}}
+\index{vw\_set\_ptt\_pin@{vw\_set\_ptt\_pin}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_set\_ptt\_pin()}{vw\_set\_ptt\_pin()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_aca84a8cff0d24bc736ab2ce327e6c517} 
+void vw\+\_\+set\+\_\+ptt\+\_\+pin (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{pin}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_ae62b601260ae59e7e83c1e63ae0c064b}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_set\_rx\_pin@{vw\_set\_rx\_pin}}
+\index{vw\_set\_rx\_pin@{vw\_set\_rx\_pin}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_set\_rx\_pin()}{vw\_set\_rx\_pin()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_ae62b601260ae59e7e83c1e63ae0c064b} 
+void vw\+\_\+set\+\_\+rx\+\_\+pin (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{pin}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_ad271843c34028a27831703d561fc1eab}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_set\_tx\_pin@{vw\_set\_tx\_pin}}
+\index{vw\_set\_tx\_pin@{vw\_set\_tx\_pin}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_set\_tx\_pin()}{vw\_set\_tx\_pin()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_ad271843c34028a27831703d561fc1eab} 
+void vw\+\_\+set\+\_\+tx\+\_\+pin (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{pin}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_a9f9d92761cce2886e5ca3d194374b220}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_setup@{vw\_setup}}
+\index{vw\_setup@{vw\_setup}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_setup()}{vw\_setup()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_a9f9d92761cce2886e5ca3d194374b220} 
+void vw\+\_\+setup (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{speed}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_ace286b4c75ee0a2e05f1ba33dd767c24}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_symbol\_6to4@{vw\_symbol\_6to4}}
+\index{vw\_symbol\_6to4@{vw\_symbol\_6to4}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_symbol\_6to4()}{vw\_symbol\_6to4()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_ace286b4c75ee0a2e05f1ba33dd767c24} 
+uint8\+\_\+t vw\+\_\+symbol\+\_\+6to4 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{symbol}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_ab00794375b4a031838daa7688c414d74}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_tx\_start@{vw\_tx\_start}}
+\index{vw\_tx\_start@{vw\_tx\_start}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_tx\_start()}{vw\_tx\_start()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_ab00794375b4a031838daa7688c414d74} 
+void vw\+\_\+tx\+\_\+start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_af4d82afaa75245c0c7746eb51bcf1653}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_tx\_stop@{vw\_tx\_stop}}
+\index{vw\_tx\_stop@{vw\_tx\_stop}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_tx\_stop()}{vw\_tx\_stop()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_af4d82afaa75245c0c7746eb51bcf1653} 
+void vw\+\_\+tx\+\_\+stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_a9845b089ad98c22fc472ced943ba0a83}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_wait\_rx@{vw\_wait\_rx}}
+\index{vw\_wait\_rx@{vw\_wait\_rx}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_wait\_rx()}{vw\_wait\_rx()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_a9845b089ad98c22fc472ced943ba0a83} 
+void vw\+\_\+wait\+\_\+rx (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_abe6b9ab869f0367aca1b0fa4237070f8}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_wait\_rx\_max@{vw\_wait\_rx\_max}}
+\index{vw\_wait\_rx\_max@{vw\_wait\_rx\_max}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_wait\_rx\_max()}{vw\_wait\_rx\_max()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_abe6b9ab869f0367aca1b0fa4237070f8} 
+uint8\+\_\+t vw\+\_\+wait\+\_\+rx\+\_\+max (\begin{DoxyParamCaption}\item[{unsigned long}]{milliseconds}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_virtual_wire_8cpp_a32419e4ef39d639ef06978bb496f1d0c}\index{VirtualWire.cpp@{VirtualWire.cpp}!vw\_wait\_tx@{vw\_wait\_tx}}
+\index{vw\_wait\_tx@{vw\_wait\_tx}!VirtualWire.cpp@{VirtualWire.cpp}}
+\doxysubsubsection{\texorpdfstring{vw\_wait\_tx()}{vw\_wait\_tx()}}
+{\footnotesize\ttfamily \label{_virtual_wire_8cpp_a32419e4ef39d639ef06978bb496f1d0c} 
+void vw\+\_\+wait\+\_\+tx (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+

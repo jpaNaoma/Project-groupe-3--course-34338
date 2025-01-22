@@ -1,4 +1,28 @@
 var searchData=
 [
-  ['readme_2emd_0',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]]
+  ['c_20mf0icu2_20_3a_0',['MIFARE Ultralight C (MF0ICU2):',['../md__c_o_d_e_2_r_f_i_d_2rfid-master_2doc_2_p_i_c_c_memory_layout.html#autotoc_md6',1,'']]],
+  ['changeuid_2eino_1',['ChangeUID.ino',['../_change_u_i_d_8ino.html',1,'']]],
+  ['channelcount_2',['ChannelCount',['../_servo_timer2_8cpp.html#ae7fa221e0d4e5055884c79930050361a',1,'ServoTimer2.cpp']]],
+  ['channelid_3',['channelID',['../lock__sensor__radio__alarm__thingspeak__setup_8ino.html#ac45cf487b7a438e2176288955a338f25',1,'channelID:&#160;lock_sensor_radio_alarm_thingspeak_setup.ino'],['../_pullinfo___a_l_a_r_m_8ino.html#ab0d9270c83271ce7b422c04f63ccdc24',1,'channelID:&#160;Pullinfo_ALARM.ino'],['../esp__wifi_8ino.html#ac45cf487b7a438e2176288955a338f25',1,'channelID:&#160;esp_wifi.ino']]],
+  ['choice_4',['choice',['../_r_f_i_d-_cloner_8ino.html#a5dc203c224c4a493d0d9baf6c1923b47',1,'RFID-Cloner.ino']]],
+  ['cid_5',['cid',['../struct_m_f_r_c522_extended_1_1_pcb_block.html#af19017b75bfb8f39d1e4c13c4981015c',1,'MFRC522Extended::PcbBlock']]],
+  ['classic_201k_20mf1s503x_6',['MIFARE Classic 1K (MF1S503x)',['../md__c_o_d_e_2_r_f_i_d_2rfid-master_2doc_2_p_i_c_c_memory_layout.html#autotoc_md2',1,'']]],
+  ['classic_204k_20mf1s703x_20_3a_7',['MIFARE Classic 4K (MF1S703x):',['../md__c_o_d_e_2_r_f_i_d_2rfid-master_2doc_2_p_i_c_c_memory_layout.html#autotoc_md3',1,'']]],
+  ['classic_20mini_20mf1_20ic_20s20_20_3a_8',['MIFARE Classic Mini (MF1 IC S20):',['../md__c_o_d_e_2_r_f_i_d_2rfid-master_2doc_2_p_i_c_c_memory_layout.html#autotoc_md4',1,'']]],
+  ['clearint_9',['clearInt',['../_minimal_interrupt_8ino.html#ac1044a7b2d6f62adda19d5bece774c90',1,'MinimalInterrupt.ino']]],
+  ['client_10',['client',['../lock__sensor__radio__alarm__thingspeak__setup_8ino.html#a323dfc205549b3c13f0a25c1b670708a',1,'client:&#160;lock_sensor_radio_alarm_thingspeak_setup.ino'],['../_pullinfo___a_l_a_r_m_8ino.html#a323dfc205549b3c13f0a25c1b670708a',1,'client:&#160;Pullinfo_ALARM.ino'],['../esp__wifi_8ino.html#a323dfc205549b3c13f0a25c1b670708a',1,'client:&#160;esp_wifi.ino']]],
+  ['collreg_11',['CollReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669afafb7ec88f79c9b1f195195497d0ca07',1,'MFRC522']]],
+  ['comienreg_12',['ComIEnReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669ad956725472615518dfb99f2d7dccc50e',1,'MFRC522']]],
+  ['comirqreg_13',['ComIrqReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a76b2a615444982e04566784bdb5c9841',1,'MFRC522']]],
+  ['commandreg_14',['CommandReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a0ec37643fa721f476b0cd4359e3c7ef1',1,'MFRC522']]],
+  ['common_20piccs_15',['Memory Layout of common PICCs',['../md__c_o_d_e_2_r_f_i_d_2rfid-master_2doc_2_p_i_c_c_memory_layout.html',1,'']]],
+  ['connections_16',['connections',['../_r_f_i_d_8ino.html#Pin',1,'']]],
+  ['controlchar_17',['ControlChar',['../_r_f_i_d_8ino.html#a835b51d12c79449fb81b0a6a0aa4c602',1,'RFID.ino']]],
+  ['controlreg_18',['ControlReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a9d0df9e03ad6706004b003e20127a76a',1,'MFRC522']]],
+  ['counter_19',['counter',['../structservo__t.html#a53257182227ffeab61fc89f0d944ad18',1,'servo_t']]],
+  ['counterphototilt_20',['counterPhotoTilt',['../lock__sensor__radio__alarm__thingspeak__setup_8ino.html#ae1593812281d8ea606acb5a3c47a6ba0',1,'counterPhotoTilt:&#160;lock_sensor_radio_alarm_thingspeak_setup.ino'],['../photocell__tilt_switch_8ino.html#ae1593812281d8ea606acb5a3c47a6ba0',1,'counterPhotoTilt:&#160;photocell_tiltSwitch.ino']]],
+  ['course_2034338_21',['Project-groupe-3&amp;ndash;course-34338',['../md__r_e_a_d_m_e.html',1,'']]],
+  ['crcresultregh_22',['CRCResultRegH',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a430d34a355d45528d674ad839a187494',1,'MFRC522']]],
+  ['crcresultregl_23',['CRCResultRegL',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a4be013336d7bab727dc0e7e150dcd03c',1,'MFRC522']]],
+  ['cwgspreg_24',['CWGsPReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a02925dc7a230fcf039c597bf8cfa113f',1,'MFRC522']]]
 ];

@@ -1,0 +1,133 @@
+\doxysection{CODE/photocell\+\_\+tilt\+Switch/photocell\+\_\+tilt\+Switch.ino File Reference}
+\hypertarget{photocell__tilt_switch_8ino}{}\label{photocell__tilt_switch_8ino}\index{CODE/photocell\_tiltSwitch/photocell\_tiltSwitch.ino@{CODE/photocell\_tiltSwitch/photocell\_tiltSwitch.ino}}
+
+
+Monitors a photocell sensor and a tilt switch to detect potential tampering or break-\/ins.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{photocell__tilt_switch_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Sets up the sensor pins. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{photocell__tilt_switch_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\begin{DoxyCompactList}\small\item\em Main loop to read sensor data, process it, and generate alerts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \mbox{\hyperlink{photocell__tilt_switch_8ino_a8450960731db3add8cee227018677825}{photocell\+Pin}} = A0
+\begin{DoxyCompactList}\small\item\em Analog pin connected to the photocell sensor. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{photocell__tilt_switch_8ino_a47b0dff059305f50185674797b2731e5}{tilt\+Pin}} = 8
+\begin{DoxyCompactList}\small\item\em Digital pin connected to the tilt switch. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{photocell__tilt_switch_8ino_a815a8f8cd56a44135955c48e1f269842}{prev\+State\+Tilt}} = LOW
+\begin{DoxyCompactList}\small\item\em Previous state of the tilt switch. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{photocell__tilt_switch_8ino_ae1593812281d8ea606acb5a3c47a6ba0}{counter\+Photo\+Tilt}} = 0
+\begin{DoxyCompactList}\small\item\em Counter for sensor readings. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{photocell__tilt_switch_8ino_a4a42ca9e43e3eefdabca412627bc8ba7}{sum\+Photocell}} = 0
+\begin{DoxyCompactList}\small\item\em Accumulated photocell sensor values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Monitors a photocell sensor and a tilt switch to detect potential tampering or break-\/ins. 
+
+This program reads data from a photocell sensor and a tilt switch. Based on the readings, it detects suspicious activities like tampering or a forceful break-\/in and sends alerts. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{photocell__tilt_switch_8ino_afe461d27b9c48d5921c00d521181f12f}\index{photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}!loop@{loop}}
+\index{loop@{loop}!photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{photocell__tilt_switch_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Main loop to read sensor data, process it, and generate alerts. 
+
+
+\begin{DoxyItemize}
+\item Reads photocell and tilt switch values.
+\item Accumulates photocell readings to calculate an average every 10 cycles.
+\item Checks for tilt state changes and triggers alerts for suspicious activities. 
+\end{DoxyItemize}\texorpdfstring{$<$}{<} Read the current photocell value.
+
+\texorpdfstring{$<$}{<} Read the current tilt switch state.
+
+\texorpdfstring{$<$}{<} Add photocell reading to sum.
+
+\texorpdfstring{$<$}{<} Increment reading counter.
+
+\texorpdfstring{$<$}{<} Process data every 10 readings.
+
+\texorpdfstring{$<$}{<} Check for high average changes brightness.
+
+\texorpdfstring{$<$}{<} Detect tilt state changes.
+
+\texorpdfstring{$<$}{<} Alert for a break-\/in.
+
+\texorpdfstring{$<$}{<} Update tilt state.
+
+\texorpdfstring{$<$}{<} Reset photocell sum.
+
+\texorpdfstring{$<$}{<} Reset counter.\Hypertarget{photocell__tilt_switch_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}!setup@{setup}}
+\index{setup@{setup}!photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{photocell__tilt_switch_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Sets up the sensor pins. 
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{photocell__tilt_switch_8ino_ae1593812281d8ea606acb5a3c47a6ba0}\index{photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}!counterPhotoTilt@{counterPhotoTilt}}
+\index{counterPhotoTilt@{counterPhotoTilt}!photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}}
+\doxysubsubsection{\texorpdfstring{counterPhotoTilt}{counterPhotoTilt}}
+{\footnotesize\ttfamily \label{photocell__tilt_switch_8ino_ae1593812281d8ea606acb5a3c47a6ba0} 
+int counter\+Photo\+Tilt = 0}
+
+
+
+Counter for sensor readings. 
+
+\Hypertarget{photocell__tilt_switch_8ino_a8450960731db3add8cee227018677825}\index{photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}!photocellPin@{photocellPin}}
+\index{photocellPin@{photocellPin}!photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}}
+\doxysubsubsection{\texorpdfstring{photocellPin}{photocellPin}}
+{\footnotesize\ttfamily \label{photocell__tilt_switch_8ino_a8450960731db3add8cee227018677825} 
+const int photocell\+Pin = A0}
+
+
+
+Analog pin connected to the photocell sensor. 
+
+\Hypertarget{photocell__tilt_switch_8ino_a815a8f8cd56a44135955c48e1f269842}\index{photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}!prevStateTilt@{prevStateTilt}}
+\index{prevStateTilt@{prevStateTilt}!photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}}
+\doxysubsubsection{\texorpdfstring{prevStateTilt}{prevStateTilt}}
+{\footnotesize\ttfamily \label{photocell__tilt_switch_8ino_a815a8f8cd56a44135955c48e1f269842} 
+int prev\+State\+Tilt = LOW}
+
+
+
+Previous state of the tilt switch. 
+
+\Hypertarget{photocell__tilt_switch_8ino_a4a42ca9e43e3eefdabca412627bc8ba7}\index{photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}!sumPhotocell@{sumPhotocell}}
+\index{sumPhotocell@{sumPhotocell}!photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}}
+\doxysubsubsection{\texorpdfstring{sumPhotocell}{sumPhotocell}}
+{\footnotesize\ttfamily \label{photocell__tilt_switch_8ino_a4a42ca9e43e3eefdabca412627bc8ba7} 
+int sum\+Photocell = 0}
+
+
+
+Accumulated photocell sensor values. 
+
+\Hypertarget{photocell__tilt_switch_8ino_a47b0dff059305f50185674797b2731e5}\index{photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}!tiltPin@{tiltPin}}
+\index{tiltPin@{tiltPin}!photocell\_tiltSwitch.ino@{photocell\_tiltSwitch.ino}}
+\doxysubsubsection{\texorpdfstring{tiltPin}{tiltPin}}
+{\footnotesize\ttfamily \label{photocell__tilt_switch_8ino_a47b0dff059305f50185674797b2731e5} 
+const int tilt\+Pin = 8}
+
+
+
+Digital pin connected to the tilt switch. 
+

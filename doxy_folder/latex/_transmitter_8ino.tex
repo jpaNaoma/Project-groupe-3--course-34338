@@ -1,0 +1,89 @@
+\doxysection{CODE/\+Radio\+Test/\+Transmitter/\+Transmitter.ino File Reference}
+\hypertarget{_transmitter_8ino}{}\label{_transmitter_8ino}\index{CODE/RadioTest/Transmitter/Transmitter.ino@{CODE/RadioTest/Transmitter/Transmitter.ino}}
+{\ttfamily \#include $<$RH\+\_\+\+ASK.\+h$>$}\newline
+{\ttfamily \#include "{}SPI.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+RH\+\_\+\+ASK \mbox{\hyperlink{_transmitter_8ino_a938461518ee29a1671f3b398524bccdd}{driver}} (2000, 4, 5, 0)
+\item 
+void \mbox{\hyperlink{_transmitter_8ino_aa5177ad0349934f4ae2257b5fd039243}{Radio\+Send}} (const char \texorpdfstring{$\ast$}{*}msg)
+\begin{DoxyCompactList}\small\item\em Sends a string using Radio Frequency using Radio\+Head library. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_transmitter_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{_transmitter_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\item 
+\mbox{\hyperlink{_transmitter_8ino_aebcff33ef4deae82a5e8bc9b7d80ed91}{if}} (current\+Time -\/ \mbox{\hyperlink{_r_f_i_d_8ino_a661eac87840fae31fddb64dfabca3f90}{last\+Transmit\+Time}} $>$ heartbeat\+Interval)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_transmitter_8ino_a0544c3fe466e421738dae463968b70ba}{else}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_transmitter_8ino_a938461518ee29a1671f3b398524bccdd}\index{Transmitter.ino@{Transmitter.ino}!driver@{driver}}
+\index{driver@{driver}!Transmitter.ino@{Transmitter.ino}}
+\doxysubsubsection{\texorpdfstring{driver()}{driver()}}
+{\footnotesize\ttfamily \label{_transmitter_8ino_a938461518ee29a1671f3b398524bccdd} 
+RH\+\_\+\+ASK driver (\begin{DoxyParamCaption}\item[{2000}]{}{, }\item[{4}]{}{, }\item[{5}]{}{, }\item[{0}]{}{}\end{DoxyParamCaption})}
+
+\hypertarget{_r_f_i_d_8ino_Pin}{}\doxysubsection{\texorpdfstring{connections}{connections}}\label{_r_f_i_d_8ino_Pin}
+SDA \texorpdfstring{$\vert$}{|} RX \texorpdfstring{$\vert$}{|} SS is connected to SS\+\_\+pin SCK is pin 52 (Mega2560) MOSI is pin 51 (Mega2560) MISO is pin 50 (Mega2560) RST \texorpdfstring{$\vert$}{|} Reset is connected to RST\+\_\+pin LED is connected to LED\+\_\+pin and is active high The LED should have a resistor to limit current (Using 220R, variation changes light level) \begin{DoxySeeAlso}{See also}
+RFID Library \& use examples are from \href{https://github.com/miguelbalboa/rfid/tree/master}{\texttt{ https\+://github.\+com/miguelbalboa/rfid/tree/master}}, Inspiration was used. ~\newline
+ 
+
+Radio Frequency Transmission are from \href{https://lastminuteengineers.com/433mhz-rf-wireless-arduino-tutorial/}{\texttt{ https\+://lastminuteengineers.\+com/433mhz-\/rf-\/wireless-\/arduino-\/tutorial/}} Servo motor uses 5V (Red), GND (brown) and digital pin Servo\+\_\+pin 
+
+Servo Library is added from due to conflicting timers \href{https://github.com/nabontra/ServoTimer2/tree/master}{\texttt{ https\+://github.\+com/nabontra/\+Servo\+Timer2/tree/master}} 
+\end{DoxySeeAlso}
+\Hypertarget{_transmitter_8ino_aebcff33ef4deae82a5e8bc9b7d80ed91}\index{Transmitter.ino@{Transmitter.ino}!if@{if}}
+\index{if@{if}!Transmitter.ino@{Transmitter.ino}}
+\doxysubsubsection{\texorpdfstring{if()}{if()}}
+{\footnotesize\ttfamily \label{_transmitter_8ino_aebcff33ef4deae82a5e8bc9b7d80ed91} 
+if (\begin{DoxyParamCaption}\item[{current\+Time -\/}]{last\+Transmit\+Time}{, }\item[{heartbeat\+Interval}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_transmitter_8ino_afe461d27b9c48d5921c00d521181f12f}\index{Transmitter.ino@{Transmitter.ino}!loop@{loop}}
+\index{loop@{loop}!Transmitter.ino@{Transmitter.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{_transmitter_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_transmitter_8ino_aa5177ad0349934f4ae2257b5fd039243}\index{Transmitter.ino@{Transmitter.ino}!RadioSend@{RadioSend}}
+\index{RadioSend@{RadioSend}!Transmitter.ino@{Transmitter.ino}}
+\doxysubsubsection{\texorpdfstring{RadioSend()}{RadioSend()}}
+{\footnotesize\ttfamily \label{_transmitter_8ino_aa5177ad0349934f4ae2257b5fd039243} 
+void Radio\+Send (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{msg}{}\end{DoxyParamCaption})}
+
+
+
+Sends a string using Radio Frequency using Radio\+Head library. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Takes} & a char pointer / string as input \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_transmitter_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{Transmitter.ino@{Transmitter.ino}!setup@{setup}}
+\index{setup@{setup}!Transmitter.ino@{Transmitter.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{_transmitter_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_transmitter_8ino_a0544c3fe466e421738dae463968b70ba}\index{Transmitter.ino@{Transmitter.ino}!else@{else}}
+\index{else@{else}!Transmitter.ino@{Transmitter.ino}}
+\doxysubsubsection{\texorpdfstring{else}{else}}
+{\footnotesize\ttfamily \label{_transmitter_8ino_a0544c3fe466e421738dae463968b70ba} 
+else}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ currentTime\ =\ millis()}
+
+\end{DoxyCode}

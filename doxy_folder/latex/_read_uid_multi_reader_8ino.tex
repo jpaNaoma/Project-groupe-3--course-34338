@@ -1,0 +1,106 @@
+\doxysection{CODE/\+RFID/rfid-\/master/examples/\+Read\+Uid\+Multi\+Reader/\+Read\+Uid\+Multi\+Reader.ino File Reference}
+\hypertarget{_read_uid_multi_reader_8ino}{}\label{_read_uid_multi_reader_8ino}\index{CODE/RFID/rfid-\/master/examples/ReadUidMultiReader/ReadUidMultiReader.ino@{CODE/RFID/rfid-\/master/examples/ReadUidMultiReader/ReadUidMultiReader.ino}}
+{\ttfamily \#include $<$SPI.\+h$>$}\newline
+{\ttfamily \#include $<$MFRC522.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_read_uid_multi_reader_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}~9
+\item 
+\#define \mbox{\hyperlink{_read_uid_multi_reader_8ino_a20989330903360e367c625b08ec73c5d}{SS\+\_\+1\+\_\+\+PIN}}~10
+\item 
+\#define \mbox{\hyperlink{_read_uid_multi_reader_8ino_ab5f32f4bc5ff765ecdbc1539214ba1bb}{SS\+\_\+2\+\_\+\+PIN}}~8
+\item 
+\#define \mbox{\hyperlink{_read_uid_multi_reader_8ino_a88deff986693856e33c92f93a502974a}{NR\+\_\+\+OF\+\_\+\+READERS}}~2
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_read_uid_multi_reader_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{_read_uid_multi_reader_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\item 
+void \mbox{\hyperlink{_read_uid_multi_reader_8ino_a58bfcaf707e4863a09a15ca2a11d33e5}{dump\+\_\+byte\+\_\+array}} (byte \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a0dc32c681766921ea9cb757927be6dd3}{buffer}}, byte buffer\+Size)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+byte \mbox{\hyperlink{_read_uid_multi_reader_8ino_a2e813b57e57a5c121cfb061068575727}{ss\+Pins}} \mbox{[}$\,$\mbox{]} = \{\mbox{\hyperlink{_read_uid_multi_reader_8ino_a20989330903360e367c625b08ec73c5d}{SS\+\_\+1\+\_\+\+PIN}}, \mbox{\hyperlink{_read_uid_multi_reader_8ino_ab5f32f4bc5ff765ecdbc1539214ba1bb}{SS\+\_\+2\+\_\+\+PIN}}\}
+\item 
+\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} \mbox{\hyperlink{_read_uid_multi_reader_8ino_a025009bc99aaf04251e7ead25a7c1dc9}{mfrc522}} \mbox{[}\mbox{\hyperlink{_read_uid_multi_reader_8ino_a88deff986693856e33c92f93a502974a}{NR\+\_\+\+OF\+\_\+\+READERS}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_read_uid_multi_reader_8ino_a88deff986693856e33c92f93a502974a}\index{ReadUidMultiReader.ino@{ReadUidMultiReader.ino}!NR\_OF\_READERS@{NR\_OF\_READERS}}
+\index{NR\_OF\_READERS@{NR\_OF\_READERS}!ReadUidMultiReader.ino@{ReadUidMultiReader.ino}}
+\doxysubsubsection{\texorpdfstring{NR\_OF\_READERS}{NR\_OF\_READERS}}
+{\footnotesize\ttfamily \label{_read_uid_multi_reader_8ino_a88deff986693856e33c92f93a502974a} 
+\#define NR\+\_\+\+OF\+\_\+\+READERS~2}
+
+\Hypertarget{_read_uid_multi_reader_8ino_a36932b0e869e0114f32e255f61306d6b}\index{ReadUidMultiReader.ino@{ReadUidMultiReader.ino}!RST\_PIN@{RST\_PIN}}
+\index{RST\_PIN@{RST\_PIN}!ReadUidMultiReader.ino@{ReadUidMultiReader.ino}}
+\doxysubsubsection{\texorpdfstring{RST\_PIN}{RST\_PIN}}
+{\footnotesize\ttfamily \label{_read_uid_multi_reader_8ino_a36932b0e869e0114f32e255f61306d6b} 
+\#define RST\+\_\+\+PIN~9}
+
+\DoxyHorRuler{0}
+ \hypertarget{_read_uid_multi_reader_8ino_autotoc_md20}{}\doxysubsubsection{\texorpdfstring{Example sketch/program showing how to read data from more than one PICC to serial.}{Example sketch/program showing how to read data from more than one PICC to serial.}}\label{_read_uid_multi_reader_8ino_autotoc_md20}
+This is a \doxylink{class_m_f_r_c522}{MFRC522} library example; for further details and other examples see\+: \href{https://github.com/miguelbalboa/rfid}{\texttt{ https\+://github.\+com/miguelbalboa/rfid}}
+
+Example sketch/program showing how to read data from more than one PICC (that is\+: a RFID Tag or Card) using a \doxylink{class_m_f_r_c522}{MFRC522} based RFID Reader on the Arduino SPI interface.
+
+Warning\+: This may not work! Multiple devices at one SPI are difficult and cause many trouble!! Engineering skill and knowledge are required!
+
+@license Released into the public domain.\hypertarget{_read_uid_multi_reader_8ino_autotoc_md21}{}\doxysubsubsection{\texorpdfstring{Typical pin layout used\+:}{Typical pin layout used\+:}}\label{_read_uid_multi_reader_8ino_autotoc_md21}
+\doxylink{class_m_f_r_c522}{MFRC522} Arduino Arduino Arduino Arduino Arduino Reader/\+PCD Uno/101 Mega Nano v3 Leonardo/\+Micro Pro Micro \hypertarget{_read_uid_multi_reader_8ino_autotoc_md22}{}\doxysubsubsection{\texorpdfstring{Signal Pin Pin Pin Pin Pin Pin}{Signal Pin Pin Pin Pin Pin Pin}}\label{_read_uid_multi_reader_8ino_autotoc_md22}
+RST/\+Reset RST 9 5 D9 RESET/\+ICSP-\/5 RST SPI SS 1 SDA(\+SS) \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} custom, take a unused pin, only HIGH/\+LOW required \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} SPI SS 2 SDA(\+SS) \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} custom, take a unused pin, only HIGH/\+LOW required \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} SPI MOSI MOSI 11 / ICSP-\/4 51 D11 ICSP-\/4 16 SPI MISO MISO 12 / ICSP-\/1 50 D12 ICSP-\/1 14 SPI SCK SCK 13 / ICSP-\/3 52 D13 ICSP-\/3 15
+
+More pin layouts for other boards can be found here\+: \href{https://github.com/miguelbalboa/rfid\#pin-layout}{\texttt{ https\+://github.\+com/miguelbalboa/rfid\#pin-\/layout}} \Hypertarget{_read_uid_multi_reader_8ino_a20989330903360e367c625b08ec73c5d}\index{ReadUidMultiReader.ino@{ReadUidMultiReader.ino}!SS\_1\_PIN@{SS\_1\_PIN}}
+\index{SS\_1\_PIN@{SS\_1\_PIN}!ReadUidMultiReader.ino@{ReadUidMultiReader.ino}}
+\doxysubsubsection{\texorpdfstring{SS\_1\_PIN}{SS\_1\_PIN}}
+{\footnotesize\ttfamily \label{_read_uid_multi_reader_8ino_a20989330903360e367c625b08ec73c5d} 
+\#define SS\+\_\+1\+\_\+\+PIN~10}
+
+\Hypertarget{_read_uid_multi_reader_8ino_ab5f32f4bc5ff765ecdbc1539214ba1bb}\index{ReadUidMultiReader.ino@{ReadUidMultiReader.ino}!SS\_2\_PIN@{SS\_2\_PIN}}
+\index{SS\_2\_PIN@{SS\_2\_PIN}!ReadUidMultiReader.ino@{ReadUidMultiReader.ino}}
+\doxysubsubsection{\texorpdfstring{SS\_2\_PIN}{SS\_2\_PIN}}
+{\footnotesize\ttfamily \label{_read_uid_multi_reader_8ino_ab5f32f4bc5ff765ecdbc1539214ba1bb} 
+\#define SS\+\_\+2\+\_\+\+PIN~8}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_read_uid_multi_reader_8ino_a58bfcaf707e4863a09a15ca2a11d33e5}\index{ReadUidMultiReader.ino@{ReadUidMultiReader.ino}!dump\_byte\_array@{dump\_byte\_array}}
+\index{dump\_byte\_array@{dump\_byte\_array}!ReadUidMultiReader.ino@{ReadUidMultiReader.ino}}
+\doxysubsubsection{\texorpdfstring{dump\_byte\_array()}{dump\_byte\_array()}}
+{\footnotesize\ttfamily \label{_read_uid_multi_reader_8ino_a58bfcaf707e4863a09a15ca2a11d33e5} 
+void dump\+\_\+byte\+\_\+array (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{byte}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+Helper routine to dump a byte array as hex values to Serial. \Hypertarget{_read_uid_multi_reader_8ino_afe461d27b9c48d5921c00d521181f12f}\index{ReadUidMultiReader.ino@{ReadUidMultiReader.ino}!loop@{loop}}
+\index{loop@{loop}!ReadUidMultiReader.ino@{ReadUidMultiReader.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{_read_uid_multi_reader_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Main loop. \Hypertarget{_read_uid_multi_reader_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{ReadUidMultiReader.ino@{ReadUidMultiReader.ino}!setup@{setup}}
+\index{setup@{setup}!ReadUidMultiReader.ino@{ReadUidMultiReader.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{_read_uid_multi_reader_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Initialize. 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_read_uid_multi_reader_8ino_a025009bc99aaf04251e7ead25a7c1dc9}\index{ReadUidMultiReader.ino@{ReadUidMultiReader.ino}!mfrc522@{mfrc522}}
+\index{mfrc522@{mfrc522}!ReadUidMultiReader.ino@{ReadUidMultiReader.ino}}
+\doxysubsubsection{\texorpdfstring{mfrc522}{mfrc522}}
+{\footnotesize\ttfamily \label{_read_uid_multi_reader_8ino_a025009bc99aaf04251e7ead25a7c1dc9} 
+\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} mfrc522\mbox{[}\mbox{\hyperlink{_read_uid_multi_reader_8ino_a88deff986693856e33c92f93a502974a}{NR\+\_\+\+OF\+\_\+\+READERS}}\mbox{]}}
+
+\Hypertarget{_read_uid_multi_reader_8ino_a2e813b57e57a5c121cfb061068575727}\index{ReadUidMultiReader.ino@{ReadUidMultiReader.ino}!ssPins@{ssPins}}
+\index{ssPins@{ssPins}!ReadUidMultiReader.ino@{ReadUidMultiReader.ino}}
+\doxysubsubsection{\texorpdfstring{ssPins}{ssPins}}
+{\footnotesize\ttfamily \label{_read_uid_multi_reader_8ino_a2e813b57e57a5c121cfb061068575727} 
+byte ss\+Pins\mbox{[}$\,$\mbox{]} = \{\mbox{\hyperlink{_read_uid_multi_reader_8ino_a20989330903360e367c625b08ec73c5d}{SS\+\_\+1\+\_\+\+PIN}}, \mbox{\hyperlink{_read_uid_multi_reader_8ino_ab5f32f4bc5ff765ecdbc1539214ba1bb}{SS\+\_\+2\+\_\+\+PIN}}\}}
+

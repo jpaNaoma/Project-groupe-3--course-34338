@@ -1,0 +1,143 @@
+\doxysection{CODE/\+Pullinfo\+\_\+\+ALARM/\+Pullinfo\+\_\+\+ALARM.ino File Reference}
+\hypertarget{_pullinfo___a_l_a_r_m_8ino}{}\label{_pullinfo___a_l_a_r_m_8ino}\index{CODE/Pullinfo\_ALARM/Pullinfo\_ALARM.ino@{CODE/Pullinfo\_ALARM/Pullinfo\_ALARM.ino}}
+
+
+A script for communicating with Thing\+Speak to retrieve information and decide whether to activate or deactivate the alarm system.  
+
+
+{\ttfamily \#include $<$ESP8266\+Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$Liquid\+Crystal\+\_\+\+I2\+C.\+h$>$}\newline
+{\ttfamily \#include $<$Thing\+Speak.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Liquid\+Crystal\+\_\+\+I2C \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_ae084e1bc8ccb35ea289ba0ca4972ea6d}{lcd}} (0x27, 16, 2)
+\item 
+void \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_a55d627c45708bc26866e27d49432eee9}{police}} ()
+\item 
+void \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint8\+\_\+t \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_a0f90fe1c4fdd4624012eee965ad1a9c6}{RGBred}} =D5
+\item 
+const uint8\+\_\+t \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_adbd61ad1eeea4f1d73c2aa486202b167}{RGBgreen}} =D6
+\item 
+const uint8\+\_\+t \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_a38a5cd86144996a11d538d6083fa7026}{RGBblue}} =D7
+\item 
+const uint8\+\_\+t \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_a0ecc45ebdb264f9f8e776cd3770b961d}{buzzer}} =D3
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_a587ba0cb07f02913598610049a3bbb79}{ssid}} = "{}Xperia\+\_\+50"{}
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_aa4a2ebcb494493f648ae1e6975672575}{password}} = "{}detvedjegikke"{}
+\item 
+const unsigned long \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_ab0d9270c83271ce7b422c04f63ccdc24}{channel\+ID}} = 2814485
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_aefc23d9953c42d4dd665949e12ece831}{read\+APIKey}} = "{}DF9\+UCEIB1\+R550\+QNT"{}
+\item 
+Wi\+Fi\+Client \mbox{\hyperlink{_pullinfo___a_l_a_r_m_8ino_a323dfc205549b3c13f0a25c1b670708a}{client}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A script for communicating with Thing\+Speak to retrieve information and decide whether to activate or deactivate the alarm system. 
+
+\begin{DoxyAuthor}{Author}
+Federico Morace 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/17
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_ae084e1bc8ccb35ea289ba0ca4972ea6d}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!lcd@{lcd}}
+\index{lcd@{lcd}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{lcd()}{lcd()}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_ae084e1bc8ccb35ea289ba0ca4972ea6d} 
+Liquid\+Crystal\+\_\+\+I2C lcd (\begin{DoxyParamCaption}\item[{0x27}]{}{, }\item[{16}]{}{, }\item[{2}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_afe461d27b9c48d5921c00d521181f12f}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!loop@{loop}}
+\index{loop@{loop}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_a55d627c45708bc26866e27d49432eee9}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!police@{police}}
+\index{police@{police}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{police()}{police()}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_a55d627c45708bc26866e27d49432eee9} 
+void police (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!setup@{setup}}
+\index{setup@{setup}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_a0ecc45ebdb264f9f8e776cd3770b961d}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!buzzer@{buzzer}}
+\index{buzzer@{buzzer}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{buzzer}{buzzer}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_a0ecc45ebdb264f9f8e776cd3770b961d} 
+const uint8\+\_\+t buzzer =D3}
+
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_ab0d9270c83271ce7b422c04f63ccdc24}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!channelID@{channelID}}
+\index{channelID@{channelID}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{channelID}{channelID}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_ab0d9270c83271ce7b422c04f63ccdc24} 
+const unsigned long channel\+ID = 2814485}
+
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_a323dfc205549b3c13f0a25c1b670708a}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!client@{client}}
+\index{client@{client}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_a323dfc205549b3c13f0a25c1b670708a} 
+Wi\+Fi\+Client client}
+
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_aa4a2ebcb494493f648ae1e6975672575}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!password@{password}}
+\index{password@{password}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{password}{password}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_aa4a2ebcb494493f648ae1e6975672575} 
+const char\texorpdfstring{$\ast$}{*} password = "{}detvedjegikke"{}}
+
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_aefc23d9953c42d4dd665949e12ece831}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!readAPIKey@{readAPIKey}}
+\index{readAPIKey@{readAPIKey}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{readAPIKey}{readAPIKey}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_aefc23d9953c42d4dd665949e12ece831} 
+const char\texorpdfstring{$\ast$}{*} read\+APIKey = "{}DF9\+UCEIB1\+R550\+QNT"{}}
+
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_a38a5cd86144996a11d538d6083fa7026}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!RGBblue@{RGBblue}}
+\index{RGBblue@{RGBblue}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{RGBblue}{RGBblue}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_a38a5cd86144996a11d538d6083fa7026} 
+const uint8\+\_\+t RGBblue =D7}
+
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_adbd61ad1eeea4f1d73c2aa486202b167}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!RGBgreen@{RGBgreen}}
+\index{RGBgreen@{RGBgreen}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{RGBgreen}{RGBgreen}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_adbd61ad1eeea4f1d73c2aa486202b167} 
+const uint8\+\_\+t RGBgreen =D6}
+
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_a0f90fe1c4fdd4624012eee965ad1a9c6}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!RGBred@{RGBred}}
+\index{RGBred@{RGBred}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{RGBred}{RGBred}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_a0f90fe1c4fdd4624012eee965ad1a9c6} 
+const uint8\+\_\+t RGBred =D5}
+
+\Hypertarget{_pullinfo___a_l_a_r_m_8ino_a587ba0cb07f02913598610049a3bbb79}\index{Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}!ssid@{ssid}}
+\index{ssid@{ssid}!Pullinfo\_ALARM.ino@{Pullinfo\_ALARM.ino}}
+\doxysubsubsection{\texorpdfstring{ssid}{ssid}}
+{\footnotesize\ttfamily \label{_pullinfo___a_l_a_r_m_8ino_a587ba0cb07f02913598610049a3bbb79} 
+const char\texorpdfstring{$\ast$}{*} ssid = "{}Xperia\+\_\+50"{}}
+

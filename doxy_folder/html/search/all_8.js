@@ -1,4 +1,25 @@
 var searchData=
 [
-  ['setup_0',['setup',['../main_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'main.ino']]]
+  ['data_0',['data',['../struct_m_f_r_c522_extended_1_1_ats.html#a079430497122e58bbd4e45c6af9a48d7',1,'MFRC522Extended::Ats::data'],['../struct_m_f_r_c522_extended_1_1_pcb_block.html#a990cf046645b6ab9ffcd5b8d56cf11a9',1,'MFRC522Extended::PcbBlock::data']]],
+  ['data_20from_20more_20than_20one_20picc_20to_20serial_1',['Example sketch/program showing how to read data from more than one PICC to serial.',['../_read_uid_multi_reader_8ino.html#autotoc_md20',1,'']]],
+  ['datasheet_20references_2',['Datasheet References',['../md__c_o_d_e_2_r_f_i_d_2rfid-master_2doc_2_p_i_c_c_memory_layout.html#autotoc_md1',1,'']]],
+  ['default_5fpulse_5fwidth_3',['DEFAULT_PULSE_WIDTH',['../_servo_timer2_8h.html#a7eada57cb49e7b1766a813e4635d79bd',1,'ServoTimer2.h']]],
+  ['delay_5fadjust_4',['DELAY_ADJUST',['../_servo_timer2_8cpp.html#a4b3ac6f7732ed61423a012a9607db8ad',1,'ServoTimer2.cpp']]],
+  ['demodreg_5',['DemodReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a37b01e93fff19ca62364e8f4f797a5c4',1,'MFRC522']]],
+  ['deprecated_6',['DEPRECATED',['../deprecated_8h.html#ac1e8a42306d8e67cb94ca31c3956ee78',1,'deprecated.h']]],
+  ['deprecated_2eh_7',['deprecated.h',['../deprecated_8h.html',1,'']]],
+  ['deprecated_5fmsg_8',['DEPRECATED_MSG',['../deprecated_8h.html#acf5fe7b5c4b0f8918b44f5b3f3916ba2',1,'deprecated.h']]],
+  ['detach_9',['detach',['../class_servo_timer2.html#a9afafed2c21712396aa9dcfbabcbf8ba',1,'ServoTimer2::detach()'],['../class_servo_array_t2.html#aea4841446c85ce5f76c7814cd050dc7a',1,'ServoArrayT2::detach()']]],
+  ['distance_10',['distance',['../_r_f_i_d_8ino.html#a06f14a9abd47b91465f895d5259cdc1b',1,'distance:&#160;RFID.ino'],['../ultrasonic__sensor_8ino.html#a06f14a9abd47b91465f895d5259cdc1b',1,'distance:&#160;ultrasonic_sensor.ino']]],
+  ['divienreg_11',['DivIEnReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669afb4527cc3e364cce3fe3e62cdcde7da0',1,'MFRC522']]],
+  ['divirqreg_12',['DivIrqReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a95e26d5ece97ae43c34d08797205a356',1,'MFRC522']]],
+  ['domain_13',['domain',['../_mifare_classic_value_block_8ino.html#autotoc_md8',1,'Released into the public domain.'],['../_minimal_interrupt_8ino.html#autotoc_md12',1,'Released into the public domain.'],['../_read_and_write_8ino.html#autotoc_md16',1,'Released into the public domain.']]],
+  ['door_14',['door',['../lock__sensor__radio__alarm__thingspeak__setup_8ino.html#a80788b5999566e5fd5e551c862390530',1,'lock_sensor_radio_alarm_thingspeak_setup.ino']]],
+  ['dr_15',['dr',['../struct_m_f_r_c522_extended_1_1_ats.html#a4f1f5a64c36b39ae274bfdd95799bdae',1,'MFRC522Extended::Ats']]],
+  ['driver_16',['driver',['../_transmitter_8ino.html#a938461518ee29a1671f3b398524bccdd',1,'Transmitter.ino']]],
+  ['ds_17',['ds',['../struct_m_f_r_c522_extended_1_1_ats.html#ae3f9fc67e1b4e9d863218622b4663582',1,'MFRC522Extended::Ats']]],
+  ['dump_5fbyte_5farray_18',['dump_byte_array',['../_mifare_classic_value_block_8ino.html#a58bfcaf707e4863a09a15ca2a11d33e5',1,'dump_byte_array(byte *buffer, byte bufferSize):&#160;MifareClassicValueBlock.ino'],['../_minimal_interrupt_8ino.html#a58bfcaf707e4863a09a15ca2a11d33e5',1,'dump_byte_array(byte *buffer, byte bufferSize):&#160;MinimalInterrupt.ino'],['../_read_and_write_8ino.html#a58bfcaf707e4863a09a15ca2a11d33e5',1,'dump_byte_array(byte *buffer, byte bufferSize):&#160;ReadAndWrite.ino'],['../_read_uid_multi_reader_8ino.html#a58bfcaf707e4863a09a15ca2a11d33e5',1,'dump_byte_array(byte *buffer, byte bufferSize):&#160;ReadUidMultiReader.ino'],['../_r_f_i_d-_cloner_8ino.html#a58bfcaf707e4863a09a15ca2a11d33e5',1,'dump_byte_array(byte *buffer, byte bufferSize):&#160;RFID-Cloner.ino'],['../rfid__default__keys_8ino.html#a58bfcaf707e4863a09a15ca2a11d33e5',1,'dump_byte_array(byte *buffer, byte bufferSize):&#160;rfid_default_keys.ino']]],
+  ['dump_5fbyte_5farray1_19',['dump_byte_array1',['../_r_f_i_d-_cloner_8ino.html#a120ec0da7312b275120e202f8c1e89df',1,'RFID-Cloner.ino']]],
+  ['dumpinfo_2eino_20',['DumpInfo.ino',['../_dump_info_8ino.html',1,'']]],
+  ['duration_21',['duration',['../_r_f_i_d_8ino.html#a49411c0db3bc12e9d548e069021b0645',1,'duration:&#160;RFID.ino'],['../ultrasonic__sensor_8ino.html#a49411c0db3bc12e9d548e069021b0645',1,'duration:&#160;ultrasonic_sensor.ino']]]
 ];

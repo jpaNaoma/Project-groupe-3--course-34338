@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['setup_0',['setup',['../main_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'main.ino']]]
+  ['clearint_0',['clearInt',['../_minimal_interrupt_8ino.html#ac1044a7b2d6f62adda19d5bece774c90',1,'MinimalInterrupt.ino']]]
 ];

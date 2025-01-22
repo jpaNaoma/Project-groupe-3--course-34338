@@ -1,0 +1,29 @@
+\doxysection{CODE/\+RFID/rfid-\/master/src/deprecated.h File Reference}
+\hypertarget{deprecated_8h}{}\label{deprecated_8h}\index{CODE/RFID/rfid-\/master/src/deprecated.h@{CODE/RFID/rfid-\/master/src/deprecated.h}}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{deprecated_8h_ac1e8a42306d8e67cb94ca31c3956ee78}{DEPRECATED}}~\+\_\+\+\_\+attribute\+\_\+\+\_\+((deprecated))
+\item 
+\#define \mbox{\hyperlink{deprecated_8h_acf5fe7b5c4b0f8918b44f5b3f3916ba2}{DEPRECATED\+\_\+\+MSG}}(msg)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{deprecated_8h_ac1e8a42306d8e67cb94ca31c3956ee78}\index{deprecated.h@{deprecated.h}!DEPRECATED@{DEPRECATED}}
+\index{DEPRECATED@{DEPRECATED}!deprecated.h@{deprecated.h}}
+\doxysubsubsection{\texorpdfstring{DEPRECATED}{DEPRECATED}}
+{\footnotesize\ttfamily \label{deprecated_8h_ac1e8a42306d8e67cb94ca31c3956ee78} 
+\#define DEPRECATED~\+\_\+\+\_\+attribute\+\_\+\+\_\+((deprecated))}
+
+Copyright (c) 2016 by Ludwig Grill (www.\+rotzbua.\+de) Simple deprecated workaround for Arduino IDE IDE 1.\+6.\+8 use gcc 4.\+8 which do not support c++14 \mbox{[}\mbox{[}deprecated\mbox{]}\mbox{]} Later versions should support c++14, then use c++14 syntax \Hypertarget{deprecated_8h_acf5fe7b5c4b0f8918b44f5b3f3916ba2}\index{deprecated.h@{deprecated.h}!DEPRECATED\_MSG@{DEPRECATED\_MSG}}
+\index{DEPRECATED\_MSG@{DEPRECATED\_MSG}!deprecated.h@{deprecated.h}}
+\doxysubsubsection{\texorpdfstring{DEPRECATED\_MSG}{DEPRECATED\_MSG}}
+{\footnotesize\ttfamily \label{deprecated_8h_acf5fe7b5c4b0f8918b44f5b3f3916ba2} 
+\#define DEPRECATED\+\_\+\+MSG(\begin{DoxyParamCaption}\item[{}]{msg}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\_\_attribute\_\_((deprecated(msg)))}
+
+\end{DoxyCode}

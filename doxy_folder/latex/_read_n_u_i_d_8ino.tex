@@ -1,0 +1,86 @@
+\doxysection{CODE/\+RFID/rfid-\/master/examples/\+Read\+NUID/\+Read\+NUID.ino File Reference}
+\hypertarget{_read_n_u_i_d_8ino}{}\label{_read_n_u_i_d_8ino}\index{CODE/RFID/rfid-\/master/examples/ReadNUID/ReadNUID.ino@{CODE/RFID/rfid-\/master/examples/ReadNUID/ReadNUID.ino}}
+{\ttfamily \#include $<$SPI.\+h$>$}\newline
+{\ttfamily \#include $<$MFRC522.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_read_n_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}~10
+\item 
+\#define \mbox{\hyperlink{_read_n_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}~9
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_read_n_u_i_d_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{_read_n_u_i_d_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\item 
+void \mbox{\hyperlink{_read_n_u_i_d_8ino_a198583bee13dd0c1f3c5230aae2163d9}{print\+Hex}} (byte \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a0dc32c681766921ea9cb757927be6dd3}{buffer}}, byte buffer\+Size)
+\item 
+void \mbox{\hyperlink{_read_n_u_i_d_8ino_aafdba0c7bd093543a3709cdc3082791e}{print\+Dec}} (byte \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a0dc32c681766921ea9cb757927be6dd3}{buffer}}, byte buffer\+Size)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} \mbox{\hyperlink{_read_n_u_i_d_8ino_a658e62e4dd1ca0460a6d3eae44913c5d}{rfid}} (\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}, \mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}})
+\item 
+byte \mbox{\hyperlink{_read_n_u_i_d_8ino_ada6aa8891fe06b207999dfca899ae810}{nuid\+PICC}} \mbox{[}4\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_read_n_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}\index{ReadNUID.ino@{ReadNUID.ino}!RST\_PIN@{RST\_PIN}}
+\index{RST\_PIN@{RST\_PIN}!ReadNUID.ino@{ReadNUID.ino}}
+\doxysubsubsection{\texorpdfstring{RST\_PIN}{RST\_PIN}}
+{\footnotesize\ttfamily \label{_read_n_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b} 
+\#define RST\+\_\+\+PIN~9}
+
+\Hypertarget{_read_n_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}\index{ReadNUID.ino@{ReadNUID.ino}!SS\_PIN@{SS\_PIN}}
+\index{SS\_PIN@{SS\_PIN}!ReadNUID.ino@{ReadNUID.ino}}
+\doxysubsubsection{\texorpdfstring{SS\_PIN}{SS\_PIN}}
+{\footnotesize\ttfamily \label{_read_n_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391} 
+\#define SS\+\_\+\+PIN~10}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_read_n_u_i_d_8ino_afe461d27b9c48d5921c00d521181f12f}\index{ReadNUID.ino@{ReadNUID.ino}!loop@{loop}}
+\index{loop@{loop}!ReadNUID.ino@{ReadNUID.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{_read_n_u_i_d_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_read_n_u_i_d_8ino_aafdba0c7bd093543a3709cdc3082791e}\index{ReadNUID.ino@{ReadNUID.ino}!printDec@{printDec}}
+\index{printDec@{printDec}!ReadNUID.ino@{ReadNUID.ino}}
+\doxysubsubsection{\texorpdfstring{printDec()}{printDec()}}
+{\footnotesize\ttfamily \label{_read_n_u_i_d_8ino_aafdba0c7bd093543a3709cdc3082791e} 
+void print\+Dec (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{byte}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+Helper routine to dump a byte array as dec values to Serial. \Hypertarget{_read_n_u_i_d_8ino_a198583bee13dd0c1f3c5230aae2163d9}\index{ReadNUID.ino@{ReadNUID.ino}!printHex@{printHex}}
+\index{printHex@{printHex}!ReadNUID.ino@{ReadNUID.ino}}
+\doxysubsubsection{\texorpdfstring{printHex()}{printHex()}}
+{\footnotesize\ttfamily \label{_read_n_u_i_d_8ino_a198583bee13dd0c1f3c5230aae2163d9} 
+void print\+Hex (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{byte}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+Helper routine to dump a byte array as hex values to Serial. \Hypertarget{_read_n_u_i_d_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{ReadNUID.ino@{ReadNUID.ino}!setup@{setup}}
+\index{setup@{setup}!ReadNUID.ino@{ReadNUID.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{_read_n_u_i_d_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_read_n_u_i_d_8ino_ada6aa8891fe06b207999dfca899ae810}\index{ReadNUID.ino@{ReadNUID.ino}!nuidPICC@{nuidPICC}}
+\index{nuidPICC@{nuidPICC}!ReadNUID.ino@{ReadNUID.ino}}
+\doxysubsubsection{\texorpdfstring{nuidPICC}{nuidPICC}}
+{\footnotesize\ttfamily \label{_read_n_u_i_d_8ino_ada6aa8891fe06b207999dfca899ae810} 
+byte nuid\+PICC\mbox{[}4\mbox{]}}
+
+\Hypertarget{_read_n_u_i_d_8ino_a658e62e4dd1ca0460a6d3eae44913c5d}\index{ReadNUID.ino@{ReadNUID.ino}!rfid@{rfid}}
+\index{rfid@{rfid}!ReadNUID.ino@{ReadNUID.ino}}
+\doxysubsubsection{\texorpdfstring{rfid}{rfid}}
+{\footnotesize\ttfamily \label{_read_n_u_i_d_8ino_a658e62e4dd1ca0460a6d3eae44913c5d} 
+\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} rfid(\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}, \mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}) (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}}]{}{, }\item[{\mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}}]{}{}\end{DoxyParamCaption})}
+
