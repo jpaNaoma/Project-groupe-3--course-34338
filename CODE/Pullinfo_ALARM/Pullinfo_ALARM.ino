@@ -137,7 +137,7 @@ void loop(){
 
   
   // Read values from ThingSpeak (field1: door status, field2: ultrasonic sensor, field3: light sensor)
-  int intdoorStatus = ThingSpeak.readIntField(channelID, 1, readAPIKey); //alarm when sensor detect a person for 20 seconds
+  int intdoorStatus = ThingSpeak.readIntField(channelID, 1, readAPIKey); 
   int intthreatDetected = ThingSpeak.readIntField(channelID, 2, readAPIKey);
   int intlightDetected = ThingSpeak.readIntField(channelID, 3, readAPIKey);
   
