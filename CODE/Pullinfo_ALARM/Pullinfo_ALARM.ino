@@ -123,6 +123,7 @@ void setup() {
   }
 
   
+
   // Initialize connection between ESP8266 and ThingSpeak
   ThingSpeak.begin(client);
 
@@ -136,13 +137,14 @@ void setup() {
 void loop(){
 
   
+  
   // Read values from ThingSpeak (field1: door status, field2: ultrasonic sensor, field3: light sensor)
-  int intdoorStatus = ThingSpeak.readIntField(channelID, 1, readAPIKey); 
+  int intdoorStatus = ThingSpeak.readIntField(channelID, 1, readAPIKey); //alarm when sensor detect a person for 20 seconds
   int intthreatDetected = ThingSpeak.readIntField(channelID, 2, readAPIKey);
-  int intlightDetected = ThingSpeak.readIntField(channelID, 3, readAPIKey);
+  int inttiltSwitch = ThingSpeak.readIntField(channelID, 3, readAPIKey);
   
   // Check if the read operation was successful
-  if (intdoorStatus == -1 || intthreatDetected == -1 || intlightDetected == -1) {
+  if (intdoorStatus == -1 || intthreatDetected == -1 || inttiltSwitch == -1) {
     Serial.println("Error reading from ThingSpeak.");
     delay(20000);  
     return;
@@ -151,23 +153,24 @@ void loop(){
   // Converts the values from ThingPseak into booleans
   bool doorStatus = (intdoorStatus == 0);   
   bool threatDetected = (intthreatDetected == 1); 
-  bool lightDetected = (intlightDetected == 1);  
+  bool tiltSwitch = (inttiltSwitch == 0);  
   
+
 
   // Display the values on the serial monitor
   Serial.print("Door status: ");
   Serial.println(doorStatus ? "Closed" : "Open");
   Serial.print("Threat detected: ");
   Serial.println(threatDetected ? "Yes" : "No");
-  Serial.print("Light detected: ");
-  Serial.println(lightDetected ? "Yes" : "No");
+  Serial.print("Trying to open the door?: ");
+  Serial.println(tiltSwitch ? "Yes" : "No");
     
   /*Conditions required to trigger the alarm:
       - the door is closed, the threat is detected, the light is on;
       - the door is closed, the threat is detected, the light is off;
       - the door is closed, the threat is not detected, the light is on; */
   
-  if(doorStatus && (threatDetected || lightDetected)){
+  if(doorStatus && (threatDetected || tiltSwitch)){
     Serial.println("Activate alarm!");  
     police();
   }
@@ -182,6 +185,13 @@ void loop(){
       lcd.scrollDisplayLeft();      
       delay(300);               
     }
+      
+    
+  }
+
+
+
+}
       
   }
 
