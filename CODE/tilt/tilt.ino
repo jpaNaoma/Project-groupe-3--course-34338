@@ -11,8 +11,12 @@ int alarm=0;
 int door=0;
 
 // Wi-Fi credentials
-const char* ssid = "Xperia_50";
-const char* password = "detvedjegikke";
+// const char* ssid = "Xperia_50";
+// const char* password = "detvedjegikke";
+
+const char* ssid = "Jarls Galaxy"; ///< @brief Wi-Fi network SSID.
+const char* password = "jarlvep26"; ///< @brief Wi-Fi password.
+
 
 // ThingSpeak settings
 WiFiClient client; 
@@ -84,6 +88,7 @@ void loop() {
         if (currentStateTilt != prevStateTilt) { ///< Detect tilt state changes.
             if (currentStateTilt == LOW) {
                 Serial.println("Forceful break in"); ///< Alert for a break-in.
+                alarm=1;
             }
             prevStateTilt = currentStateTilt; ///< Update tilt state.
         }
@@ -105,24 +110,15 @@ void loop() {
       if (strcmp((char*)buf , "LockedNFar") == 0){
         
         door=0;
-alarm = 0;
          Serial.println("Locking the door");
         lock.write(160);
       }
       else if(strcmp((char*)buf , "LockedNClose") == 0) {
     Serial.println("Locking the door223");
     door = 0;
-
-    alarm = 0; // Ensure the alarm starts off
-    loopCounter = 0; // Reset the loop counter
-
+    alarm = 1; // Ensure the alarm starts off
     lock.write(160); // Lock the door immediately
-
-    
 }
-
-
-
       else if(strcmp((char* )buf , "UnlockNFar") == 0){
          Serial.println("Unlocking the door");
         
@@ -148,13 +144,7 @@ alarm = 0;
     }
 
 
-     if (loopCounter < 10) {
-    loopCounter++;
-      } else if (loopCounter == 10 && alarm == 0 && door == 0) {
-    alarm = 1; // Trigger the alarm
-    Serial.println("Alarm goes off");
-    loopCounter = 0;
-    }
+  
 
  // Message handling logic here
 
@@ -165,6 +155,8 @@ alarm = 0;
         ThingSpeak.setField(1, door);
         ThingSpeak.setField(2, alarm);
         ThingSpeak.setField(3, currentStateTilt);
+        ThingSpeak.setField(4, valuePhotocell);
+
         int response = ThingSpeak.writeFields(channelID, APIKey);
 
         if (response == 200) {
