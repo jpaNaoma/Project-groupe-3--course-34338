@@ -142,7 +142,7 @@ void loop(){
   int intlightDetected = ThingSpeak.readIntField(channelID, 3, readAPIKey);
   
   // Check if the read operation was successful
-  if (intdoorStatus == -1 || intthreatDetected == -1) { //|| intlightDetected == -1) {
+  if (intdoorStatus == -1 || intthreatDetected == -1 || intlightDetected == -1) {
     Serial.println("Error reading from ThingSpeak.");
     delay(20000);  
     return;
