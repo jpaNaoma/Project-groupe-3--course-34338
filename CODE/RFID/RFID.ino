@@ -101,9 +101,7 @@ void setup() {
 
   SPI.begin();                     // Init SPI bus
   rfid.PCD_Init();                 // Init MFRC522
-  delay(4);                        // Optional delay. Some board do need more time after init to be ready, see Readme
-  rfid.PCD_DumpVersionToSerial();  // Show details of PCD - MFRC522 Card Reader details
-  Serial.println(F("Scan PICC to see UID, SAK, type, and data blocks..."));
+  delay(4);                    
 }
 
 /**
@@ -115,7 +113,7 @@ void setup() {
 */
 void loop() {
   unsigned long currentTime = millis(); // Current time
-  if(currentTime - lastTransmitTime > TransmitInterval){ // Send status every TransmitInterval
+  if(currentTime - lastTransmitTime > TransmitInterval){ ///< Send status every TransmitInterval
     measureDistance();
     if (ControlChar & 1<<1){
       angle -= 100;
@@ -130,21 +128,17 @@ void loop() {
     }
     UltraSonicServo.write(angle); ///< Move servo to the current angle.
 
-    if (distance > 0 && distance <= minDistance){
-      if ((ControlChar & 1<<0)){ // Sends the status over radio
+    if (distance > 0 && distance <= minDistance){ ///< Sends the status over radio
+      if ((ControlChar & 1<<0)){  ///< If system should be locked
         RadioSend("LockedNClose");
-       // Serial.println("Sending status: LockedNClose");
       }else{
         RadioSend("UnlockNClose");
-       // Serial.println("Sending status: UnlockedNClose");
       }
     }else{
-      if ((ControlChar & 1<<0)){ // Sends the status over radio
+      if ((ControlChar & 1<<0)){ 
         RadioSend("LockedNFar");
-       // Serial.println("Sending status: LockedNFar");
       }else{
         RadioSend("UnlockNFar");
-      //  Serial.println("Sending status: UnlockedNFar");
       }
     }
     lastTransmitTime = currentTime; 
