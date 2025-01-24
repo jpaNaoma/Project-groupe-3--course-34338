@@ -42,10 +42,10 @@ RH_ASK rf_driver;
 
 unsigned char nuidPICC[4];
 unsigned char AccessPICC[4] = {0x83,0xE8,0x1F, 0x16};
-char ControlChar = (1<<0); //! Char that is used to control the program, the 1st bit shows if the system should be locked or unlocked
+char ControlChar = (1<<0); // Char that is used to control the program, the 1st bit shows if the system should be locked or unlocked
 
 unsigned long lastTransmitTime = 0;
-const unsigned long TransmitInterval = 250; //! Send status every 250 ms
+const unsigned long TransmitInterval = 250; // Send status every 250 ms
 
 /**
 * @brief Send a string over radio
