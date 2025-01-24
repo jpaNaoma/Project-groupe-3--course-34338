@@ -1,0 +1,227 @@
+\doxysection{CODE/tilt/tilt.ino File Reference}
+\hypertarget{tilt_8ino}{}\label{tilt_8ino}\index{CODE/tilt/tilt.ino@{CODE/tilt/tilt.ino}}
+{\ttfamily \#include $<$RH\+\_\+\+ASK.\+h$>$}\newline
+{\ttfamily \#include "{}SPI.\+h"{}}\newline
+{\ttfamily \#include "{}Servo.\+h"{}}\newline
+{\ttfamily \#include $<$ESP8266\+Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$Thing\+Speak.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+RH\+\_\+\+ASK \mbox{\hyperlink{tilt_8ino_abcaa4452b81fc04d4abe5ea07ea75334}{rf\+\_\+driver}} (2000, 2)
+\item 
+void \mbox{\hyperlink{tilt_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{tilt_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{tilt_8ino_acb559820d9ca11295b4500f179ef6392}{i}} =0
+\item 
+int \mbox{\hyperlink{tilt_8ino_a9e3b50e48c757ee5067da367f779839a}{alarm}} =0
+\item 
+int \mbox{\hyperlink{tilt_8ino_a80788b5999566e5fd5e551c862390530}{door}} =0
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{tilt_8ino_a587ba0cb07f02913598610049a3bbb79}{ssid}} = "{}Jarls Galaxy"{}
+\begin{DoxyCompactList}\small\item\em Wi-\/\+Fi network SSID. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{tilt_8ino_aa4a2ebcb494493f648ae1e6975672575}{password}} = "{}jarlvep26"{}
+\begin{DoxyCompactList}\small\item\em Wi-\/\+Fi password. \end{DoxyCompactList}\item 
+Wi\+Fi\+Client \mbox{\hyperlink{tilt_8ino_a323dfc205549b3c13f0a25c1b670708a}{client}}
+\item 
+unsigned long \mbox{\hyperlink{tilt_8ino_ac45cf487b7a438e2176288955a338f25}{channel\+ID}} = 2814485
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{tilt_8ino_a3fe2d87e95035781883990bf38554c9f}{APIKey}} = "{}6COFCODQXCAV6\+F9\+O"{}
+\item 
+const int \mbox{\hyperlink{tilt_8ino_a8450960731db3add8cee227018677825}{photocell\+Pin}} = A0
+\begin{DoxyCompactList}\small\item\em Analog pin connected to the photocell sensor. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{tilt_8ino_a47b0dff059305f50185674797b2731e5}{tilt\+Pin}} = 15
+\begin{DoxyCompactList}\small\item\em 15 = D8, Digital pin connected to the tilt switch. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{tilt_8ino_a815a8f8cd56a44135955c48e1f269842}{prev\+State\+Tilt}} = LOW
+\begin{DoxyCompactList}\small\item\em Previous state of the tilt switch. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{tilt_8ino_ae1593812281d8ea606acb5a3c47a6ba0}{counter\+Photo\+Tilt}} = 0
+\begin{DoxyCompactList}\small\item\em Counter for sensor readings. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{tilt_8ino_a4a42ca9e43e3eefdabca412627bc8ba7}{sum\+Photocell}} = 0
+\begin{DoxyCompactList}\small\item\em Accumulated photocell sensor values. \end{DoxyCompactList}\item 
+Servo \mbox{\hyperlink{tilt_8ino_adad9499a803515d704d2d755988592cd}{lock}}
+\item 
+unsigned long \mbox{\hyperlink{tilt_8ino_a86027ad9c9159f02624d136fb63364fe}{previous\+Millis}} = 0
+\item 
+const unsigned long \mbox{\hyperlink{tilt_8ino_a7d81bed69a26114de6cde86ad1746f6e}{post\+Delay}} = 20000
+\item 
+int \mbox{\hyperlink{tilt_8ino_a86262625e3099f82a3c01b1c9fb26e25}{loop\+Counter}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{tilt_8ino_afe461d27b9c48d5921c00d521181f12f}\index{tilt.ino@{tilt.ino}!loop@{loop}}
+\index{loop@{loop}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{tilt_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\texorpdfstring{$<$}{<} Read the current photocell value.
+
+\texorpdfstring{$<$}{<} Read the current tilt switch state.
+
+\texorpdfstring{$<$}{<} Add photocell reading to sum.
+
+\texorpdfstring{$<$}{<} Increment reading counter.
+
+\texorpdfstring{$<$}{<} Process data every 10 readings.
+
+\texorpdfstring{$<$}{<} Check for high average changes brightness.
+
+\texorpdfstring{$<$}{<} Detect tilt state changes.
+
+\texorpdfstring{$<$}{<} Alert for a break-\/in.
+
+\texorpdfstring{$<$}{<} Update tilt state.
+
+\texorpdfstring{$<$}{<} Reset photocell sum.
+
+\texorpdfstring{$<$}{<} Reset counter.\Hypertarget{tilt_8ino_abcaa4452b81fc04d4abe5ea07ea75334}\index{tilt.ino@{tilt.ino}!rf\_driver@{rf\_driver}}
+\index{rf\_driver@{rf\_driver}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{rf\_driver()}{rf\_driver()}}
+{\footnotesize\ttfamily \label{tilt_8ino_abcaa4452b81fc04d4abe5ea07ea75334} 
+RH\+\_\+\+ASK rf\+\_\+driver (\begin{DoxyParamCaption}\item[{2000}]{}{, }\item[{2}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{tilt_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{tilt.ino@{tilt.ino}!setup@{setup}}
+\index{setup@{setup}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{tilt_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{tilt_8ino_a9e3b50e48c757ee5067da367f779839a}\index{tilt.ino@{tilt.ino}!alarm@{alarm}}
+\index{alarm@{alarm}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{alarm}{alarm}}
+{\footnotesize\ttfamily \label{tilt_8ino_a9e3b50e48c757ee5067da367f779839a} 
+int alarm =0}
+
+\Hypertarget{tilt_8ino_a3fe2d87e95035781883990bf38554c9f}\index{tilt.ino@{tilt.ino}!APIKey@{APIKey}}
+\index{APIKey@{APIKey}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{APIKey}{APIKey}}
+{\footnotesize\ttfamily \label{tilt_8ino_a3fe2d87e95035781883990bf38554c9f} 
+const char\texorpdfstring{$\ast$}{*} APIKey = "{}6COFCODQXCAV6\+F9\+O"{}}
+
+\Hypertarget{tilt_8ino_ac45cf487b7a438e2176288955a338f25}\index{tilt.ino@{tilt.ino}!channelID@{channelID}}
+\index{channelID@{channelID}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{channelID}{channelID}}
+{\footnotesize\ttfamily \label{tilt_8ino_ac45cf487b7a438e2176288955a338f25} 
+unsigned long channel\+ID = 2814485}
+
+\Hypertarget{tilt_8ino_a323dfc205549b3c13f0a25c1b670708a}\index{tilt.ino@{tilt.ino}!client@{client}}
+\index{client@{client}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily \label{tilt_8ino_a323dfc205549b3c13f0a25c1b670708a} 
+Wi\+Fi\+Client client}
+
+\Hypertarget{tilt_8ino_ae1593812281d8ea606acb5a3c47a6ba0}\index{tilt.ino@{tilt.ino}!counterPhotoTilt@{counterPhotoTilt}}
+\index{counterPhotoTilt@{counterPhotoTilt}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{counterPhotoTilt}{counterPhotoTilt}}
+{\footnotesize\ttfamily \label{tilt_8ino_ae1593812281d8ea606acb5a3c47a6ba0} 
+int counter\+Photo\+Tilt = 0}
+
+
+
+Counter for sensor readings. 
+
+\Hypertarget{tilt_8ino_a80788b5999566e5fd5e551c862390530}\index{tilt.ino@{tilt.ino}!door@{door}}
+\index{door@{door}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{door}{door}}
+{\footnotesize\ttfamily \label{tilt_8ino_a80788b5999566e5fd5e551c862390530} 
+int door =0}
+
+\Hypertarget{tilt_8ino_acb559820d9ca11295b4500f179ef6392}\index{tilt.ino@{tilt.ino}!i@{i}}
+\index{i@{i}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{i}{i}}
+{\footnotesize\ttfamily \label{tilt_8ino_acb559820d9ca11295b4500f179ef6392} 
+int i =0}
+
+\Hypertarget{tilt_8ino_adad9499a803515d704d2d755988592cd}\index{tilt.ino@{tilt.ino}!lock@{lock}}
+\index{lock@{lock}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{lock}{lock}}
+{\footnotesize\ttfamily \label{tilt_8ino_adad9499a803515d704d2d755988592cd} 
+Servo lock}
+
+\Hypertarget{tilt_8ino_a86262625e3099f82a3c01b1c9fb26e25}\index{tilt.ino@{tilt.ino}!loopCounter@{loopCounter}}
+\index{loopCounter@{loopCounter}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{loopCounter}{loopCounter}}
+{\footnotesize\ttfamily \label{tilt_8ino_a86262625e3099f82a3c01b1c9fb26e25} 
+int loop\+Counter = 0}
+
+\Hypertarget{tilt_8ino_aa4a2ebcb494493f648ae1e6975672575}\index{tilt.ino@{tilt.ino}!password@{password}}
+\index{password@{password}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{password}{password}}
+{\footnotesize\ttfamily \label{tilt_8ino_aa4a2ebcb494493f648ae1e6975672575} 
+const char\texorpdfstring{$\ast$}{*} password = "{}jarlvep26"{}}
+
+
+
+Wi-\/\+Fi password. 
+
+\Hypertarget{tilt_8ino_a8450960731db3add8cee227018677825}\index{tilt.ino@{tilt.ino}!photocellPin@{photocellPin}}
+\index{photocellPin@{photocellPin}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{photocellPin}{photocellPin}}
+{\footnotesize\ttfamily \label{tilt_8ino_a8450960731db3add8cee227018677825} 
+const int photocell\+Pin = A0}
+
+
+
+Analog pin connected to the photocell sensor. 
+
+\Hypertarget{tilt_8ino_a7d81bed69a26114de6cde86ad1746f6e}\index{tilt.ino@{tilt.ino}!postDelay@{postDelay}}
+\index{postDelay@{postDelay}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{postDelay}{postDelay}}
+{\footnotesize\ttfamily \label{tilt_8ino_a7d81bed69a26114de6cde86ad1746f6e} 
+const unsigned long post\+Delay = 20000}
+
+\Hypertarget{tilt_8ino_a86027ad9c9159f02624d136fb63364fe}\index{tilt.ino@{tilt.ino}!previousMillis@{previousMillis}}
+\index{previousMillis@{previousMillis}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{previousMillis}{previousMillis}}
+{\footnotesize\ttfamily \label{tilt_8ino_a86027ad9c9159f02624d136fb63364fe} 
+unsigned long previous\+Millis = 0}
+
+\Hypertarget{tilt_8ino_a815a8f8cd56a44135955c48e1f269842}\index{tilt.ino@{tilt.ino}!prevStateTilt@{prevStateTilt}}
+\index{prevStateTilt@{prevStateTilt}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{prevStateTilt}{prevStateTilt}}
+{\footnotesize\ttfamily \label{tilt_8ino_a815a8f8cd56a44135955c48e1f269842} 
+int prev\+State\+Tilt = LOW}
+
+
+
+Previous state of the tilt switch. 
+
+\Hypertarget{tilt_8ino_a587ba0cb07f02913598610049a3bbb79}\index{tilt.ino@{tilt.ino}!ssid@{ssid}}
+\index{ssid@{ssid}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{ssid}{ssid}}
+{\footnotesize\ttfamily \label{tilt_8ino_a587ba0cb07f02913598610049a3bbb79} 
+const char\texorpdfstring{$\ast$}{*} ssid = "{}Jarls Galaxy"{}}
+
+
+
+Wi-\/\+Fi network SSID. 
+
+\Hypertarget{tilt_8ino_a4a42ca9e43e3eefdabca412627bc8ba7}\index{tilt.ino@{tilt.ino}!sumPhotocell@{sumPhotocell}}
+\index{sumPhotocell@{sumPhotocell}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{sumPhotocell}{sumPhotocell}}
+{\footnotesize\ttfamily \label{tilt_8ino_a4a42ca9e43e3eefdabca412627bc8ba7} 
+int sum\+Photocell = 0}
+
+
+
+Accumulated photocell sensor values. 
+
+\Hypertarget{tilt_8ino_a47b0dff059305f50185674797b2731e5}\index{tilt.ino@{tilt.ino}!tiltPin@{tiltPin}}
+\index{tiltPin@{tiltPin}!tilt.ino@{tilt.ino}}
+\doxysubsubsection{\texorpdfstring{tiltPin}{tiltPin}}
+{\footnotesize\ttfamily \label{tilt_8ino_a47b0dff059305f50185674797b2731e5} 
+const int tilt\+Pin = 15}
+
+
+
+15 = D8, Digital pin connected to the tilt switch. 
+

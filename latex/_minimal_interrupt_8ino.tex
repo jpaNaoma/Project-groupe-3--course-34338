@@ -1,0 +1,126 @@
+\doxysection{CODE/\+RFID/rfid-\/master/examples/\+Minimal\+Interrupt/\+Minimal\+Interrupt.ino File Reference}
+\hypertarget{_minimal_interrupt_8ino}{}\label{_minimal_interrupt_8ino}\index{CODE/RFID/rfid-\/master/examples/MinimalInterrupt/MinimalInterrupt.ino@{CODE/RFID/rfid-\/master/examples/MinimalInterrupt/MinimalInterrupt.ino}}
+{\ttfamily \#include $<$SPI.\+h$>$}\newline
+{\ttfamily \#include $<$MFRC522.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_minimal_interrupt_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}~9
+\item 
+\#define \mbox{\hyperlink{_minimal_interrupt_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}~3
+\item 
+\#define \mbox{\hyperlink{_minimal_interrupt_8ino_affe1756c211a5cb663bb38443fd5e307}{IRQ\+\_\+\+PIN}}~2
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_minimal_interrupt_8ino_a2a46c81df0f231a98b49942e4f4688cb}{activate\+Rec}} (\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} \mbox{\hyperlink{_change_u_i_d_8ino_ac64ce4c8758bf4e4c9cc49c065a182eb}{mfrc522}})
+\item 
+void \mbox{\hyperlink{_minimal_interrupt_8ino_ac1044a7b2d6f62adda19d5bece774c90}{clear\+Int}} (\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} \mbox{\hyperlink{_change_u_i_d_8ino_ac64ce4c8758bf4e4c9cc49c065a182eb}{mfrc522}})
+\item 
+void \mbox{\hyperlink{_minimal_interrupt_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{_minimal_interrupt_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\item 
+void \mbox{\hyperlink{_minimal_interrupt_8ino_a58bfcaf707e4863a09a15ca2a11d33e5}{dump\+\_\+byte\+\_\+array}} (byte \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a0dc32c681766921ea9cb757927be6dd3}{buffer}}, byte buffer\+Size)
+\item 
+void \mbox{\hyperlink{_minimal_interrupt_8ino_ab8a3c8c05ccd043423c78720cff28a0c}{read\+Card}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} \mbox{\hyperlink{_minimal_interrupt_8ino_ac64ce4c8758bf4e4c9cc49c065a182eb}{mfrc522}} (\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}, \mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}})
+\item 
+volatile bool \mbox{\hyperlink{_minimal_interrupt_8ino_a5226ca9dddbdee5f46dc144f97ba46f7}{b\+New\+Int}} = false
+\item 
+byte \mbox{\hyperlink{_minimal_interrupt_8ino_a23984d630c33e8a86dcaf7b25d2454bd}{reg\+Val}} = 0x7F
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_minimal_interrupt_8ino_affe1756c211a5cb663bb38443fd5e307}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!IRQ\_PIN@{IRQ\_PIN}}
+\index{IRQ\_PIN@{IRQ\_PIN}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{IRQ\_PIN}{IRQ\_PIN}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_affe1756c211a5cb663bb38443fd5e307} 
+\#define IRQ\+\_\+\+PIN~2}
+
+\Hypertarget{_minimal_interrupt_8ino_a36932b0e869e0114f32e255f61306d6b}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!RST\_PIN@{RST\_PIN}}
+\index{RST\_PIN@{RST\_PIN}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{RST\_PIN}{RST\_PIN}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_a36932b0e869e0114f32e255f61306d6b} 
+\#define RST\+\_\+\+PIN~9}
+
+\DoxyHorRuler{0}
+ This is a \doxylink{class_m_f_r_c522}{MFRC522} library example; see \href{https://github.com/miguelbalboa/rfid}{\texttt{ https\+://github.\+com/miguelbalboa/rfid}} for further details and other examples.
+
+NOTE\+: The library file \doxylink{_m_f_r_c522_8h}{MFRC522.\+h} has a lot of useful info. Please read it.\hypertarget{_minimal_interrupt_8ino_autotoc_md12}{}\doxysubsubsection{\texorpdfstring{Released into the public domain.}{Released into the public domain.}}\label{_minimal_interrupt_8ino_autotoc_md12}
+Minimal example how to use the interrupts to read the UID of a MIFARE Classic PICC (= card/tag).\hypertarget{_minimal_interrupt_8ino_autotoc_md13}{}\doxysubsubsection{\texorpdfstring{Typical pin layout used\+:}{Typical pin layout used\+:}}\label{_minimal_interrupt_8ino_autotoc_md13}
+\doxylink{class_m_f_r_c522}{MFRC522} Arduino Arduino Arduino Arduino Arduino Reader/\+PCD Uno/101 Mega Nano v3 Leonardo/\+Micro Pro Micro \hypertarget{_minimal_interrupt_8ino_autotoc_md14}{}\doxysubsubsection{\texorpdfstring{Signal Pin Pin Pin Pin Pin Pin}{Signal Pin Pin Pin Pin Pin Pin}}\label{_minimal_interrupt_8ino_autotoc_md14}
+RST/\+Reset RST 9 5 D9 RESET/\+ICSP-\/5 RST SPI SS SDA(\+SS) 10 53 D10 3 10 IRQ ? ? ? ? 2 10 SPI MOSI MOSI 11 / ICSP-\/4 51 D11 ICSP-\/4 16 SPI MISO MISO 12 / ICSP-\/1 50 D12 ICSP-\/1 14 SPI SCK SCK 13 / ICSP-\/3 52 D13 ICSP-\/3 15
+
+More pin layouts for other boards can be found here\+: \href{https://github.com/miguelbalboa/rfid\#pin-layout}{\texttt{ https\+://github.\+com/miguelbalboa/rfid\#pin-\/layout}} \Hypertarget{_minimal_interrupt_8ino_a86fac98c9b4c98a3e50fc45440878391}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!SS\_PIN@{SS\_PIN}}
+\index{SS\_PIN@{SS\_PIN}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{SS\_PIN}{SS\_PIN}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_a86fac98c9b4c98a3e50fc45440878391} 
+\#define SS\+\_\+\+PIN~3}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_minimal_interrupt_8ino_a2a46c81df0f231a98b49942e4f4688cb}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!activateRec@{activateRec}}
+\index{activateRec@{activateRec}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{activateRec()}{activateRec()}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_a2a46c81df0f231a98b49942e4f4688cb} 
+void activate\+Rec (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}}}]{mfrc522}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_minimal_interrupt_8ino_ac1044a7b2d6f62adda19d5bece774c90}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!clearInt@{clearInt}}
+\index{clearInt@{clearInt}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{clearInt()}{clearInt()}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_ac1044a7b2d6f62adda19d5bece774c90} 
+void clear\+Int (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}}}]{mfrc522}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_minimal_interrupt_8ino_a58bfcaf707e4863a09a15ca2a11d33e5}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!dump\_byte\_array@{dump\_byte\_array}}
+\index{dump\_byte\_array@{dump\_byte\_array}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{dump\_byte\_array()}{dump\_byte\_array()}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_a58bfcaf707e4863a09a15ca2a11d33e5} 
+void dump\+\_\+byte\+\_\+array (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{byte}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+Helper routine to dump a byte array as hex values to Serial. \Hypertarget{_minimal_interrupt_8ino_afe461d27b9c48d5921c00d521181f12f}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!loop@{loop}}
+\index{loop@{loop}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Main loop. \Hypertarget{_minimal_interrupt_8ino_ab8a3c8c05ccd043423c78720cff28a0c}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!readCard@{readCard}}
+\index{readCard@{readCard}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{readCard()}{readCard()}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_ab8a3c8c05ccd043423c78720cff28a0c} 
+void read\+Card (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\doxylink{class_m_f_r_c522}{MFRC522} interrupt serving routine \Hypertarget{_minimal_interrupt_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!setup@{setup}}
+\index{setup@{setup}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Initialize. 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_minimal_interrupt_8ino_a5226ca9dddbdee5f46dc144f97ba46f7}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!bNewInt@{bNewInt}}
+\index{bNewInt@{bNewInt}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{bNewInt}{bNewInt}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_a5226ca9dddbdee5f46dc144f97ba46f7} 
+volatile bool b\+New\+Int = false}
+
+\Hypertarget{_minimal_interrupt_8ino_ac64ce4c8758bf4e4c9cc49c065a182eb}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!mfrc522@{mfrc522}}
+\index{mfrc522@{mfrc522}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{mfrc522}{mfrc522}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_ac64ce4c8758bf4e4c9cc49c065a182eb} 
+\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} mfrc522(\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}, \mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}) (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}}]{}{, }\item[{\mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_minimal_interrupt_8ino_a23984d630c33e8a86dcaf7b25d2454bd}\index{MinimalInterrupt.ino@{MinimalInterrupt.ino}!regVal@{regVal}}
+\index{regVal@{regVal}!MinimalInterrupt.ino@{MinimalInterrupt.ino}}
+\doxysubsubsection{\texorpdfstring{regVal}{regVal}}
+{\footnotesize\ttfamily \label{_minimal_interrupt_8ino_a23984d630c33e8a86dcaf7b25d2454bd} 
+byte reg\+Val = 0x7F}
+

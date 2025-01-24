@@ -1,0 +1,108 @@
+\doxysection{CODE/\+RFID/rfid-\/master/examples/rfid\+\_\+default\+\_\+keys/rfid\+\_\+default\+\_\+keys.ino File Reference}
+\hypertarget{rfid__default__keys_8ino}{}\label{rfid__default__keys_8ino}\index{CODE/RFID/rfid-\/master/examples/rfid\_default\_keys/rfid\_default\_keys.ino@{CODE/RFID/rfid-\/master/examples/rfid\_default\_keys/rfid\_default\_keys.ino}}
+{\ttfamily \#include $<$SPI.\+h$>$}\newline
+{\ttfamily \#include $<$MFRC522.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{rfid__default__keys_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}~9
+\item 
+\#define \mbox{\hyperlink{rfid__default__keys_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}~10
+\item 
+\#define \mbox{\hyperlink{rfid__default__keys_8ino_a4e9333178aea3cb0d87e7e01a31004ee}{NR\+\_\+\+KNOWN\+\_\+\+KEYS}}~8
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{rfid__default__keys_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{rfid__default__keys_8ino_a58bfcaf707e4863a09a15ca2a11d33e5}{dump\+\_\+byte\+\_\+array}} (byte \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a0dc32c681766921ea9cb757927be6dd3}{buffer}}, byte buffer\+Size)
+\item 
+bool \mbox{\hyperlink{rfid__default__keys_8ino_a17a9c7b3e5a9a0420c28a157f76b7c34}{try\+\_\+key}} (\mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MFRC522\+::\+MIFARE\+\_\+\+Key}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_mifare_classic_value_block_8ino_a74db86b29b9d826a8007113e1fd3d2d4}{key}})
+\item 
+void \mbox{\hyperlink{rfid__default__keys_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} \mbox{\hyperlink{rfid__default__keys_8ino_ac64ce4c8758bf4e4c9cc49c065a182eb}{mfrc522}} (\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}, \mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}})
+\item 
+byte \mbox{\hyperlink{rfid__default__keys_8ino_a8a1087031f33ac66faa31115d7cca601}{known\+Keys}} \mbox{[}\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a4e9333178aea3cb0d87e7e01a31004ee}{NR\+\_\+\+KNOWN\+\_\+\+KEYS}}\mbox{]}\mbox{[}\mbox{\hyperlink{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eedea410c51021b253b680b7ec518ccc818ce}{MFRC522\+::\+MF\+\_\+\+KEY\+\_\+\+SIZE}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{rfid__default__keys_8ino_a4e9333178aea3cb0d87e7e01a31004ee}\index{rfid\_default\_keys.ino@{rfid\_default\_keys.ino}!NR\_KNOWN\_KEYS@{NR\_KNOWN\_KEYS}}
+\index{NR\_KNOWN\_KEYS@{NR\_KNOWN\_KEYS}!rfid\_default\_keys.ino@{rfid\_default\_keys.ino}}
+\doxysubsubsection{\texorpdfstring{NR\_KNOWN\_KEYS}{NR\_KNOWN\_KEYS}}
+{\footnotesize\ttfamily \label{rfid__default__keys_8ino_a4e9333178aea3cb0d87e7e01a31004ee} 
+\#define NR\+\_\+\+KNOWN\+\_\+\+KEYS~8}
+
+\Hypertarget{rfid__default__keys_8ino_a36932b0e869e0114f32e255f61306d6b}\index{rfid\_default\_keys.ino@{rfid\_default\_keys.ino}!RST\_PIN@{RST\_PIN}}
+\index{RST\_PIN@{RST\_PIN}!rfid\_default\_keys.ino@{rfid\_default\_keys.ino}}
+\doxysubsubsection{\texorpdfstring{RST\_PIN}{RST\_PIN}}
+{\footnotesize\ttfamily \label{rfid__default__keys_8ino_a36932b0e869e0114f32e255f61306d6b} 
+\#define RST\+\_\+\+PIN~9}
+
+\Hypertarget{rfid__default__keys_8ino_a86fac98c9b4c98a3e50fc45440878391}\index{rfid\_default\_keys.ino@{rfid\_default\_keys.ino}!SS\_PIN@{SS\_PIN}}
+\index{SS\_PIN@{SS\_PIN}!rfid\_default\_keys.ino@{rfid\_default\_keys.ino}}
+\doxysubsubsection{\texorpdfstring{SS\_PIN}{SS\_PIN}}
+{\footnotesize\ttfamily \label{rfid__default__keys_8ino_a86fac98c9b4c98a3e50fc45440878391} 
+\#define SS\+\_\+\+PIN~10}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{rfid__default__keys_8ino_a58bfcaf707e4863a09a15ca2a11d33e5}\index{rfid\_default\_keys.ino@{rfid\_default\_keys.ino}!dump\_byte\_array@{dump\_byte\_array}}
+\index{dump\_byte\_array@{dump\_byte\_array}!rfid\_default\_keys.ino@{rfid\_default\_keys.ino}}
+\doxysubsubsection{\texorpdfstring{dump\_byte\_array()}{dump\_byte\_array()}}
+{\footnotesize\ttfamily \label{rfid__default__keys_8ino_a58bfcaf707e4863a09a15ca2a11d33e5} 
+void dump\+\_\+byte\+\_\+array (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{byte}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+\Hypertarget{rfid__default__keys_8ino_afe461d27b9c48d5921c00d521181f12f}\index{rfid\_default\_keys.ino@{rfid\_default\_keys.ino}!loop@{loop}}
+\index{loop@{loop}!rfid\_default\_keys.ino@{rfid\_default\_keys.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{rfid__default__keys_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{rfid__default__keys_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{rfid\_default\_keys.ino@{rfid\_default\_keys.ino}!setup@{setup}}
+\index{setup@{setup}!rfid\_default\_keys.ino@{rfid\_default\_keys.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{rfid__default__keys_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{rfid__default__keys_8ino_a17a9c7b3e5a9a0420c28a157f76b7c34}\index{rfid\_default\_keys.ino@{rfid\_default\_keys.ino}!try\_key@{try\_key}}
+\index{try\_key@{try\_key}!rfid\_default\_keys.ino@{rfid\_default\_keys.ino}}
+\doxysubsubsection{\texorpdfstring{try\_key()}{try\_key()}}
+{\footnotesize\ttfamily \label{rfid__default__keys_8ino_a17a9c7b3e5a9a0420c28a157f76b7c34} 
+bool try\+\_\+key (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_m_f_r_c522_1_1_m_i_f_a_r_e___key}{MFRC522\+::\+MIFARE\+\_\+\+Key}} \texorpdfstring{$\ast$}{*}}]{key}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{rfid__default__keys_8ino_a8a1087031f33ac66faa31115d7cca601}\index{rfid\_default\_keys.ino@{rfid\_default\_keys.ino}!knownKeys@{knownKeys}}
+\index{knownKeys@{knownKeys}!rfid\_default\_keys.ino@{rfid\_default\_keys.ino}}
+\doxysubsubsection{\texorpdfstring{knownKeys}{knownKeys}}
+{\footnotesize\ttfamily \label{rfid__default__keys_8ino_a8a1087031f33ac66faa31115d7cca601} 
+byte known\+Keys\mbox{[}\mbox{\hyperlink{_r_f_i_d-_cloner_8ino_a4e9333178aea3cb0d87e7e01a31004ee}{NR\+\_\+\+KNOWN\+\_\+\+KEYS}}\mbox{]}\mbox{[}\mbox{\hyperlink{class_m_f_r_c522_a92c17a5b83cc4fde3cc3454c03b8eedea410c51021b253b680b7ec518ccc818ce}{MFRC522\+::\+MF\+\_\+\+KEY\+\_\+\+SIZE}}\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{}
+\DoxyCodeLine{\ \ \ \ \{0xff,\ 0xff,\ 0xff,\ 0xff,\ 0xff,\ 0xff\},\ }
+\DoxyCodeLine{\ \ \ \ \{0xa0,\ 0xa1,\ 0xa2,\ 0xa3,\ 0xa4,\ 0xa5\},\ }
+\DoxyCodeLine{\ \ \ \ \{0xb0,\ 0xb1,\ 0xb2,\ 0xb3,\ 0xb4,\ 0xb5\},\ }
+\DoxyCodeLine{\ \ \ \ \{0x4d,\ 0x3a,\ 0x99,\ 0xc3,\ 0x51,\ 0xdd\},\ }
+\DoxyCodeLine{\ \ \ \ \{0x1a,\ 0x98,\ 0x2c,\ 0x7e,\ 0x45,\ 0x9a\},\ }
+\DoxyCodeLine{\ \ \ \ \{0xd3,\ 0xf7,\ 0xd3,\ 0xf7,\ 0xd3,\ 0xf7\},\ }
+\DoxyCodeLine{\ \ \ \ \{0xaa,\ 0xbb,\ 0xcc,\ 0xdd,\ 0xee,\ 0xff\},\ }
+\DoxyCodeLine{\ \ \ \ \{0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00\}\ \ }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{rfid__default__keys_8ino_ac64ce4c8758bf4e4c9cc49c065a182eb}\index{rfid\_default\_keys.ino@{rfid\_default\_keys.ino}!mfrc522@{mfrc522}}
+\index{mfrc522@{mfrc522}!rfid\_default\_keys.ino@{rfid\_default\_keys.ino}}
+\doxysubsubsection{\texorpdfstring{mfrc522}{mfrc522}}
+{\footnotesize\ttfamily \label{rfid__default__keys_8ino_ac64ce4c8758bf4e4c9cc49c065a182eb} 
+\mbox{\hyperlink{class_m_f_r_c522}{MFRC522}} mfrc522(\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}, \mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}) (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_change_u_i_d_8ino_a86fac98c9b4c98a3e50fc45440878391}{SS\+\_\+\+PIN}}}]{}{, }\item[{\mbox{\hyperlink{_change_u_i_d_8ino_a36932b0e869e0114f32e255f61306d6b}{RST\+\_\+\+PIN}}}]{}{}\end{DoxyParamCaption})}
+

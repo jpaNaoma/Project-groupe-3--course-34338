@@ -1,0 +1,26 @@
+var _virtual_wire_8h =
+[
+    [ "VW_HEADER_LEN", "_virtual_wire_8h.html#a8457f2497e3ba191c30504d83bc275db", null ],
+    [ "VW_MAX_MESSAGE_LEN", "_virtual_wire_8h.html#a452f8c2d0db1bb9a2ca507642f396715", null ],
+    [ "VW_MAX_PAYLOAD", "_virtual_wire_8h.html#a603f4fa1a2bb0c02a1c54a466e907f6e", null ],
+    [ "VW_RAMP_ADJUST", "_virtual_wire_8h.html#ad6c091ae0ab196b5150a6de9ef868539", null ],
+    [ "VW_RAMP_INC", "_virtual_wire_8h.html#aa0cc20bc395fcefb080c0b7674623038", null ],
+    [ "VW_RAMP_INC_ADVANCE", "_virtual_wire_8h.html#a06c6a3d88ba1c8410bbbec928f1b1cac", null ],
+    [ "VW_RAMP_INC_RETARD", "_virtual_wire_8h.html#aaac6e7f3bcf04ff6e6734abd80f7fc67", null ],
+    [ "VW_RAMP_TRANSITION", "_virtual_wire_8h.html#a8f592fa10bd1cd9aa3cde21e1b7b8f85", null ],
+    [ "VW_RX_RAMP_LEN", "_virtual_wire_8h.html#af48f8055714fb577ce1a7c496ab7aaa6", null ],
+    [ "VW_RX_SAMPLES_PER_BIT", "_virtual_wire_8h.html#ad5a5c8919a669ce0121375f7bc08f376", null ],
+    [ "vw_get_message", "_virtual_wire_8h.html#a30fe9c9ebfe7e52ca713a1785cd3aac9", null ],
+    [ "vw_have_message", "_virtual_wire_8h.html#adda86a5d05bbe2c16a34d498ce954fba", null ],
+    [ "vw_rx_start", "_virtual_wire_8h.html#a679b3f838975d923d083446fed38ba28", null ],
+    [ "vw_rx_stop", "_virtual_wire_8h.html#af4b28feb2cbe309a45ac46bf6a5f6c16", null ],
+    [ "vw_send", "_virtual_wire_8h.html#afe452c485bfe43b1c9088f66ec3b63b2", null ],
+    [ "vw_set_ptt_inverted", "_virtual_wire_8h.html#afed4337c63b2e784774c415120db3d02", null ],
+    [ "vw_set_ptt_pin", "_virtual_wire_8h.html#aca84a8cff0d24bc736ab2ce327e6c517", null ],
+    [ "vw_set_rx_pin", "_virtual_wire_8h.html#ae62b601260ae59e7e83c1e63ae0c064b", null ],
+    [ "vw_set_tx_pin", "_virtual_wire_8h.html#ad271843c34028a27831703d561fc1eab", null ],
+    [ "vw_setup", "_virtual_wire_8h.html#a9f9d92761cce2886e5ca3d194374b220", null ],
+    [ "vw_wait_rx", "_virtual_wire_8h.html#a9845b089ad98c22fc472ced943ba0a83", null ],
+    [ "vw_wait_rx_max", "_virtual_wire_8h.html#abe6b9ab869f0367aca1b0fa4237070f8", null ],
+    [ "vw_wait_tx", "_virtual_wire_8h.html#a32419e4ef39d639ef06978bb496f1d0c", null ]
+];

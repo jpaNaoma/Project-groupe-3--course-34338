@@ -1,0 +1,176 @@
+\doxysection{CODE/ultrasonic\+\_\+sensor/ultrasonic\+\_\+sensor.ino File Reference}
+\hypertarget{ultrasonic__sensor_8ino}{}\label{ultrasonic__sensor_8ino}\index{CODE/ultrasonic\_sensor/ultrasonic\_sensor.ino@{CODE/ultrasonic\_sensor/ultrasonic\_sensor.ino}}
+
+
+A script for controlling an HC-\/\+SR04 ultrasonic sensor and SG90 servo motor. The servo sweeps like a radar, and the script measures distance to objects. If an object is within a specified range, the onboard LED lights up.  
+
+
+{\ttfamily \#include $<$Servo.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ultrasonic__sensor_8ino_aee62c3a7d3e632bffa8988ef89be8fee}{trig\+Pin}}~2
+\begin{DoxyCompactList}\small\item\em Pin definitions for the ultrasonic sensor. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{ultrasonic__sensor_8ino_a56811be58e9ac98a4d85f1af9e973453}{echo\+Pin}}~3
+\begin{DoxyCompactList}\small\item\em Echo pin for the ultrasonic sensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ultrasonic__sensor_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Setup function initializes pins and serial communication. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ultrasonic__sensor_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\begin{DoxyCompactList}\small\item\em Main loop sweeps the servo and measures distance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ultrasonic__sensor_8ino_a25a80b44317c718d0a6ede130a43833e}{measure\+Distance}} ()
+\begin{DoxyCompactList}\small\item\em Measures distance using the ultrasonic sensor and controls the onboard LED. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Servo \mbox{\hyperlink{ultrasonic__sensor_8ino_adf17ca54f95cc0bdcfeaaa2fc007438b}{radar}}
+\item 
+Servo \mbox{\hyperlink{ultrasonic__sensor_8ino_adad9499a803515d704d2d755988592cd}{lock}}
+\item 
+long \mbox{\hyperlink{ultrasonic__sensor_8ino_a49411c0db3bc12e9d548e069021b0645}{duration}}
+\item 
+float \mbox{\hyperlink{ultrasonic__sensor_8ino_a06f14a9abd47b91465f895d5259cdc1b}{distance}}
+\item 
+const int \mbox{\hyperlink{ultrasonic__sensor_8ino_aa8c01f960dce86380266036abc48ee73}{min\+Distance}} = 10
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A script for controlling an HC-\/\+SR04 ultrasonic sensor and SG90 servo motor. The servo sweeps like a radar, and the script measures distance to objects. If an object is within a specified range, the onboard LED lights up. 
+
+\begin{DoxyAuthor}{Author}
+Jarl Pallesen 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/16
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{ultrasonic__sensor_8ino_a56811be58e9ac98a4d85f1af9e973453}\index{ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}!echoPin@{echoPin}}
+\index{echoPin@{echoPin}!ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}}
+\doxysubsubsection{\texorpdfstring{echoPin}{echoPin}}
+{\footnotesize\ttfamily \label{ultrasonic__sensor_8ino_a56811be58e9ac98a4d85f1af9e973453} 
+\#define echo\+Pin~3}
+
+
+
+Echo pin for the ultrasonic sensor. 
+
+\Hypertarget{ultrasonic__sensor_8ino_aee62c3a7d3e632bffa8988ef89be8fee}\index{ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}!trigPin@{trigPin}}
+\index{trigPin@{trigPin}!ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}}
+\doxysubsubsection{\texorpdfstring{trigPin}{trigPin}}
+{\footnotesize\ttfamily \label{ultrasonic__sensor_8ino_aee62c3a7d3e632bffa8988ef89be8fee} 
+\#define trig\+Pin~2}
+
+
+
+Pin definitions for the ultrasonic sensor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em trig\+Pin} & Trigger pin for the ultrasonic sensor. \\
+\hline
+{\em echo\+Pin} & Echo pin for the ultrasonic sensor. \\
+\hline
+{\em duration} & Duration of echo signal in microseconds. \\
+\hline
+{\em distance} & Calculated distance in cm. \\
+\hline
+{\em min\+Distance} & Minimum distance (in cm) to trigger LED. Trigger pin for the ultrasonic sensor. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{ultrasonic__sensor_8ino_afe461d27b9c48d5921c00d521181f12f}\index{ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}!loop@{loop}}
+\index{loop@{loop}!ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{ultrasonic__sensor_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Main loop sweeps the servo and measures distance. 
+
+\texorpdfstring{$<$}{<} Move servo to the current angle.
+
+\texorpdfstring{$<$}{<} Wait for servo to reach position.
+
+\texorpdfstring{$<$}{<} Measure and process distance.
+
+\texorpdfstring{$<$}{<} Move servo to the current angle.
+
+\texorpdfstring{$<$}{<} Wait for servo to reach position.
+
+\texorpdfstring{$<$}{<} Measure and process distance.\Hypertarget{ultrasonic__sensor_8ino_a25a80b44317c718d0a6ede130a43833e}\index{ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}!measureDistance@{measureDistance}}
+\index{measureDistance@{measureDistance}!ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}}
+\doxysubsubsection{\texorpdfstring{measureDistance()}{measureDistance()}}
+{\footnotesize\ttfamily \label{ultrasonic__sensor_8ino_a25a80b44317c718d0a6ede130a43833e} 
+void measure\+Distance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Measures distance using the ultrasonic sensor and controls the onboard LED. 
+
+\texorpdfstring{$<$}{<} Turn on LED if object is close.
+
+\texorpdfstring{$<$}{<} Turn off LED if no object is nearby.\Hypertarget{ultrasonic__sensor_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}!setup@{setup}}
+\index{setup@{setup}!ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{ultrasonic__sensor_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Setup function initializes pins and serial communication. 
+
+\texorpdfstring{$<$}{<} Set trigger pin as output.
+
+\texorpdfstring{$<$}{<} Set echo pin as input.
+
+\texorpdfstring{$<$}{<} Set onboard LED pin as output.
+
+\texorpdfstring{$<$}{<} Attach servo to pin 4 (orange wire to digital output, brown to ground, red to power).
+
+\texorpdfstring{$<$}{<} Initialize serial communication at 115200 baud.
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{ultrasonic__sensor_8ino_a06f14a9abd47b91465f895d5259cdc1b}\index{ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}!distance@{distance}}
+\index{distance@{distance}!ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}}
+\doxysubsubsection{\texorpdfstring{distance}{distance}}
+{\footnotesize\ttfamily \label{ultrasonic__sensor_8ino_a06f14a9abd47b91465f895d5259cdc1b} 
+float distance}
+
+\Hypertarget{ultrasonic__sensor_8ino_a49411c0db3bc12e9d548e069021b0645}\index{ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}!duration@{duration}}
+\index{duration@{duration}!ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}}
+\doxysubsubsection{\texorpdfstring{duration}{duration}}
+{\footnotesize\ttfamily \label{ultrasonic__sensor_8ino_a49411c0db3bc12e9d548e069021b0645} 
+long duration}
+
+\Hypertarget{ultrasonic__sensor_8ino_adad9499a803515d704d2d755988592cd}\index{ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}!lock@{lock}}
+\index{lock@{lock}!ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}}
+\doxysubsubsection{\texorpdfstring{lock}{lock}}
+{\footnotesize\ttfamily \label{ultrasonic__sensor_8ino_adad9499a803515d704d2d755988592cd} 
+Servo lock}
+
+\Hypertarget{ultrasonic__sensor_8ino_aa8c01f960dce86380266036abc48ee73}\index{ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}!minDistance@{minDistance}}
+\index{minDistance@{minDistance}!ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}}
+\doxysubsubsection{\texorpdfstring{minDistance}{minDistance}}
+{\footnotesize\ttfamily \label{ultrasonic__sensor_8ino_aa8c01f960dce86380266036abc48ee73} 
+const int min\+Distance = 10}
+
+\Hypertarget{ultrasonic__sensor_8ino_adf17ca54f95cc0bdcfeaaa2fc007438b}\index{ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}!radar@{radar}}
+\index{radar@{radar}!ultrasonic\_sensor.ino@{ultrasonic\_sensor.ino}}
+\doxysubsubsection{\texorpdfstring{radar}{radar}}
+{\footnotesize\ttfamily \label{ultrasonic__sensor_8ino_adf17ca54f95cc0bdcfeaaa2fc007438b} 
+Servo radar}
+

@@ -1,0 +1,113 @@
+\doxysection{Virtual\+Wire.\+h}
+\hypertarget{_virtual_wire_8h_source}{}\label{_virtual_wire_8h_source}\index{CODE/RadioTest/Transmitter/VirtualWire-\/master/VirtualWire-\/master/VirtualWire.h@{CODE/RadioTest/Transmitter/VirtualWire-\/master/VirtualWire-\/master/VirtualWire.h}}
+\mbox{\hyperlink{_virtual_wire_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ VirtualWire.h}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ Virtual\ Wire\ implementation\ for\ Arduino}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ See\ the\ README\ file\ in\ this\ directory\ fdor\ documentation}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ Author:\ Mike\ McCauley\ (mikem@open.com.au)}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ Copyright\ (C)\ 2008\ Mike\ McCauley}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ \$Id:\ VirtualWire.h,v\ 1.3\ 2009/03/30\ 00:07:24\ mikem\ Exp\ \$}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ VirtualWire\_h}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ VirtualWire\_h}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <wiring.h>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ Maximum\ number\ of\ bytes\ in\ a\ message,\ counting\ the\ byte\ count\ and\ FCS}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ VW\_MAX\_MESSAGE\_LEN\ 30}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ The\ maximum\ payload\ length}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ VW\_MAX\_PAYLOAD\ VW\_MAX\_MESSAGE\_LEN-\/3}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ The\ size\ of\ the\ receiver\ ramp.\ Ramp\ wraps\ modulu\ this\ number}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ VW\_RX\_RAMP\_LEN\ 160}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ Number\ of\ samples\ per\ bit}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ VW\_RX\_SAMPLES\_PER\_BIT\ 8}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ Ramp\ adjustment\ parameters}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Standard\ is\ if\ a\ transition\ occurs\ before\ VW\_RAMP\_TRANSITION\ (80)\ in\ the\ ramp,}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ the\ ramp\ is\ retarded\ by\ adding\ VW\_RAMP\_INC\_RETARD\ (11)}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ else\ by\ adding\ VW\_RAMP\_INC\_ADVANCE\ (29)}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ If\ there\ is\ no\ transition\ it\ is\ adjusted\ by\ VW\_RAMP\_INC\ (20)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ VW\_RAMP\_INC\ (VW\_RX\_RAMP\_LEN/VW\_RX\_SAMPLES\_PER\_BIT)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ VW\_RAMP\_TRANSITION\ VW\_RX\_RAMP\_LEN/2}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ VW\_RAMP\_ADJUST\ 9}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ VW\_RAMP\_INC\_RETARD\ (VW\_RAMP\_INC-\/VW\_RAMP\_ADJUST)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ VW\_RAMP\_INC\_ADVANCE\ (VW\_RAMP\_INC+VW\_RAMP\_ADJUST)}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ Outgoing\ message\ bits\ grouped\ as\ 6-\/bit\ words}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ 36\ alternating\ 1/0\ bits,\ followed\ by\ 12\ bits\ of\ start\ symbol}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ Followed\ immediately\ by\ the\ 4-\/6\ bit\ encoded\ byte\ count,\ }}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ message\ buffer\ and\ 2\ byte\ FCS}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ Each\ byte\ from\ the\ byte\ count\ on\ is\ translated\ into\ 2x6-\/bit\ words}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ Caution,\ each\ symbol\ is\ transmitted\ LSBit\ first,\ }}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ but\ each\ byte\ is\ transmitted\ high\ nybble\ first}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ VW\_HEADER\_LEN\ 8}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ Cant\ really\ do\ this\ as\ a\ real\ C++\ class,\ since\ we\ need\ to\ have\ }}
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ an\ ISR}}
+\DoxyCodeLine{00050\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{00051\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ digital\ IO\ pin\ to\ be\ for\ transmit\ data}}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//\ Defaults\ to\ 12}}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_virtual_wire_8h_ad271843c34028a27831703d561fc1eab}{vw\_set\_tx\_pin}}(uint8\_t\ pin);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ digital\ IO\ pin\ to\ be\ for\ receive\ data}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{//\ Defaults\ to\ 11}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_virtual_wire_8h_ae62b601260ae59e7e83c1e63ae0c064b}{vw\_set\_rx\_pin}}(uint8\_t\ pin);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ digital\ IO\ pin\ to\ enable\ the\ transmitter\ (press\ to\ talk)}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ Defaults\ to\ 10}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_virtual_wire_8h_aca84a8cff0d24bc736ab2ce327e6c517}{vw\_set\_ptt\_pin}}(uint8\_t\ pin);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//\ By\ default\ the\ PTT\ pin\ goes\ high\ when\ the\ transmitter\ is\ enabled.}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//\ This\ flag\ forces\ it\ low\ when\ the\ transmitter\ is\ enabled.}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_virtual_wire_8h_afed4337c63b2e784774c415120db3d02}{vw\_set\_ptt\_inverted}}(uint8\_t\ inverted);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ Initialise\ the\ VirtualWire\ software,\ to\ operate\ at\ speed\ bits\ per\ second}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{//\ Call\ this\ one\ in\ your\ setup()\ after\ any\ vw\_set\_*\ calls}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{//\ Must\ call\ vw\_rx\_start()\ before\ you\ will\ get\ any\ messages}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_virtual_wire_8h_a9f9d92761cce2886e5ca3d194374b220}{vw\_setup}}(uint16\_t\ speed);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{//\ Start\ the\ Phase\ Locked\ Loop\ listening\ to\ the\ receiver}}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ Must\ do\ this\ before\ you\ can\ receive\ any\ messages}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{comment}{//\ When\ a\ message\ is\ available\ (good\ checksum\ or\ not),\ vw\_have\_message();}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{//\ will\ return\ true.}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_virtual_wire_8h_a679b3f838975d923d083446fed38ba28}{vw\_rx\_start}}();}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{//\ Stop\ the\ Phase\ Locked\ Loop\ listening\ to\ the\ receiver}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//\ No\ messages\ will\ be\ received\ until\ vw\_rx\_start()\ is\ called\ again}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//\ Saves\ interrupt\ processing\ cycles}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_virtual_wire_8h_af4b28feb2cbe309a45ac46bf6a5f6c16}{vw\_rx\_stop}}();}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//\ Block\ until\ the\ transmitter\ is\ idle}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_virtual_wire_8h_a32419e4ef39d639ef06978bb496f1d0c}{vw\_wait\_tx}}();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{comment}{//\ Block\ until\ a\ message\ is\ available}}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_virtual_wire_8h_a9845b089ad98c22fc472ced943ba0a83}{vw\_wait\_rx}}();}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ or\ for\ a\ max\ time}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{extern}\ uint8\_t\ \mbox{\hyperlink{_virtual_wire_8h_abe6b9ab869f0367aca1b0fa4237070f8}{vw\_wait\_rx\_max}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ milliseconds);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{comment}{//\ Send\ a\ message\ with\ the\ given\ length.\ Returns\ almost\ immediately,}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{//\ and\ message\ will\ be\ sent\ at\ the\ right\ timing\ by\ interrupts}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//\ Returns\ true\ if\ the\ message\ was\ accepted\ for\ transmissions}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//\ Returns\ false\ if\ the\ message\ is\ too\ long\ (>VW\_MAX\_MESSAGE\_LEN\ -\/\ 3)}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{extern}\ uint8\_t\ \mbox{\hyperlink{_virtual_wire_8h_afe452c485bfe43b1c9088f66ec3b63b2}{vw\_send}}(uint8\_t*\ buf,\ uint8\_t\ len);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{comment}{//\ Returns\ true\ if\ an\ unread\ message\ is\ available}}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{extern}\ uint8\_t\ \mbox{\hyperlink{_virtual_wire_8h_adda86a5d05bbe2c16a34d498ce954fba}{vw\_have\_message}}();}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ If\ a\ message\ is\ available\ (good\ checksum\ or\ not),\ copies}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ up\ to\ *len\ octets\ to\ buf.}}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{comment}{//\ Returns\ true\ if\ there\ was\ a\ message\ and\ the\ checksum\ was\ good}}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{extern}\ uint8\_t\ \mbox{\hyperlink{_virtual_wire_8h_a30fe9c9ebfe7e52ca713a1785cd3aac9}{vw\_get\_message}}(uint8\_t*\ buf,\ uint8\_t*\ len);}
+\DoxyCodeLine{00105\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

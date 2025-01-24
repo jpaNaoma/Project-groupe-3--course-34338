@@ -1,0 +1,153 @@
+\doxysection{Servo\+Timer2.\+h}
+\hypertarget{_servo_timer2_8h_source}{}\label{_servo_timer2_8h_source}\index{CODE/RFID/ServoTimer2-\/master/ServoTimer2-\/master/ServoTimer2.h@{CODE/RFID/ServoTimer2-\/master/ServoTimer2-\/master/ServoTimer2.h}}
+\mbox{\hyperlink{_servo_timer2_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ \ ServoTimer2.h\ -\/\ Interrupt\ driven\ Servo\ library\ for\ Arduino\ using\ Timer2-\/\ Version\ 0.1}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ \ Copyright\ (c)\ 2008\ Michael\ Margolis.\ \ All\ right\ reserved.}}
+\DoxyCodeLine{00004\ \textcolor{comment}{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ \ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ \ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ \ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ \ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ \ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ \ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ \ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ \ Foundation,\ Inc.,\ 51\ Franklin\ St,\ Fifth\ Floor,\ Boston,\ MA\ \ 02110-\/1301\ \ USA}}
+\DoxyCodeLine{00018\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ Updated\ for\ Arduino\ 1.x\ by\ Nick\ Bontrager\ 2013}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ This\ library\ uses\ Timer2\ to\ drive\ up\ to\ 8\ servos\ using\ interrupts\ so\ no\ refresh\ activity\ is\ required\ from\ within\ the\ sketch.\ }}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ The\ usage\ and\ method\ naming\ is\ similar\ to\ the\ Arduino\ software\ servo\ library\ http://www.arduino.cc/playground/ComponentLib/Servo}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ except\ that\ pulse\ widths\ can\ be\ in\ microseconds\ or\ degrees.}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ write()\ treats\ parameters\ of\ 180\ or\ less\ as\ degrees,\ otherwise\ values\ are\ milliseconds.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ }}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ }}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ A\ servo\ is\ activated\ by\ creating\ an\ instance\ of\ the\ Servo\ class\ passing\ the\ desired\ pin\ to\ the\ attach()\ method.}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ The\ servo\ is\ pulsed\ in\ the\ background\ to\ the\ value\ most\ recently\ written\ using\ the\ write()\ method}}
+\DoxyCodeLine{00031\ \textcolor{comment}{}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ Note\ that\ analogWrite\ of\ PWM\ on\ pins\ 3\ and\ 11\ is\ disabled\ when\ the\ first\ servo\ is\ attached}}
+\DoxyCodeLine{00033\ \textcolor{comment}{}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ The\ methods\ are:}}
+\DoxyCodeLine{00035\ \textcolor{comment}{}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ ServoTimer2\ -\/\ Class\ for\ manipulating\ servo\ motors\ connected\ to\ Arduino\ pins.}}
+\DoxyCodeLine{00037\ \textcolor{comment}{}}
+\DoxyCodeLine{00038\ \textcolor{comment}{}}
+\DoxyCodeLine{00039\ \textcolor{comment}{}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ attach(pin\ )\ \ -\/\ Attaches\ a\ servo\ motor\ to\ an\ i/o\ pin.}}
+\DoxyCodeLine{00041\ \textcolor{comment}{}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ attach(pin,\ min,\ max\ \ )\ -\/\ Attaches\ to\ a\ pin\ setting\ min\ and\ max\ values\ in\ microseconds}}
+\DoxyCodeLine{00043\ \textcolor{comment}{}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ \ default\ min\ is\ 544,\ max\ is\ 2400\ \ }}
+\DoxyCodeLine{00045\ \textcolor{comment}{}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ }}
+\DoxyCodeLine{00047\ \textcolor{comment}{}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ write()\ \ \ \ \ -\/\ Sets\ the\ servo\ pulse\ width\ in\ microseconds.}}
+\DoxyCodeLine{00049\ \textcolor{comment}{}}
+\DoxyCodeLine{00050\ \textcolor{comment}{}}
+\DoxyCodeLine{00051\ \textcolor{comment}{}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ read()\ \ \ \ \ \ -\/\ Gets\ the\ last\ written\ servo\ pulse\ width\ in\ microseconds.\ }}
+\DoxyCodeLine{00053\ \textcolor{comment}{}}
+\DoxyCodeLine{00054\ \textcolor{comment}{}}
+\DoxyCodeLine{00055\ \textcolor{comment}{}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ \ \ attached()\ \ -\/\ Returns\ true\ if\ there\ is\ a\ servo\ attached.\ }}
+\DoxyCodeLine{00057\ \textcolor{comment}{}}
+\DoxyCodeLine{00058\ \textcolor{comment}{}}
+\DoxyCodeLine{00059\ \textcolor{comment}{}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ detach()\ \ \ \ -\/\ Stops\ an\ attached\ servos\ from\ pulsing\ its\ i/o\ pin.\ }}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ }}
+\DoxyCodeLine{00062\ \textcolor{comment}{}}
+\DoxyCodeLine{00063\ \textcolor{comment}{}}
+\DoxyCodeLine{00064\ \textcolor{comment}{The\ library\ takes\ about\ 824\ bytes\ of\ program\ memory\ and\ 32+(1*servos)\ bytes\ of\ SRAM.\ }}
+\DoxyCodeLine{00065\ \textcolor{comment}{}}
+\DoxyCodeLine{00066\ \textcolor{comment}{The\ pulse\ width\ timing\ is\ accurate\ to\ within\ 1\%}}
+\DoxyCodeLine{00067\ \textcolor{comment}{}}
+\DoxyCodeLine{00068\ \textcolor{comment}{}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{comment}{//\ ensure\ this\ library\ description\ is\ only\ included\ once}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#ifndef\ ServoTimer2\_h}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#define\ ServoTimer2\_h}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#include\ <inttypes.h>}}
+\DoxyCodeLine{00076\ \textcolor{comment}{//typedef\ uint8\_t\ boolean;}}
+\DoxyCodeLine{00077\ \textcolor{comment}{//typedef\ uint8\_t\ byte;}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#define\ MIN\_PULSE\_WIDTH\ \ \ \ \ \ \ 750\ \ \ \ \ \ \ \ }\textcolor{comment}{//\ the\ shortest\ pulse\ sent\ to\ a\ servo\ \ }}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ MAX\_PULSE\_WIDTH\ \ \ \ \ \ 2250\ \ \ \ \ \ \ \ }\textcolor{comment}{//\ the\ longest\ pulse\ sent\ to\ a\ servo\ }}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ DEFAULT\_PULSE\_WIDTH\ \ 1500\ \ \ \ \ \ \ \ }\textcolor{comment}{//\ default\ pulse\ width\ when\ servo\ is\ attached}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ FRAME\_SYNC\_PERIOD\ \ \ 20000\ \ \ \ \ \ \ \ }\textcolor{comment}{//\ total\ frame\ duration\ in\ microseconds\ }}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ NBR\_CHANNELS\ 8\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ the\ maximum\ number\ of\ channels,\ don't\ change\ this\ }}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }\{}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_servo_pin__t_ad2ff0e34820e04a276e38d359021b03c}{nbr}}\ \ \ \ \ \ \ \ :5\ ;\ \ \textcolor{comment}{//\ a\ pin\ number\ from\ 0\ to\ 31}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_servo_pin__t_aaf3c1889bb99bc6f936a3cfb6eba532a}{isActive}}\ \ \ :1\ ;\ \ \textcolor{comment}{//\ false\ if\ this\ channel\ not\ enabled,\ pin\ only\ pulsed\ if\ true\ }}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \}\ \mbox{\hyperlink{struct_servo_pin__t}{ServoPin\_t}}\ \ \ ;\ \ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \mbox{\hyperlink{struct_servo_pin__t}{ServoPin\_t}}\ \mbox{\hyperlink{structservo__t_a04bcc6cf13ea5cd2c4dabdc977e054cb}{Pin}};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordtype}{byte}\ \mbox{\hyperlink{structservo__t_a53257182227ffeab61fc89f0d944ad18}{counter}};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{byte}\ \mbox{\hyperlink{structservo__t_af5b6543b13ee199bd1e261f81b17fe6f}{remainder}};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \}\ \ \mbox{\hyperlink{structservo__t}{servo\_t}};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_servo_timer2_a157f62c0d6b79b1edde7d07248ec4edf}{ServoTimer2}}}
+\DoxyCodeLine{00110\ \{}
+\DoxyCodeLine{00111\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{comment}{//\ constructor:}}
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{class_servo_timer2_a157f62c0d6b79b1edde7d07248ec4edf}{ServoTimer2}}();}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_servo_timer2_ac159e8599eeddbab857e63060825a788}{attach}}(\textcolor{keywordtype}{int});\ \ \ \ \ \textcolor{comment}{//\ attach\ the\ given\ pin\ to\ the\ next\ free\ channel,\ sets\ pinMode,\ returns\ channel\ number\ or\ 0\ if\ failure}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ attached\ servo\ is\ pulsed\ with\ the\ current\ pulse\ width\ value,\ (see\ the\ write\ method)\ }}
+\DoxyCodeLine{00117\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_servo_timer2_a6778a02aa53ebf3daf7faa9eaa2b5a84}{attach}}(\textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int});\ \textcolor{comment}{//\ as\ above\ but\ also\ sets\ min\ and\ max\ values\ for\ writes.\ }}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servo_timer2_a9afafed2c21712396aa9dcfbabcbf8ba}{detach}}();}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servo_timer2_a76383d02fbb23b3d99a1c4ddf3acb2ba}{write}}(\textcolor{keywordtype}{int});\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ store\ the\ pulse\ width\ in\ microseconds\ (between\ MIN\_PULSE\_WIDTH\ and\ MAX\_PULSE\_WIDTH)for\ this\ channel}}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_servo_timer2_aa1b574d05b6a11160f821ffb4c06f63f}{read}}();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ returns\ current\ pulse\ width\ in\ microseconds\ for\ this\ servo}}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{class_servo_timer2_a715ff6d1750bee3feed2884d211a7696}{attached}}();\ \ \ \ \ \ \textcolor{comment}{//\ return\ true\ if\ this\ servo\ is\ attached\ }}
+\DoxyCodeLine{00122\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00123\ \ \ \ \ \ uint8\_t\ chanIndex;\ \ \ \ \ \ \textcolor{comment}{//\ index\ into\ the\ channel\ data\ for\ this\ servo}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{comment}{//\ the\ following\ ServoArrayT2\ class\ is\ not\ implemented\ in\ the\ first\ version\ of\ this\ library}}
+\DoxyCodeLine{00129\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_servo_array_t2_ab1f9f169086da9a04adf5b2d8db5b6f2}{ServoArrayT2}}}
+\DoxyCodeLine{00130\ \{}
+\DoxyCodeLine{00131\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{//\ constructor:}}
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{class_servo_array_t2_ab1f9f169086da9a04adf5b2d8db5b6f2}{ServoArrayT2}}();}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_servo_array_t2_a253109640012fa7d2ecf549c2cd673af}{attach}}(\textcolor{keywordtype}{int});\ \ \ \ \ \textcolor{comment}{//\ attach\ the\ given\ pin\ to\ the\ next\ free\ channel,\ sets\ pinMode,\ returns\ channel\ number\ or\ 0\ if\ failure}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ channels\ are\ assigned\ consecutively\ starting\ from\ 1}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ attached\ servo\ is\ pulsed\ with\ the\ current\ pulse\ width\ value,\ (see\ the\ write\ method)\ }}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servo_array_t2_aea4841446c85ce5f76c7814cd050dc7a}{detach}}(\textcolor{keywordtype}{int});\ \ \ \ \ \ \ \ \textcolor{comment}{//\ detach\ the\ servo\ on\ the\ given\ channel}}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servo_array_t2_a1082f3b58ee53b64b87443eea66d7ca2}{write}}(\textcolor{keywordtype}{int},\textcolor{keywordtype}{int});\ \ \ \ \ \textcolor{comment}{//\ store\ the\ pulse\ width\ in\ microseconds\ (between\ MIN\_PULSE\_WIDTH\ and\ MAX\_PULSE\_WIDTH)for\ the\ given\ channel}}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_servo_array_t2_a6d566f468798d09c601e1fd6be190a53}{read}}(\textcolor{keywordtype}{int});\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ returns\ current\ pulse\ width\ in\ microseconds\ for\ the\ given\ channel}}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{class_servo_array_t2_a1da047d2234ef0bc213584d66a9b4e0b}{attached}}(\textcolor{keywordtype}{int});\ \ \ \textcolor{comment}{//\ return\ true\ if\ the\ servo\ on\ the\ given\ channel\ is\ attached\ }}
+\DoxyCodeLine{00142\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00143\ \ \ \ \ \ uint8\_t\ chanIndex;\ \ \ \ \ \ \textcolor{comment}{//\ index\ into\ the\ channel\ data\ for\ this\ servo}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \};}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

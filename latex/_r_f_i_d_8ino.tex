@@ -1,0 +1,274 @@
+\doxysection{CODE/\+RFID/\+RFID.ino File Reference}
+\hypertarget{_r_f_i_d_8ino}{}\label{_r_f_i_d_8ino}\index{CODE/RFID/RFID.ino@{CODE/RFID/RFID.ino}}
+{\ttfamily \#include $<$RH\+\_\+\+ASK.\+h$>$}\newline
+{\ttfamily \#include "{}SPI.\+h"{}}\newline
+{\ttfamily \#include "{}MFRC522.\+h"{}}\newline
+{\ttfamily \#include "{}Servo\+Timer2.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_r_f_i_d_8ino_a53bb3e64ab8d7264393e362c2d55be2d}{SS\+\_\+pin}}~53
+\item 
+\#define \mbox{\hyperlink{_r_f_i_d_8ino_aec52f40312f8211a0fb4887510a69693}{RST\+\_\+pin}}~5
+\item 
+\#define \mbox{\hyperlink{_r_f_i_d_8ino_a11072b2064d1ddbf639f10dadea9d585}{Servo\+\_\+\+Pin}}~3
+\item 
+\#define \mbox{\hyperlink{_r_f_i_d_8ino_a749f1d58a6e7d0f77a0086338769f523}{LED\+\_\+pin}}~2
+\item 
+\#define \mbox{\hyperlink{_r_f_i_d_8ino_aee62c3a7d3e632bffa8988ef89be8fee}{trig\+Pin}}~7
+\item 
+\#define \mbox{\hyperlink{_r_f_i_d_8ino_a56811be58e9ac98a4d85f1af9e973453}{echo\+Pin}}~6
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+MFRC522 \mbox{\hyperlink{_r_f_i_d_8ino_a71c4b5d9d00f1263bc15ccaa3f99f7a2}{rfid}} (\mbox{\hyperlink{_r_f_i_d_8ino_a53bb3e64ab8d7264393e362c2d55be2d}{SS\+\_\+pin}}, \mbox{\hyperlink{_r_f_i_d_8ino_aec52f40312f8211a0fb4887510a69693}{RST\+\_\+pin}})
+\item 
+void \mbox{\hyperlink{_r_f_i_d_8ino_aa5177ad0349934f4ae2257b5fd039243}{Radio\+Send}} (const char \texorpdfstring{$\ast$}{*}msg)
+\begin{DoxyCompactList}\small\item\em Send a string over radio. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_r_f_i_d_8ino_a25a80b44317c718d0a6ede130a43833e}{measure\+Distance}} ()
+\begin{DoxyCompactList}\small\item\em Measures distance using the ultrasonic sensor and controls the onboard LED. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_r_f_i_d_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Setups Serial (Not needed for final), Pins, SPI and RFID. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_r_f_i_d_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\begin{DoxyCompactList}\small\item\em Main loop for RFID part. Checks the RFID and sends over radio if it should be locked or not. LED shows the status if it\textquotesingle{}s locked or unlocked Also measures if something is in close proximity or not to the ultrasonic sensor and then sending via radiofrequency. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_r_f_i_d_8ino_a198583bee13dd0c1f3c5230aae2163d9}{print\+Hex}} (byte \texorpdfstring{$\ast$}{*}buffer, byte buffer\+Size)
+\begin{DoxyCompactList}\small\item\em Helper routine to dump a byte array as hex values to Serial. Will not be needed in final project. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+long \mbox{\hyperlink{_r_f_i_d_8ino_a49411c0db3bc12e9d548e069021b0645}{duration}}
+\item 
+float \mbox{\hyperlink{_r_f_i_d_8ino_a06f14a9abd47b91465f895d5259cdc1b}{distance}}
+\item 
+const int \mbox{\hyperlink{_r_f_i_d_8ino_aa8c01f960dce86380266036abc48ee73}{min\+Distance}} = 10
+\item 
+int \mbox{\hyperlink{_r_f_i_d_8ino_a63177970cacb40efba67ce501ea89210}{angle}} = 0
+\item 
+Servo\+Timer2 \mbox{\hyperlink{_r_f_i_d_8ino_a1ab4f68f2f3afd1ae38ca04fd1a8717b}{Ultra\+Sonic\+Servo}}
+\item 
+MFRC522\+::\+MIFARE\+\_\+\+Key \mbox{\hyperlink{_r_f_i_d_8ino_a74db86b29b9d826a8007113e1fd3d2d4}{key}}
+\item 
+RH\+\_\+\+ASK \mbox{\hyperlink{_r_f_i_d_8ino_a4f43e679b031a869dce374f1cbf783ef}{rf\+\_\+driver}}
+\item 
+unsigned char \mbox{\hyperlink{_r_f_i_d_8ino_aec545b3f41246ef7d8622e0e6855dc76}{nuid\+PICC}} \mbox{[}4\mbox{]}
+\item 
+unsigned char \mbox{\hyperlink{_r_f_i_d_8ino_ab5c8616682f841d305276c450f753637}{Access\+PICC}} \mbox{[}4\mbox{]} = \{0x83,0x\+E8,0x1F, 0x16\}
+\item 
+char \mbox{\hyperlink{_r_f_i_d_8ino_a835b51d12c79449fb81b0a6a0aa4c602}{Control\+Char}} = (1$<$$<$0)
+\item 
+unsigned long \mbox{\hyperlink{_r_f_i_d_8ino_a661eac87840fae31fddb64dfabca3f90}{last\+Transmit\+Time}} = 0
+\item 
+const unsigned long \mbox{\hyperlink{_r_f_i_d_8ino_a1a0704e2c552bf037ee680a076faefb4}{Transmit\+Interval}} = 250
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_r_f_i_d_8ino_a56811be58e9ac98a4d85f1af9e973453}\index{RFID.ino@{RFID.ino}!echoPin@{echoPin}}
+\index{echoPin@{echoPin}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{echoPin}{echoPin}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a56811be58e9ac98a4d85f1af9e973453} 
+\#define echo\+Pin~6}
+
+\Hypertarget{_r_f_i_d_8ino_a749f1d58a6e7d0f77a0086338769f523}\index{RFID.ino@{RFID.ino}!LED\_pin@{LED\_pin}}
+\index{LED\_pin@{LED\_pin}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{LED\_pin}{LED\_pin}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a749f1d58a6e7d0f77a0086338769f523} 
+\#define LED\+\_\+pin~2}
+
+\Hypertarget{_r_f_i_d_8ino_aec52f40312f8211a0fb4887510a69693}\index{RFID.ino@{RFID.ino}!RST\_pin@{RST\_pin}}
+\index{RST\_pin@{RST\_pin}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{RST\_pin}{RST\_pin}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_aec52f40312f8211a0fb4887510a69693} 
+\#define RST\+\_\+pin~5}
+
+\Hypertarget{_r_f_i_d_8ino_a11072b2064d1ddbf639f10dadea9d585}\index{RFID.ino@{RFID.ino}!Servo\_Pin@{Servo\_Pin}}
+\index{Servo\_Pin@{Servo\_Pin}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{Servo\_Pin}{Servo\_Pin}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a11072b2064d1ddbf639f10dadea9d585} 
+\#define Servo\+\_\+\+Pin~3}
+
+\Hypertarget{_r_f_i_d_8ino_a53bb3e64ab8d7264393e362c2d55be2d}\index{RFID.ino@{RFID.ino}!SS\_pin@{SS\_pin}}
+\index{SS\_pin@{SS\_pin}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{SS\_pin}{SS\_pin}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a53bb3e64ab8d7264393e362c2d55be2d} 
+\#define SS\+\_\+pin~53}
+
+\hypertarget{_r_f_i_d_8ino_Pin}{}\doxysubsection{\texorpdfstring{connections}{connections}}\label{_r_f_i_d_8ino_Pin}
+SDA \texorpdfstring{$\vert$}{|} RX \texorpdfstring{$\vert$}{|} SS is connected to SS\+\_\+pin SCK is pin 52 (Mega2560) MOSI is pin 51 (Mega2560) MISO is pin 50 (Mega2560) RST \texorpdfstring{$\vert$}{|} Reset is connected to RST\+\_\+pin LED is connected to LED\+\_\+pin and is active high The LED should have a resistor to limit current (Using 220R, variation changes light level) \begin{DoxySeeAlso}{See also}
+Servo Library is added from due to conflicting timers \href{https://github.com/nabontra/ServoTimer2/tree/master}{\texttt{ https\+://github.\+com/nabontra/\+Servo\+Timer2/tree/master}} 
+
+RFID Library \& use examples are from \href{https://github.com/miguelbalboa/rfid/tree/master}{\texttt{ https\+://github.\+com/miguelbalboa/rfid/tree/master}}, Inspiration was used. ~\newline
+ 
+
+Radio Frequency Transmission are from \href{https://lastminuteengineers.com/433mhz-rf-wireless-arduino-tutorial/}{\texttt{ https\+://lastminuteengineers.\+com/433mhz-\/rf-\/wireless-\/arduino-\/tutorial/}} 
+\end{DoxySeeAlso}
+\Hypertarget{_r_f_i_d_8ino_aee62c3a7d3e632bffa8988ef89be8fee}\index{RFID.ino@{RFID.ino}!trigPin@{trigPin}}
+\index{trigPin@{trigPin}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{trigPin}{trigPin}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_aee62c3a7d3e632bffa8988ef89be8fee} 
+\#define trig\+Pin~7}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_r_f_i_d_8ino_afe461d27b9c48d5921c00d521181f12f}\index{RFID.ino@{RFID.ino}!loop@{loop}}
+\index{loop@{loop}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Main loop for RFID part. Checks the RFID and sends over radio if it should be locked or not. LED shows the status if it\textquotesingle{}s locked or unlocked Also measures if something is in close proximity or not to the ultrasonic sensor and then sending via radiofrequency. 
+
+\begin{DoxyAuthor}{Author}
+s225271 
+\end{DoxyAuthor}
+\texorpdfstring{$<$}{<} Send status every Transmit\+Interval
+
+\texorpdfstring{$<$}{<} Move servo to the current angle.
+
+\texorpdfstring{$<$}{<} Sends the status over radio
+
+\texorpdfstring{$<$}{<} If system should be locked\Hypertarget{_r_f_i_d_8ino_a25a80b44317c718d0a6ede130a43833e}\index{RFID.ino@{RFID.ino}!measureDistance@{measureDistance}}
+\index{measureDistance@{measureDistance}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{measureDistance()}{measureDistance()}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a25a80b44317c718d0a6ede130a43833e} 
+void measure\+Distance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Measures distance using the ultrasonic sensor and controls the onboard LED. 
+
+\begin{DoxyAuthor}{Author}
+s18342 \& s136513 
+\end{DoxyAuthor}
+\texorpdfstring{$<$}{<} Turn on LED if object is close.
+
+\texorpdfstring{$<$}{<} Turn off LED if no object is nearby.\Hypertarget{_r_f_i_d_8ino_a198583bee13dd0c1f3c5230aae2163d9}\index{RFID.ino@{RFID.ino}!printHex@{printHex}}
+\index{printHex@{printHex}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{printHex()}{printHex()}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a198583bee13dd0c1f3c5230aae2163d9} 
+void print\+Hex (\begin{DoxyParamCaption}\item[{byte \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{byte}]{buffer\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Helper routine to dump a byte array as hex values to Serial. Will not be needed in final project. 
+
+\begin{DoxyAuthor}{Author}
+Found on github \href{https://github.com/miguelbalboa/rfid/blob/master/examples/ReadNUID/ReadNUID.ino}{\texttt{ https\+://github.\+com/miguelbalboa/rfid/blob/master/examples/\+Read\+NUID/\+Read\+NUID.\+ino}} 
+\end{DoxyAuthor}
+\Hypertarget{_r_f_i_d_8ino_aa5177ad0349934f4ae2257b5fd039243}\index{RFID.ino@{RFID.ino}!RadioSend@{RadioSend}}
+\index{RadioSend@{RadioSend}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{RadioSend()}{RadioSend()}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_aa5177ad0349934f4ae2257b5fd039243} 
+void Radio\+Send (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{msg}{}\end{DoxyParamCaption})}
+
+
+
+Send a string over radio. 
+
+\begin{DoxyAuthor}{Author}
+s225271 
+\end{DoxyAuthor}
+\Hypertarget{_r_f_i_d_8ino_a71c4b5d9d00f1263bc15ccaa3f99f7a2}\index{RFID.ino@{RFID.ino}!rfid@{rfid}}
+\index{rfid@{rfid}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{rfid()}{rfid()}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a71c4b5d9d00f1263bc15ccaa3f99f7a2} 
+MFRC522 rfid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_r_f_i_d_8ino_a53bb3e64ab8d7264393e362c2d55be2d}{SS\+\_\+pin}}}]{}{, }\item[{\mbox{\hyperlink{_r_f_i_d_8ino_aec52f40312f8211a0fb4887510a69693}{RST\+\_\+pin}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_r_f_i_d_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{RFID.ino@{RFID.ino}!setup@{setup}}
+\index{setup@{setup}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Setups Serial (Not needed for final), Pins, SPI and RFID. 
+
+\begin{DoxyAuthor}{Author}
+s225271 
+\end{DoxyAuthor}
+Set trigger pin as output.
+
+Set echo pin as input.
+
+Set onboard LED pin as output.
+
+set led\+\_\+pin as output
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_r_f_i_d_8ino_ab5c8616682f841d305276c450f753637}\index{RFID.ino@{RFID.ino}!AccessPICC@{AccessPICC}}
+\index{AccessPICC@{AccessPICC}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{AccessPICC}{AccessPICC}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_ab5c8616682f841d305276c450f753637} 
+unsigned char Access\+PICC\mbox{[}4\mbox{]} = \{0x83,0x\+E8,0x1F, 0x16\}}
+
+\Hypertarget{_r_f_i_d_8ino_a63177970cacb40efba67ce501ea89210}\index{RFID.ino@{RFID.ino}!angle@{angle}}
+\index{angle@{angle}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{angle}{angle}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a63177970cacb40efba67ce501ea89210} 
+int angle = 0}
+
+\Hypertarget{_r_f_i_d_8ino_a835b51d12c79449fb81b0a6a0aa4c602}\index{RFID.ino@{RFID.ino}!ControlChar@{ControlChar}}
+\index{ControlChar@{ControlChar}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{ControlChar}{ControlChar}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a835b51d12c79449fb81b0a6a0aa4c602} 
+char Control\+Char = (1$<$$<$0)}
+
+\Hypertarget{_r_f_i_d_8ino_a06f14a9abd47b91465f895d5259cdc1b}\index{RFID.ino@{RFID.ino}!distance@{distance}}
+\index{distance@{distance}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{distance}{distance}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a06f14a9abd47b91465f895d5259cdc1b} 
+float distance}
+
+\Hypertarget{_r_f_i_d_8ino_a49411c0db3bc12e9d548e069021b0645}\index{RFID.ino@{RFID.ino}!duration@{duration}}
+\index{duration@{duration}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{duration}{duration}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a49411c0db3bc12e9d548e069021b0645} 
+long duration}
+
+\Hypertarget{_r_f_i_d_8ino_a74db86b29b9d826a8007113e1fd3d2d4}\index{RFID.ino@{RFID.ino}!key@{key}}
+\index{key@{key}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{key}{key}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a74db86b29b9d826a8007113e1fd3d2d4} 
+MFRC522\+::\+MIFARE\+\_\+\+Key key}
+
+\Hypertarget{_r_f_i_d_8ino_a661eac87840fae31fddb64dfabca3f90}\index{RFID.ino@{RFID.ino}!lastTransmitTime@{lastTransmitTime}}
+\index{lastTransmitTime@{lastTransmitTime}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{lastTransmitTime}{lastTransmitTime}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a661eac87840fae31fddb64dfabca3f90} 
+unsigned long last\+Transmit\+Time = 0}
+
+\Hypertarget{_r_f_i_d_8ino_aa8c01f960dce86380266036abc48ee73}\index{RFID.ino@{RFID.ino}!minDistance@{minDistance}}
+\index{minDistance@{minDistance}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{minDistance}{minDistance}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_aa8c01f960dce86380266036abc48ee73} 
+const int min\+Distance = 10}
+
+\Hypertarget{_r_f_i_d_8ino_aec545b3f41246ef7d8622e0e6855dc76}\index{RFID.ino@{RFID.ino}!nuidPICC@{nuidPICC}}
+\index{nuidPICC@{nuidPICC}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{nuidPICC}{nuidPICC}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_aec545b3f41246ef7d8622e0e6855dc76} 
+unsigned char nuid\+PICC\mbox{[}4\mbox{]}}
+
+\Hypertarget{_r_f_i_d_8ino_a4f43e679b031a869dce374f1cbf783ef}\index{RFID.ino@{RFID.ino}!rf\_driver@{rf\_driver}}
+\index{rf\_driver@{rf\_driver}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{rf\_driver}{rf\_driver}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a4f43e679b031a869dce374f1cbf783ef} 
+RH\+\_\+\+ASK rf\+\_\+driver}
+
+\Hypertarget{_r_f_i_d_8ino_a1a0704e2c552bf037ee680a076faefb4}\index{RFID.ino@{RFID.ino}!TransmitInterval@{TransmitInterval}}
+\index{TransmitInterval@{TransmitInterval}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{TransmitInterval}{TransmitInterval}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a1a0704e2c552bf037ee680a076faefb4} 
+const unsigned long Transmit\+Interval = 250}
+
+\Hypertarget{_r_f_i_d_8ino_a1ab4f68f2f3afd1ae38ca04fd1a8717b}\index{RFID.ino@{RFID.ino}!UltraSonicServo@{UltraSonicServo}}
+\index{UltraSonicServo@{UltraSonicServo}!RFID.ino@{RFID.ino}}
+\doxysubsubsection{\texorpdfstring{UltraSonicServo}{UltraSonicServo}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8ino_a1ab4f68f2f3afd1ae38ca04fd1a8717b} 
+Servo\+Timer2 Ultra\+Sonic\+Servo}
+

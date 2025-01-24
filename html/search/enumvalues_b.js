@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['tcountervalueregh_0',['TCounterValueRegH',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669ab32cff60c4488866726d4a3930ad8995',1,'MFRC522']]],
+  ['tcountervalueregl_1',['TCounterValueRegL',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669ad70c519d4928690a1d8e7835532ce146',1,'MFRC522']]],
+  ['testadcreg_2',['TestADCReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a1042587aeb71f82f884975ca54c8854a',1,'MFRC522']]],
+  ['testbusreg_3',['TestBusReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a37bc0188996dc1ee5332d40961bffb4b',1,'MFRC522']]],
+  ['testdac1reg_4',['TestDAC1Reg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a25334abb5ff680a530e95e6fb0e48a5b',1,'MFRC522']]],
+  ['testdac2reg_5',['TestDAC2Reg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a505b75aac860302b2959da7fe607e5eb',1,'MFRC522']]],
+  ['testpinenreg_6',['TestPinEnReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a62a7871c0d3452a8f642bbea0ca7cb34',1,'MFRC522']]],
+  ['testpinvaluereg_7',['TestPinValueReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669aa5bb4445abb525ddf46c6efcb21e8811',1,'MFRC522']]],
+  ['testsel1reg_8',['TestSel1Reg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a3fd81beec1ed6566ff1897aac235890f',1,'MFRC522']]],
+  ['testsel2reg_9',['TestSel2Reg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669ac1053bcb64682eba4a767caaea677807',1,'MFRC522']]],
+  ['tmodereg_10',['TModeReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a1ed52e7f88c8bf3fda91bf31bb62afe4',1,'MFRC522']]],
+  ['tprescalerreg_11',['TPrescalerReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a88c2ad7cdfb7178ea775c157f4ce5213',1,'MFRC522']]],
+  ['treloadregh_12',['TReloadRegH',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669ac9a037a517ada62924c47d5e4b62a14c',1,'MFRC522']]],
+  ['treloadregl_13',['TReloadRegL',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669afa3348d82b026de8fecdd18d58e92e2a',1,'MFRC522']]],
+  ['txaskreg_14',['TxASKReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669ac9de33ca066ca9481bd01d5642a0c879',1,'MFRC522']]],
+  ['txcontrolreg_15',['TxControlReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a73dc12b03f05177a400263e5e2bcf0cc',1,'MFRC522']]],
+  ['txmodereg_16',['TxModeReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669ad4fe18ad01abc83d4559369226fe7992',1,'MFRC522']]],
+  ['txselreg_17',['TxSelReg',['../class_m_f_r_c522.html#a3f25eb3421a80d3aeca247c9640f0669a6cf11e077148648aaec0492317be5177',1,'MFRC522']]]
+];
