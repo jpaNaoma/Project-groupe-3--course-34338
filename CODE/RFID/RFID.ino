@@ -42,12 +42,15 @@ RH_ASK rf_driver;
 
 unsigned char nuidPICC[4];
 unsigned char AccessPICC[4] = {0x83,0xE8,0x1F, 0x16};
-char ControlChar = (1<<0); // 1st bit is locked, starts being locked
+char ControlChar = (1<<0); //! Char that is used to control the program, the 1st bit shows if the system should be locked or unlocked
 
 unsigned long lastTransmitTime = 0;
-const unsigned long TransmitInterval = 250; // Send status every 250 ms
+const unsigned long TransmitInterval = 250; //! Send status every 250 ms
 
-
+/**
+* @brief Send a string over radio
+* @author s225271
+*/
 void RadioSend(const char *msg){
   rf_driver.send((uint8_t *)msg, strlen(msg));
   rf_driver.waitPacketSent();
@@ -55,6 +58,7 @@ void RadioSend(const char *msg){
 
 /**
  * @brief Measures distance using the ultrasonic sensor and controls the onboard LED.
+ * @author s18342 & s136513 
  */
 void measureDistance() {
   // Send a 10us pulse to trigger pin.
@@ -82,21 +86,21 @@ void measureDistance() {
 
 /**
 * @brief Setups Serial (Not needed for final), Pins, SPI and RFID
-*
+* @author s225271
 *
 */
 void setup() {
   rf_driver.init(); // Initialize receiver
   
   UltraSonicServo.attach(Servo_Pin);
-  UltraSonicServo.write(1500);
+  UltraSonicServo.write(1500); // Starts locked
   
-  pinMode(trigPin, OUTPUT); ///< Set trigger pin as output.
-  pinMode(echoPin, INPUT); ///< Set echo pin as input.
-  pinMode(LED_BUILTIN, OUTPUT); ///< Set onboard LED pin as output.
+  pinMode(trigPin, OUTPUT); //! Set trigger pin as output.
+  pinMode(echoPin, INPUT); //! Set echo pin as input.
+  pinMode(LED_BUILTIN, OUTPUT); //! Set onboard LED pin as output.
 
   Serial.begin(115200);  // Initialize serial communications with the PC
-  pinMode(LED_pin, OUTPUT);
+  pinMode(LED_pin, OUTPUT); //! set led_pin as output
   digitalWrite(LED_pin, ControlChar && (1<<0) );
 
   SPI.begin();                     // Init SPI bus
@@ -110,6 +114,7 @@ void setup() {
 * LED shows the status if it's locked or unlocked
 * Also measures if something is in close proximity or not to the ultrasonic sensor and then sending 
 * via radiofrequency
+* @author s225271
 */
 void loop() {
   unsigned long currentTime = millis(); // Current time
@@ -144,6 +149,7 @@ void loop() {
     lastTransmitTime = currentTime; 
   }
 
+// From github example start
   // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
   if ( ! rfid.PICC_IsNewCardPresent())
     return;
@@ -165,8 +171,9 @@ void loop() {
 
   // Stop encryption on PCD
   rfid.PCD_StopCrypto1();
-
-  if (nuidPICC[0] == AccessPICC[0] && 
+// From github example end
+  
+  if (nuidPICC[0] == AccessPICC[0] && // check if the read uid is the one that has access
       nuidPICC[1] == AccessPICC[1] &&
       nuidPICC[2] == AccessPICC[2] &&
       nuidPICC[3] == AccessPICC[3] 
@@ -176,8 +183,8 @@ void loop() {
     digitalWrite(LED_pin, ControlChar & (1<<0) );
   }else{
     Serial.println("This is wrong key. Go away intruder!");
-    if( !ControlChar & (1<<0) ){
-      ControlChar |= (1<<0); // Lock the door
+    if( !ControlChar & (1<<0) ){  // if door is unlocked lock the door
+      ControlChar |= (1<<0); 
       Serial.println("Locking the door");
       digitalWrite(LED_pin, ControlChar & (1<<0));
     }
@@ -186,7 +193,7 @@ void loop() {
 
 /**
  * @brief Helper routine to dump a byte array as hex values to Serial. Will not be needed in final project
- *  
+ * @author Found on github https://github.com/miguelbalboa/rfid/blob/master/examples/ReadNUID/ReadNUID.ino
  */
 void printHex(byte *buffer, byte bufferSize) {
   for (byte i = 0; i < bufferSize; i++) {
